@@ -1,0 +1,25 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# build outputs
+dist/
+lib/
+.next/
+out/
+
+# generated
+packages/tokens/generated/
+
+# misc
+.DS_Store
+*.log
+.env
+.env.local
+.env.*.local
+
+# TypeScript
+*.tsbuildinfo
+
+# storybook
+storybook-static/
