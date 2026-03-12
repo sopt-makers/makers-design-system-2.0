@@ -2,8 +2,11 @@
   "name": "makers-design-system",
   "private": true,
   "scripts": {
+    "changeset": "changeset",
+    "changeset:status": "changeset status --verbose",
     "format": "biome format --write .",
-    "lint": "biome lint ."
+    "lint": "biome lint .",
+    "version-packages": "changeset version"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.6",
