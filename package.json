@@ -6,6 +6,8 @@
     "changeset:status": "changeset status --verbose",
     "format": "biome format --write .",
     "lint": "biome lint .",
+    "publish-packages": "pnpm lint && changeset publish",
+    "release": "pnpm publish-packages",
     "version-packages": "changeset version"
   },
   "devDependencies": {
@@ -13,5 +15,9 @@
     "@changesets/cli": "^2.27.0",
     "typescript": "^5.6.0"
   },
-  "packageManager": "pnpm@10.26.2"
+  "packageManager": "pnpm@10.26.2",
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=10"
+  }
 }
