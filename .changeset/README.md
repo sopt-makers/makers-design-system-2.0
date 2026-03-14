@@ -25,4 +25,3 @@ This repository uses Changesets for versioning and package publishing in the pnp
 
 - `@makers/design-tokens`
 - `@makers/ui`
-- `@makers/tsconfig`
