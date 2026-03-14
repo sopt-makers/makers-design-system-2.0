@@ -1,4 +1,0 @@
-interface:
-  display_name: "Create PR"
-  short_description: "현재 레포 PR 규칙을 적용합니다."
-  default_prompt: "Use $create-pr to create a pull request in this repository with the required title and description format."
