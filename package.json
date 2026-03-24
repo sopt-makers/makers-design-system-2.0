@@ -2,13 +2,12 @@
   "name": "makers-design-system",
   "private": true,
   "scripts": {
-    "ci:publish": "pnpm publish -r --report-summary",
     "changeset": "changeset",
     "changeset:status": "changeset status --verbose",
     "format": "biome format --write .",
     "lint": "biome lint .",
-    "release": "pnpm ci:publish",
-    "versioning": "changeset version && pnpm install --no-frozen-lockfile"
+    "release": "changeset publish",
+    "versioning": "changeset version && pnpm install --lockfile-only"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.6",
