@@ -1,0 +1,7 @@
+{
+  "extends": "@makers/tsconfig/library.json",
+  "include": [".storybook/**/*.ts", ".storybook/**/*.tsx", "vite.config.ts"],
+  "compilerOptions": {
+    "types": ["vite/client", "node", "react"]
+  }
+}

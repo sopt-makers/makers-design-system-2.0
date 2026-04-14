@@ -1,0 +1,15 @@
+body {
+  font-family:
+    "SUIT", -apple-system, BlinkMacSystemFont, "Pretendard", "Segoe UI",
+    sans-serif;
+  color: var(--color-foreground);
+  background: var(--color-background);
+}
+
+/** TODO(@wuzoo): 다크모드 static color 피드백 */
+.theme-dark {
+  --color-background: #0f1012;
+  --color-foreground: #f9fafb;
+  --color-foreground-muted: #b0b8c1;
+  --color-border: #333d4b;
+}
