@@ -1,0 +1,7 @@
+{
+  "extends": "@makers/tsconfig/library.json",
+  "compilerOptions": {
+    "types": ["react"]
+  },
+  "include": ["src"]
+}
