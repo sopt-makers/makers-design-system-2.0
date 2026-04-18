@@ -1,9 +1,12 @@
 body {
-  font-family:
-    "SUIT", -apple-system, BlinkMacSystemFont, "Pretendard", "Segoe UI",
-    sans-serif;
   color: var(--color-foreground);
   background: var(--color-background);
+}
+
+* {
+  font-family:
+    "SUIT Variable", "SUIT", -apple-system, BlinkMacSystemFont, "Pretendard",
+    "Segoe UI", sans-serif;
 }
 
 /** TODO(@wuzoo): 다크모드 static color 피드백 */
