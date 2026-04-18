@@ -1,0 +1,36 @@
+name: Storybook Preview to Chromatic
+
+on:
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: chromatic-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  chromatic:
+    name: Publish to Chromatic
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node and pnpm
+        uses: ./.github/actions/setup-node-pnpm
+        with:
+          node-version: 22
+          pnpm-version: 10.26.2
+
+      - name: Build Storybook
+        run: pnpm -F=@makers/storybook build
+
+      - name: Publish to Chromatic
+        uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          storybookBuildDir: apps/storybook/storybook-static
+          exitZeroOnChanges: true
+          autoAcceptChanges: main
+          onlyChanged: true
