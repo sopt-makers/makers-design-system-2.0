@@ -27,6 +27,7 @@ jobs:
         run: pnpm -F=@makers/storybook build
 
       - name: Publish to Chromatic
+        id: chromatic
         uses: chromaui/action@latest
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
@@ -34,3 +35,12 @@ jobs:
           exitZeroOnChanges: true
           autoAcceptChanges: main
           onlyChanged: true
+
+      - name: Comment PR
+        uses: thollander/actions-comment-pull-request@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          message: |
+            ### 📦 Preview 배포 완료
+            ${{ steps.chromatic.outputs.storybookUrl }}
