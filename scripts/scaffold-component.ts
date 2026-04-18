@@ -28,21 +28,12 @@ const listUpExistingComponentNames = async (): Promise<Set<string>> => {
 
 /** 컴포넌트에 필요한 템플릿 문자열 생성 */
 const buildTemplates = (name: string) => {
-  const componentTsx = `import type { HTMLAttributes } from "react";
-import * as styles from "./${name}.css";
+  const componentTsx = `import * as styles from "./${name}.css";
 
-/** 
- * @ts-expect-error - 플레이스 홀더
- * @description 컴포넌트 구현 후 지워주세요
- */
-export interface ${name}Props extends HTMLAttributes<HTMLDivElement> {}
+export interface ${name}Props {}
 
-export function ${name}({ children, ...rest }: ${name}Props) {
-  return (
-    <div {...rest} className={styles.root}>
-      {children}
-    </div>
-  );
+export function ${name}({}: ${name}Props) {
+  return <div className={styles.root} />;
 }
 `;
 
@@ -120,21 +111,34 @@ const main = async () => {
     const link = `[${name}](?path=/docs/components-${slug}--소개)`;
 
     if (!mdx.includes(link)) {
-      const updated = mdx.replace(
-        /(## 컴포넌트 목록\n\n[\s\S]*?\S)(\n*$)/,
-        `$1\n\n${link}\n`,
-      );
-      await fsp.writeFile(introMdx, updated);
+      const marker = "## 컴포넌트 목록";
+      const markerIdx = mdx.indexOf(marker);
+
+      if (markerIdx !== -1) {
+        const before = mdx.slice(0, markerIdx + marker.length);
+        const after = mdx.slice(markerIdx + marker.length).trimEnd();
+        const updated = after
+          ? `${before}${after}\n\n${link}\n`
+          : `${before}\n\n${link}\n`;
+
+        try {
+          await fsp.writeFile(introMdx, updated);
+          console.log(`Introduction.mdx에 ${name} 컴포넌트를 추가했어요.`);
+        } catch {
+          console.error(
+            `Introduction.mdx에 ${name} 컴포넌트를 추가하는데 실패했어요.`,
+          );
+        }
+      }
     }
   }
 
   console.log(`\n✔ Created ${name}`);
-  console.log(`  packages/ui/src/components/${name}/`);
+  console.log(`  packages/ui/src/${name}/`);
   console.log(`    ├── ${name}.tsx`);
   console.log(`    ├── ${name}.css.ts`);
   console.log(`    ├── ${name}.stories.tsx`);
   console.log(`    └── index.ts`);
-  console.log(`  Introduction.mdx에 ${name} 컴포넌트가 추가되었어요.`);
 };
 
 main();
