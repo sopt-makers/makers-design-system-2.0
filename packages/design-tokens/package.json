@@ -1,6 +1,25 @@
 {
   "name": "@makers/design-tokens",
   "version": "0.0.0",
+  "type": "module",
+  "sideEffects": ["*.css"],
+  "exports": {
+    ".": "./src/index.ts",
+    "./base": "./src/base/index.ts",
+    "./semantic": "./src/semantic/index.ts",
+    "./tokens.css": "./src/tokens.css"
+  },
+  "files": ["src"],
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@makers/tsconfig": "workspace:*",
+    "@storybook/react": "^8.4.7",
+    "@types/react": "^18.3.0",
+    "react": "^18.3.1",
+    "typescript": "^5.6.0"
+  },
   "publishConfig": {
     "access": "public"
   }

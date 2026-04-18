@@ -1,0 +1,24 @@
+:root {
+  --color-background: #ffffff;
+  --color-foreground: #191f28;
+  --color-foreground-muted: #6b7684;
+  --color-border: #e5e8eb;
+  --color-primary: #3182f6;
+  --color-primary-hover: #2272eb;
+  --color-danger: #f04452;
+
+  --space-1: 2px;
+  --space-2: 4px;
+  --space-3: 8px;
+  --space-4: 12px;
+  --space-5: 16px;
+  --space-6: 20px;
+  --space-7: 24px;
+  --space-8: 32px;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  --font-body: 16px;
+}
