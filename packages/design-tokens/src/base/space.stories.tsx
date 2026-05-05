@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { space } from "./space";
+import { spacingBase } from "./space";
 
 function SpaceScale() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-      {Object.entries(space).map(([token, value]) => (
+      {Object.entries(spacingBase).map(([token, value]) => (
         <div
           key={token}
           style={{ display: "flex", alignItems: "center", gap: 12 }}
         >
-          <div style={{ width: 48, fontFamily: "monospace" }}>{token}</div>
-          <div style={{ background: "#3182f6", height: 16, width: value }} />
-          <div style={{ color: "#6b7684" }}>{value}</div>
+          <div style={{ width: 80, fontFamily: "monospace" }}>{token}</div>
+          <div style={{ background: "#346FFA", height: 16, width: value }} />
+          <div style={{ color: "#808087" }}>{value}</div>
         </div>
       ))}
     </div>

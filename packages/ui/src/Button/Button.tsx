@@ -1,4 +1,4 @@
-import { semanticColor } from "@makers/design-tokens";
+import { colors } from "@makers/design-tokens";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
 export type ButtonVariant = "primary" | "secondary" | "danger";
@@ -20,12 +20,12 @@ const variantStyle: Record<
   ButtonVariant,
   { background: string; color: string }
 > = {
-  primary: { background: semanticColor.primary, color: "#fff" },
+  primary: { background: colors.bg.brand.default, color: colors.fg.neutral.bold },
   secondary: {
-    background: semanticColor.backgroundSubtle,
-    color: semanticColor.foreground,
+    background: colors.bg.neutral.subtle,
+    color: colors.fg.neutral.default,
   },
-  danger: { background: semanticColor.danger, color: "#fff" },
+  danger: { background: colors.bg.danger.default, color: colors.fg.neutral.bold },
 };
 
 export function Button({

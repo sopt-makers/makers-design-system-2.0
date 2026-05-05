@@ -1,9 +1,33 @@
-export const typography = {
-  h1: { fontSize: "32px", lineHeight: "40px", fontWeight: 700 },
-  h2: { fontSize: "24px", lineHeight: "32px", fontWeight: 700 },
-  h3: { fontSize: "20px", lineHeight: "28px", fontWeight: 600 },
-  body: { fontSize: "16px", lineHeight: "24px", fontWeight: 400 },
-  caption: { fontSize: "13px", lineHeight: "18px", fontWeight: 400 },
+export const typographyWeight = {
+  bold: 700,
+  semibold: 600,
+  regular: 400,
 } as const;
 
-export type TypographyToken = keyof typeof typography;
+export const typographySize = {
+  t12: "12px",
+  t14: "14px",
+  t16: "16px",
+  t18: "18px",
+  t20: "20px",
+  t24: "24px",
+  t28: "28px",
+  t32: "32px",
+} as const;
+
+export const typographyLineHeight = {
+  t16: "16px",
+  t18: "18px",
+  t22: "22px",
+  t24: "24px",
+  t26: "26px",
+  t30: "30px",
+  t36: "36px",
+  t42: "42px",
+  t48: "48px",
+} as const;
+
+export const typographyLetterSpacing = {
+  wide: "-0.015em",
+  default: "-0.02em",
+} as const;

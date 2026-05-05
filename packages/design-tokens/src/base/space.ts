@@ -1,15 +1,25 @@
-export const space = {
-  "0": "0px",
-  "1": "2px",
-  "2": "4px",
-  "3": "8px",
-  "4": "12px",
-  "5": "16px",
-  "6": "20px",
-  "7": "24px",
-  "8": "32px",
-  "9": "40px",
-  "10": "48px",
+export const spacingBase = {
+  s0: "0px",
+  s2: "2px",
+  s4: "4px",
+  s6: "6px",
+  s8: "8px",
+  s10: "10px",
+  s12: "12px",
+  s14: "14px",
+  s16: "16px",
+  s20: "20px",
+  s24: "24px",
+  s28: "28px",
+  s32: "32px",
+  s36: "36px",
+  s40: "40px",
+  s48: "48px",
+  s64: "64px",
+  s72: "72px",
+  s80: "80px",
+  s120: "120px",
+  s160: "160px",
 } as const;
 
-export type Space = keyof typeof space;
+export type SpacingToken = keyof typeof spacingBase;
