@@ -4,7 +4,7 @@ export const colorFg = {
   neutral: {
     bold: baseColor.gray10,
     default: baseColor.gray100,
-    "default-disabled": baseColor.gray500,
+    defaultDisabled: baseColor.gray500,
     subtle: baseColor.gray300,
     ghost: baseColor.gray500,
     inverse: baseColor.gray950,
@@ -39,20 +39,20 @@ export const colorFg = {
 export const colorBg = {
   neutral: {
     inverse: baseColor.gray10,
-    "inverse-hover": baseColor.gray100,
-    "inverse-pressed": baseColor.gray100,
+    inverseHover: baseColor.gray100,
+    inversePressed: baseColor.gray100,
     bold: baseColor.gray500,
-    "bold-disabled": baseColor.gray700,
+    boldDisabled: baseColor.gray700,
     default: baseColor.gray600,
-    "default-hover": baseColor.gray500,
-    "default-pressed": baseColor.gray500,
-    "default-disabled": baseColor.gray800,
+    defaultHover: baseColor.gray500,
+    defaultPressed: baseColor.gray500,
+    defaultDisabled: baseColor.gray800,
     subtle: baseColor.gray700,
-    "subtle-hover": baseColor.gray600,
-    "subtle-pressed": baseColor.gray600,
+    subtleHover: baseColor.gray600,
+    subtlePressed: baseColor.gray600,
     ghost: baseColor.gray800,
-    "ghost-hover": baseColor.gray700,
-    "ghost-pressed": baseColor.gray700,
+    ghostHover: baseColor.gray700,
+    ghostPressed: baseColor.gray700,
   },
   brand: {
     default: baseColor.orange400,
@@ -61,8 +61,8 @@ export const colorBg = {
   },
   secondary: {
     default: baseColor.blue400,
-    "default-hover": baseColor.blue500,
-    "default-pressed": baseColor.blue600,
+    defaultHover: baseColor.blue500,
+    defaultPressed: baseColor.blue600,
     subtle: baseColor.blue900,
     ghost: baseColor.blue950,
   },
@@ -74,8 +74,8 @@ export const colorBg = {
   },
   danger: {
     default: baseColor.red400,
-    "default-hover": baseColor.red500,
-    "default-pressed": baseColor.red600,
+    defaultHover: baseColor.red500,
+    defaultPressed: baseColor.red600,
     ghost: baseColor.red950,
   },
   dim: {
@@ -86,8 +86,8 @@ export const colorBg = {
 export const colorStroke = {
   neutral: {
     default: baseColor.gray600,
-    "default-focused": baseColor.gray200,
-    "default-disabled": baseColor.gray700,
+    defaultFocused: baseColor.gray200,
+    defaultDisabled: baseColor.gray700,
     inverse: baseColor.gray10,
     subtle: baseColor.gray700,
     ghost: baseColor.gray800,
