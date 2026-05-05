@@ -1,6 +1,6 @@
 import { withThemeByClassName } from "@storybook/addon-themes";
 import type { Preview } from "@storybook/react";
-import "@makers/design-tokens/tokens.css";
+import "@sopt-mds/design-tokens/tokens.css";
 import "./preview.css";
 
 const preview: Preview = {

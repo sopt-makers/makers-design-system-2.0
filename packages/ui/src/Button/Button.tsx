@@ -1,4 +1,4 @@
-import { colors } from "@makers/design-tokens";
+import { colors } from "@sopt-mds/design-tokens";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
 export type ButtonVariant = "primary" | "secondary" | "danger";

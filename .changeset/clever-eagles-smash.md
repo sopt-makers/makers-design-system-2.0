@@ -1,5 +1,5 @@
 ---
-"@makers/design-tokens": major
+"@sopt-mds/design-tokens": major
 ---
 
 define design tokens

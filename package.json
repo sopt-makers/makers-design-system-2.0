@@ -8,8 +8,8 @@
     "lint": "biome lint .",
     "release": "changeset publish",
     "versioning": "changeset version && pnpm install --lockfile-only",
-    "storybook": "pnpm --filter @makers/storybook dev",
-    "storybook:build": "pnpm --filter @makers/storybook build",
+    "storybook": "pnpm --filter @sopt-mds/storybook dev",
+    "storybook:build": "pnpm --filter @sopt-mds/storybook build",
     "typecheck": "pnpm -r typecheck",
     "scaffold:component": "tsx scripts/scaffold-component.ts"
   },
