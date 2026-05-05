@@ -1,5 +1,5 @@
 {
-  "name": "@makers/storybook",
+  "name": "@sopt-mds/storybook",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -9,14 +9,14 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@makers/design-tokens": "workspace:*",
-    "@makers/ui": "workspace:*",
+    "@sopt-mds/design-tokens": "workspace:*",
+    "@sopt-mds/ui": "workspace:*",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.0",
-    "@makers/tsconfig": "workspace:*",
+    "@sopt-mds/tsconfig": "workspace:*",
     "@storybook/addon-a11y": "^8.4.7",
     "@storybook/addon-docs": "^8.4.7",
     "@storybook/addon-essentials": "^8.4.7",

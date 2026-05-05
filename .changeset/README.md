@@ -28,5 +28,5 @@ This repository uses Changesets for versioning and package publishing in the pnp
 
 ## Current Release Surface
 
-- `@makers/design-tokens`
-- `@makers/ui`
+- `@sopt-mds/design-tokens`
+- `@sopt-mds/ui`

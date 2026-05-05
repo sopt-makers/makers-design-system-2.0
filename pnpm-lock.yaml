@@ -29,10 +29,10 @@ importers:
 
   apps/storybook:
     dependencies:
-      '@makers/design-tokens':
+      '@sopt-mds/design-tokens':
         specifier: workspace:*
         version: link:../../packages/design-tokens
-      '@makers/ui':
+      '@sopt-mds/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       react:
@@ -45,7 +45,7 @@ importers:
       '@chromatic-com/storybook':
         specifier: ^3.2.0
         version: 3.2.7(react@18.3.1)(storybook@8.6.18(prettier@2.8.8))
-      '@makers/tsconfig':
+      '@sopt-mds/tsconfig':
         specifier: workspace:*
         version: link:../../configs/tsconfig
       '@storybook/addon-a11y':
@@ -98,7 +98,7 @@ importers:
 
   packages/design-tokens:
     devDependencies:
-      '@makers/tsconfig':
+      '@sopt-mds/tsconfig':
         specifier: workspace:*
         version: link:../../configs/tsconfig
       '@storybook/react':
@@ -116,7 +116,7 @@ importers:
 
   packages/ui:
     dependencies:
-      '@makers/design-tokens':
+      '@sopt-mds/design-tokens':
         specifier: workspace:*
         version: link:../design-tokens
       '@vanilla-extract/css':
@@ -126,7 +126,7 @@ importers:
         specifier: '>=18'
         version: 18.3.1(react@18.3.1)
     devDependencies:
-      '@makers/tsconfig':
+      '@sopt-mds/tsconfig':
         specifier: workspace:*
         version: link:../../configs/tsconfig
       '@storybook/react':

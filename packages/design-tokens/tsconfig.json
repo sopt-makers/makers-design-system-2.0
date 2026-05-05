@@ -1,5 +1,5 @@
 {
-  "extends": "@makers/tsconfig/library.json",
+  "extends": "@sopt-mds/tsconfig/library.json",
   "compilerOptions": {
     "types": ["react"]
   },
