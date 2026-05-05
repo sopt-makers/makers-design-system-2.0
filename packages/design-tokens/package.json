@@ -1,15 +1,19 @@
 {
-  "name": "@makers/design-tokens",
+  "name": "@sopt-mds/design-tokens",
   "version": "0.0.0",
   "type": "module",
-  "sideEffects": ["*.css"],
+  "sideEffects": [
+    "*.css"
+  ],
   "exports": {
     ".": "./src/index.ts",
     "./base": "./src/base/index.ts",
     "./semantic": "./src/semantic/index.ts",
     "./tokens.css": "./src/tokens.css"
   },
-  "files": ["src"],
+  "files": [
+    "src"
+  ],
   "scripts": {
     "typecheck": "tsc --noEmit"
   },
