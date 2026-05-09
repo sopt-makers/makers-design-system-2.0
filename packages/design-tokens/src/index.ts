@@ -17,22 +17,14 @@ import {
   typographySize,
   typographyWeight,
 } from "./base/typography";
-import {
-  typographyBody,
-  typographyHeading,
-  typographyLabel,
-  typographyTitle,
-} from "./semantic/typography";
+import { semanticTypography } from "./semantic/typography";
 
 export const typography = {
   weight: typographyWeight,
   size: typographySize,
   lineHeight: typographyLineHeight,
   letterSpacing: typographyLetterSpacing,
-  heading: typographyHeading,
-  title: typographyTitle,
-  body: typographyBody,
-  label: typographyLabel,
+  ...semanticTypography,
 } as const;
 
 import { spacingBase } from "./base/space";

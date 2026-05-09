@@ -5,95 +5,86 @@ import {
   typographyWeight,
 } from "../base/typography";
 
-export const typographyHeading = {
-  t1: {
+export const semanticTypography = {
+  heading1: {
     fontWeight: typographyWeight.bold,
     fontSize: typographySize.t32,
     lineHeight: typographyLineHeight.t48,
     letterSpacing: typographyLetterSpacing.default,
   },
-  t2: {
+  heading2: {
     fontWeight: typographyWeight.bold,
     fontSize: typographySize.t24,
     lineHeight: typographyLineHeight.t36,
     letterSpacing: typographyLetterSpacing.default,
   },
-  t3: {
+  heading3: {
     fontWeight: typographyWeight.bold,
     fontSize: typographySize.t20,
     lineHeight: typographyLineHeight.t30,
     letterSpacing: typographyLetterSpacing.default,
   },
-  t4: {
+  heading4: {
     fontWeight: typographyWeight.bold,
     fontSize: typographySize.t16,
     lineHeight: typographyLineHeight.t24,
     letterSpacing: typographyLetterSpacing.wide,
   },
-} as const;
-
-export const typographyTitle = {
-  t1: {
+  title1: {
     fontWeight: typographyWeight.semibold,
     fontSize: typographySize.t28,
     lineHeight: typographyLineHeight.t42,
     letterSpacing: typographyLetterSpacing.default,
   },
-  t2: {
+  title2: {
     fontWeight: typographyWeight.semibold,
     fontSize: typographySize.t24,
     lineHeight: typographyLineHeight.t36,
     letterSpacing: typographyLetterSpacing.default,
   },
-  t3: {
+  title3: {
     fontWeight: typographyWeight.semibold,
     fontSize: typographySize.t20,
     lineHeight: typographyLineHeight.t30,
     letterSpacing: typographyLetterSpacing.default,
   },
-  t4: {
+  title4: {
     fontWeight: typographyWeight.semibold,
     fontSize: typographySize.t16,
     lineHeight: typographyLineHeight.t24,
     letterSpacing: typographyLetterSpacing.wide,
   },
-} as const;
-
-export const typographyBody = {
-  t1: {
+  body1: {
     fontWeight: typographyWeight.regular,
     fontSize: typographySize.t16,
     lineHeight: typographyLineHeight.t26,
     letterSpacing: typographyLetterSpacing.wide,
   },
-  t2: {
+  body2: {
     fontWeight: typographyWeight.regular,
     fontSize: typographySize.t14,
     lineHeight: typographyLineHeight.t22,
     letterSpacing: typographyLetterSpacing.wide,
   },
-} as const;
-
-export const typographyLabel = {
-  t1: {
+  label1: {
     fontWeight: typographyWeight.semibold,
     fontSize: typographySize.t18,
     lineHeight: typographyLineHeight.t24,
     letterSpacing: typographyLetterSpacing.default,
   },
-  t2: {
+  label2: {
     fontWeight: typographyWeight.semibold,
     fontSize: typographySize.t16,
     lineHeight: typographyLineHeight.t22,
     letterSpacing: typographyLetterSpacing.default,
   },
-  t3: {
+  label3: {
     fontWeight: typographyWeight.semibold,
     fontSize: typographySize.t14,
     lineHeight: typographyLineHeight.t18,
     letterSpacing: typographyLetterSpacing.default,
   },
-  t4: {
+  label4: {
     fontWeight: typographyWeight.semibold,
     fontSize: typographySize.t12,
     lineHeight: typographyLineHeight.t16,

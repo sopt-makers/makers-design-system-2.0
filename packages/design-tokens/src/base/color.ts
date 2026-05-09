@@ -27,7 +27,7 @@ export const baseColor = {
   orange900: "#422109",
   orange950: "#2C1D18",
 
-  blue50: "#CBE1FF",
+  blue50: "#C8E1FF",
   blue100: "#8FC0FF",
   blue200: "#619EFF",
   blue300: "#4485FF",

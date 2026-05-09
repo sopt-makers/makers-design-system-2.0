@@ -1,11 +1,6 @@
 import type { CSSProperties } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  typographyHeading,
-  typographyTitle,
-  typographyBody,
-  typographyLabel,
-} from "../semantic/typography";
+import { semanticTypography } from "../semantic/typography";
 
 interface TypographyStyle {
   fontWeight: number;
@@ -32,21 +27,12 @@ function TypographyRow({ name, style }: { name: string; style: TypographyStyle }
   );
 }
 
-const categories = [
-  { name: "heading", scales: typographyHeading },
-  { name: "title", scales: typographyTitle },
-  { name: "body", scales: typographyBody },
-  { name: "label", scales: typographyLabel },
-] as const;
-
 function TypographyScale() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 16, padding: 16 }}>
-      {categories.map(({ name, scales }) =>
-        (Object.entries(scales) as [string, TypographyStyle][]).map(([level, style]) => (
-          <TypographyRow key={`${name}-${level}`} name={`typography.${name}.${level}`} style={style} />
-        ))
-      )}
+      {(Object.entries(semanticTypography) as [string, TypographyStyle][]).map(([name, style]) => (
+        <TypographyRow key={name} name={`typography.${name}`} style={style} />
+      ))}
     </div>
   );
 }
