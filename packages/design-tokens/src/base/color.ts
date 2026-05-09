@@ -53,7 +53,7 @@ export const baseColor = {
 
   green50: "#CCFFEC",
   green100: "#82F6CB",
-  green200: "#82F6CB",
+  green200: "#4EE4AD",
   green300: "#26CF91",
   green400: "#16BF81",
   green500: "#13A06C",
