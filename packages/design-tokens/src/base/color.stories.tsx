@@ -30,7 +30,9 @@ const palettes = ["gray", "orange", "blue", "red", "green", "yellow"] as const;
 
 function groupByPalette() {
   return palettes.map((palette) => {
-    const entries = Object.entries(baseColor).filter(([key]) => key.startsWith(palette));
+    const entries = Object.entries(baseColor).filter(([key]) =>
+      key.startsWith(palette),
+    );
     return { palette, entries };
   });
 }
@@ -40,10 +42,23 @@ function ColorGrid() {
     <div style={{ padding: 16 }}>
       {groupByPalette().map(({ palette, entries }) => (
         <div key={palette} style={{ marginBottom: 24 }}>
-          <div style={{ fontWeight: 700, fontSize: 14, marginBottom: 8, textTransform: "capitalize" }}>
+          <div
+            style={{
+              fontWeight: 700,
+              fontSize: 14,
+              marginBottom: 8,
+              textTransform: "capitalize",
+            }}
+          >
             {palette}
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 8 }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(4, 1fr)",
+              gap: 8,
+            }}
+          >
             {entries.map(([name, value]) => (
               <Swatch key={name} name={name} value={value} />
             ))}
@@ -55,7 +70,7 @@ function ColorGrid() {
 }
 
 const meta: Meta<typeof ColorGrid> = {
-  title: "Base/Color",
+  title: "Token/Color",
   component: ColorGrid,
   parameters: { layout: "padded" },
 };
