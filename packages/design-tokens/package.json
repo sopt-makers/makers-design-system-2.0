@@ -5,16 +5,12 @@
   "sideEffects": [
     "*.css"
   ],
-  "exports": {
-    ".": "./src/index.ts",
-    "./base": "./src/base/index.ts",
-    "./semantic": "./src/semantic/index.ts",
-    "./tokens.css": "./src/tokens.css"
-  },
+  "zshy": "./src/index.ts",
   "files": [
-    "src"
+    "dist"
   ],
   "scripts": {
+    "build": "zshy",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
@@ -22,9 +18,20 @@
     "@storybook/react": "^8.4.7",
     "@types/react": "^18.3.0",
     "react": "^18.3.1",
-    "typescript": "^5.6.0"
+    "typescript": "^5.6.0",
+    "zshy": "^0.7.2"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.cts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.cts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
   }
 }

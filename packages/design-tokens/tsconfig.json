@@ -1,7 +1,9 @@
 {
   "extends": "@sopt-mds/tsconfig/library.json",
   "compilerOptions": {
-    "types": ["react"]
+    "types": ["react"],
+    "outDir": "./dist",
+    "declaration": true
   },
   "include": ["src"]
 }
