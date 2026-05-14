@@ -5,33 +5,36 @@
   "sideEffects": [
     "*.css"
   ],
-  "zshy": "./src/index.ts",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "zshy",
+    "build": "vite build",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@sopt-mds/tsconfig": "workspace:*",
     "@storybook/react": "^8.4.7",
+    "@types/node": "^22.0.0",
     "@types/react": "^18.3.0",
     "react": "^18.3.1",
     "typescript": "^5.6.0",
-    "zshy": "^0.7.2"
+    "vite": "npm:rolldown-vite@latest",
+    "vite-plugin-dts": "^4.5.0"
   },
   "publishConfig": {
     "access": "public"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
-  "types": "./dist/index.d.cts",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.cts",
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
-    }
+    },
+    "./index.css": "./dist/index.css",
+    "./package.json": "./package.json"
   }
 }
