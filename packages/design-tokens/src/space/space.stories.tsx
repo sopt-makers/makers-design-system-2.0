@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { spacingBase } from "./space";
+import { spacingBase } from "./base";
 
 function SpaceScale() {
   return (

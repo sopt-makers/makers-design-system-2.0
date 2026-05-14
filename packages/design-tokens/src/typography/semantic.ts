@@ -3,7 +3,7 @@ import {
   typographyLineHeight,
   typographySize,
   typographyWeight,
-} from "../base/typography";
+} from "./base";
 
 export const semanticTypography = {
   heading1: {

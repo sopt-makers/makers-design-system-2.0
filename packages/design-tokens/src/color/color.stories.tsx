@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { baseColor } from "./color";
+import { baseColor } from "./base";
 
 interface SwatchProps {
   name: string;

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import type { CSSProperties } from "react";
-import { semanticTypography } from "../semantic/typography";
+import { semanticTypography } from "./semantic";
 
 interface TypographyStyle {
   fontWeight: number;
