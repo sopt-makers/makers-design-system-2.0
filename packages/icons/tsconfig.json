@@ -1,0 +1,7 @@
+{
+  "extends": "@sopt-mds/tsconfig/library.json",
+  "compilerOptions": {
+    "types": ["react"]
+  },
+  "include": ["src"]
+}

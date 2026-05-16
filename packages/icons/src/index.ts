@@ -1,0 +1,21 @@
+export * from "./Communication/index";
+export * from "./Editor/index";
+export * from "./Feedback/index";
+export * from "./Files/index";
+export * from "./General/index";
+export * from "./Interaction/index";
+export * from "./Logo/index";
+export * from "./Media/index";
+export * from "./Time/index";
+export * from "./Users/index";
+
+export * as Communication from "./Communication/index";
+export * as Editor from "./Editor/index";
+export * as Feedback from "./Feedback/index";
+export * as Files from "./Files/index";
+export * as General from "./General/index";
+export * as Interaction from "./Interaction/index";
+export * as Logo from "./Logo/index";
+export * as Media from "./Media/index";
+export * as Time from "./Time/index";
+export * as Users from "./Users/index";

@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"pkill -f \\\"storybook dev\\\" 2>/dev/null; sleep 1; git status && echo \\\"---package.json diff---\\\" && git diff package.json\",\"description\":\"Stop storybook and inspect changes\"}",
+  "error": "Exit code 128\nOn branch feat/icons\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   ../../../../apps/storybook/.storybook/main.ts\n\tmodified:   ../../../../apps/storybook/.storybook/preview.tsx\n\tmodified:   ../../../../apps/storybook/package.json\n\tmodified:   ../../../../apps/storybook/stories/Introduction.mdx\n\tmodified:   ../../../../package.json\n\tmodified:   ../../../....",
+  "timestamp": "2026-05-16T12:05:51.329Z",
+  "retry_count": 1
+}
