@@ -26,7 +26,7 @@ export default defineConfig({
      * https://rolldown.rs/reference/
      */
     rolldownOptions: {
-      external: ["react", "react-dom", "react/jsx-runtime"],
+      external: ["react", "react/jsx-runtime"],
       output: [
         {
           format: "es",
