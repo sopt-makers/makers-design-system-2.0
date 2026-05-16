@@ -16,16 +16,24 @@ export default defineConfig({
     }),
   ],
   build: {
+    minify: false,
     outDir: "dist",
-    emptyOutDir: true,
-    sourcemap: true,
     lib: {
+      cssFileName: "index",
       entry: resolve(__dirname, "src/index.ts"),
-      formats: ["es", "cjs"],
-      fileName: (format) => (format === "es" ? "index.js" : "index.cjs"),
     },
-    rollupOptions: {
+    /**
+     * https://rolldown.rs/reference/
+     */
+    rolldownOptions: {
       external: ["react", "react-dom", "react/jsx-runtime"],
+      output: [
+        {
+          format: "es",
+          dir: "dist",
+          entryFileNames: "[name].js",
+        },
+      ],
     },
   },
 });
