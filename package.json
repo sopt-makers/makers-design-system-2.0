@@ -11,7 +11,8 @@
     "storybook": "pnpm --filter @sopt-mds/storybook dev",
     "storybook:build": "pnpm --filter @sopt-mds/storybook build",
     "typecheck": "pnpm -r typecheck",
-    "scaffold:component": "tsx scripts/scaffold-component.ts"
+    "scaffold:component": "tsx scripts/scaffold-component.ts",
+    "icons:inspect": "tsx scripts/inspect-figma-icons.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.6",
