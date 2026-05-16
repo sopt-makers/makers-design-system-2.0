@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "storybook dev -p 6006 --no-open",
-    "build": "storybook build --output-dir storybook-static",
+    "build": "storybook build --output-dir storybook-static --stats-json",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

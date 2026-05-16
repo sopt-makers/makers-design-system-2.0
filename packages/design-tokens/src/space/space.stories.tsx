@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { spacingBase } from "./space";
+import { spacingBase } from "./base";
 
 function SpaceScale() {
   return (
@@ -19,7 +19,7 @@ function SpaceScale() {
 }
 
 const meta: Meta<typeof SpaceScale> = {
-  title: "Base/Space",
+  title: "Token/Space",
   component: SpaceScale,
   parameters: { layout: "padded" },
 };

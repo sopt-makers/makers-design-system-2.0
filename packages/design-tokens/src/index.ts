@@ -1,8 +1,16 @@
-export * from "./base/index";
-export * from "./semantic/index";
+export * from "./color";
+export * from "./space";
+export * from "./typography";
 
-import { baseColor } from "./base/color";
-import { colorBg, colorFg, colorStroke } from "./semantic/color";
+import { baseColor, colorBg, colorFg, colorStroke } from "./color";
+import { spacingBase } from "./space";
+import {
+  semanticTypography,
+  typographyLetterSpacing,
+  typographyLineHeight,
+  typographySize,
+  typographyWeight,
+} from "./typography";
 
 export const colors = {
   base: baseColor,
@@ -11,30 +19,12 @@ export const colors = {
   stroke: colorStroke,
 } as const;
 
-import {
-  typographyLetterSpacing,
-  typographyLineHeight,
-  typographySize,
-  typographyWeight,
-} from "./base/typography";
-import {
-  typographyBody,
-  typographyHeading,
-  typographyLabel,
-  typographyTitle,
-} from "./semantic/typography";
-
 export const typography = {
   weight: typographyWeight,
   size: typographySize,
   lineHeight: typographyLineHeight,
   letterSpacing: typographyLetterSpacing,
-  heading: typographyHeading,
-  title: typographyTitle,
-  body: typographyBody,
-  label: typographyLabel,
+  ...semanticTypography,
 } as const;
-
-import { spacingBase } from "./base/space";
 
 export const spacing = spacingBase;

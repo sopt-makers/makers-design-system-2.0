@@ -1,4 +1,4 @@
-import { baseColor } from "../base/color";
+import { baseColor } from "./base";
 
 export const colorFg = {
   neutral: {
