@@ -30,7 +30,7 @@ export default defineConfig({
   },
 });
 
-const ROOT_DIR = path.resolve(__dirname, "../src");
+const ROOT_DIR = path.resolve(__dirname, "./src");
 
 async function collectCssFiles(root: string): Promise<string[]> {
   const entries = await fsp.readdir(root, {

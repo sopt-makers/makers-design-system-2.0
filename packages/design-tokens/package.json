@@ -8,6 +8,10 @@
   "files": [
     "dist"
   ],
+  "exports": {
+    ".": "./src/index.ts",
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "build": "vite build",
     "typecheck": "tsc --noEmit"
@@ -23,18 +27,18 @@
     "vite-plugin-dts": "^4.5.0"
   },
   "publishConfig": {
-    "access": "public"
-  },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    },
-    "./index.css": "./dist/index.css",
-    "./package.json": "./package.json"
+    "access": "public",
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js",
+        "require": "./dist/index.cjs"
+      },
+      "./index.css": "./dist/index.css",
+      "./package.json": "./package.json"
+    }
   }
 }
