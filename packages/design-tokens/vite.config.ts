@@ -19,7 +19,6 @@ export default defineConfig({
     minify: false,
     outDir: "dist",
     lib: {
-      cssFileName: "index",
       entry: resolve(__dirname, "src/index.ts"),
     },
     /**
