@@ -48,12 +48,13 @@ interface IconCardProps {
 
 function IconCard({ name, Icon, size, color }: IconCardProps) {
   const iconStyle: CSSProperties = { width: size, height: size, flexShrink: 0 };
-  if (color && color.trim()) {
+  if (color?.trim()) {
     iconStyle.color = color;
   }
 
   return (
-    <div
+    <button
+      type="button"
       style={{
         display: "flex",
         flexDirection: "column",
@@ -63,7 +64,9 @@ function IconCard({ name, Icon, size, color }: IconCardProps) {
         border: "1px solid var(--color-border, #e5e7eb)",
         borderRadius: 10,
         background: "var(--color-surface, #f9fafb)",
+        color: "inherit",
         cursor: "pointer",
+        font: "inherit",
         transition: "border-color 120ms ease",
       }}
       onClick={() => {
@@ -84,7 +87,7 @@ function IconCard({ name, Icon, size, color }: IconCardProps) {
       >
         {name}
       </span>
-    </div>
+    </button>
   );
 }
 
