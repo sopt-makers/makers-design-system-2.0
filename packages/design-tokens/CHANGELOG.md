@@ -1,5 +1,11 @@
 # @sopt-mds/design-tokens
 
+## 1.0.2
+
+### Patch Changes
+
+- 9c6987d: sopt-mds/ui vite rolldown build
+
 ## 1.0.1
 
 ### Patch Changes
