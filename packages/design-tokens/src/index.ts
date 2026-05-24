@@ -1,8 +1,10 @@
 export * from "./color";
+export * from "./radius";
 export * from "./space";
 export * from "./typography";
 
 import { baseColor, colorBg, colorFg, colorStroke } from "./color";
+import { radiusBase } from "./radius";
 import { spacingBase } from "./space";
 import {
   semanticTypography,
@@ -28,3 +30,4 @@ export const typography = {
 } as const;
 
 export const spacing = spacingBase;
+export const radius = radiusBase;
