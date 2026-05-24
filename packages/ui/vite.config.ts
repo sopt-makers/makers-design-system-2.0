@@ -1,14 +1,10 @@
 import { resolve } from "node:path";
-import { mergeCss } from "@sopt-mds/vite/plugins";
+import { collectComponentEntries } from "@sopt-mds/vite/utils";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 
 export default defineConfig({
   plugins: [
-    mergeCss({
-      root: resolve(__dirname, "./src"),
-      outFileName: "index.css",
-    }),
     dts({
       tsconfigPath: resolve(__dirname, "./tsconfig.lib.json"),
       entryRoot: "src",
@@ -20,15 +16,25 @@ export default defineConfig({
     minify: false,
     outDir: "dist",
     lib: {
-      entry: resolve(__dirname, "src/index.ts"),
+      entry: {
+        index: "src/index.ts",
+        ...(await collectComponentEntries()),
+      },
     },
     rolldownOptions: {
-      external: ["react", "react/jsx-runtime"],
+      external: [
+        "react",
+        "react-dom",
+        "react/jsx-runtime",
+        "@sopt-mds/design-tokens",
+        "@vanilla-extract/css",
+      ],
       output: [
         {
           format: "es",
           dir: "dist",
           entryFileNames: "[name].js",
+          chunkFileNames: "chunks/[name]-[hash].js",
         },
       ],
     },

@@ -1,0 +1,7 @@
+{
+  "extends": "@sopt-mds/tsconfig/base.json",
+  "compilerOptions": {
+    "types": ["node"]
+  },
+  "include": ["src"]
+}

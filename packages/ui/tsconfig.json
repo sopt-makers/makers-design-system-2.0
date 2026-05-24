@@ -1,7 +1,7 @@
 {
   "extends": "@sopt-mds/tsconfig/library.json",
   "compilerOptions": {
-    "types": ["react"]
+    "types": ["react", "node"]
   },
-  "include": ["src"]
+  "include": ["src", "vite.config.ts"]
 }
