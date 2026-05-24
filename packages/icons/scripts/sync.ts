@@ -1,14 +1,9 @@
-import { existsSync } from "node:fs";
+import { existsSync, readdirSync } from "node:fs";
 import { mkdir, rm, writeFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { transform } from "@svgr/core";
 import * as prettier from "prettier";
-import {
-  ICON_CATEGORIES,
-  type IconCategory,
-  getCorrectedName,
-} from "../src/_meta/icon-map";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const packageRoot = resolve(__dirname, "..");
@@ -28,6 +23,15 @@ if (!FIGMA_TOKEN || !FIGMA_FILE_ID) {
   process.exit(1);
 }
 
+/**
+ * 피그마 type 값의 오타를 보정한다. 디자이너가 피그마에서 정정하면 해당 항목 제거.
+ * 대소문자 차이(`Facebook`, `CalendarDate` 등)는 lowerFirst로 자동 정규화하므로 여기 둘 필요 없음.
+ */
+const TYPO_FIXES: Record<string, string> = {
+  mesageCheck: "messageCheck",
+  imagCheck: "imageCheck",
+};
+
 type FigmaNode = {
   id: string;
   name: string;
@@ -41,7 +45,6 @@ type IconVariant = {
   figmaType: string;
   name: string;
   style: "filled" | "outlined";
-  category: IconCategory;
   nodeId: string;
 };
 
@@ -60,6 +63,11 @@ const toKebab = (camel: string): string =>
 
 const toPascal = (camel: string): string =>
   camel.charAt(0).toUpperCase() + camel.slice(1);
+
+const lowerFirst = (s: string): string => s.charAt(0).toLowerCase() + s.slice(1);
+
+const normalizeName = (figmaType: string): string =>
+  lowerFirst(TYPO_FIXES[figmaType] ?? figmaType);
 
 const parseVariant = (variant: string): { type: string; style: string } => {
   const props = Object.fromEntries(
@@ -99,16 +107,10 @@ const collectVariants = (iconSet: FigmaNode): IconVariant[] => {
       console.warn(`  ⚠ Unknown style '${style}' for ${figmaType}`);
       continue;
     }
-    const category = ICON_CATEGORIES[figmaType];
-    if (!category) {
-      console.warn(`  ⚠ No category mapping for figma type: ${figmaType}`);
-      continue;
-    }
     variants.push({
       figmaType,
-      name: getCorrectedName(figmaType),
+      name: normalizeName(figmaType),
       style,
-      category,
       nodeId: child.id,
     });
   }
@@ -153,13 +155,8 @@ const applyCurrentColor = (svg: string): string =>
     .replace(/(\s)fill="(?!none|currentColor)[^"]+"/g, '$1fill="currentColor"');
 
 /**
- * 단일 색상만 사용하는 SVG인지 판별한다.
- * - `fill="none"`, `stroke="none"`은 무시
- * - 나머지 색상이 한 종류면 monochrome
- *
- * Logo 카테고리는 기본적으로 색상 보존이지만, 단일 색만 쓰는 로고(예: white로 export된
- * apple/kakao/...)는 배경이 같은 색일 때 안 보이는 문제가 있어 currentColor로 치환한다.
- * 다색 로고(googleColor, github의 음각 디테일 등)는 그대로 둔다.
+ * Monochrome SVG는 currentColor로 치환해 테마/color prop을 따르게 하고,
+ * 다색 SVG(예: googleColor, github의 음각 디테일)는 원본 색상을 보존한다.
  */
 const isMonochromeSvg = (svg: string): boolean => {
   const colors = new Set<string>();
@@ -175,10 +172,8 @@ const isMonochromeSvg = (svg: string): boolean => {
 const buildComponentSource = async (
   rawSvg: string,
   componentName: string,
-  category: IconCategory,
 ): Promise<string> => {
-  const shouldApplyCurrentColor = category !== "Logo" || isMonochromeSvg(rawSvg);
-  const preprocessed = shouldApplyCurrentColor ? applyCurrentColor(rawSvg) : rawSvg;
+  const preprocessed = isMonochromeSvg(rawSvg) ? applyCurrentColor(rawSvg) : rawSvg;
 
   const tsx = await transform(
     preprocessed,
@@ -205,24 +200,22 @@ export default ${name};
   return prettier.format(tsx, { parser: "typescript", printWidth: 100 });
 };
 
-const writeCategoryIndex = async (
-  category: IconCategory,
+const writeRootIndex = async (
   entries: { fileName: string; componentName: string }[],
 ): Promise<void> => {
   const sorted = [...entries].sort((a, b) => a.componentName.localeCompare(b.componentName));
   const lines = sorted.map(
     (e) => `export { default as ${e.componentName} } from "./${e.fileName}";`,
   );
-  const content = `${lines.join("\n")}\n`;
-  await writeFile(join(srcRoot, category, "index.ts"), content);
+  await writeFile(join(srcRoot, "index.ts"), `${lines.join("\n")}\n`);
 };
 
-const writeRootIndex = async (categories: IconCategory[]): Promise<void> => {
-  const sortedCategories = [...categories].sort();
-  const flat = sortedCategories.map((c) => `export * from "./${c}/index";`);
-  const namespaced = sortedCategories.map((c) => `export * as ${c} from "./${c}/index";`);
-  const content = `${flat.join("\n")}\n\n${namespaced.join("\n")}\n`;
-  await writeFile(join(srcRoot, "index.ts"), content);
+const cleanPreviousOutput = async (): Promise<void> => {
+  for (const entry of readdirSync(srcRoot, { withFileTypes: true })) {
+    if (entry.isFile() && entry.name.startsWith("ic-") && entry.name.endsWith(".tsx")) {
+      await rm(join(srcRoot, entry.name), { force: true });
+    }
+  }
 };
 
 const main = async (): Promise<void> => {
@@ -235,7 +228,7 @@ const main = async (): Promise<void> => {
   }
 
   const variants = collectVariants(iconSet);
-  console.log(`→ Found ${variants.length} icon variants across ${new Set(variants.map((v) => v.category)).size} categories`);
+  console.log(`→ Found ${variants.length} icon variants`);
 
   const styleCount = new Map<string, Set<string>>();
   for (const v of variants) {
@@ -259,16 +252,11 @@ const main = async (): Promise<void> => {
   const urls = await fetchSvgUrls(variants.map((v) => v.nodeId));
 
   console.log("→ Cleaning previous output...");
-  const categories: IconCategory[] = [];
-  for (const dir of new Set(variants.map((v) => v.category))) {
-    const path = join(srcRoot, dir);
-    if (existsSync(path)) await rm(path, { recursive: true, force: true });
-    await mkdir(path, { recursive: true });
-    categories.push(dir);
-  }
+  await mkdir(srcRoot, { recursive: true });
+  await cleanPreviousOutput();
 
   console.log("→ Downloading SVGs and generating components...");
-  const perCategory = new Map<IconCategory, { fileName: string; componentName: string }[]>();
+  const entries: { fileName: string; componentName: string }[] = [];
 
   let done = 0;
   const total = variants.length;
@@ -282,14 +270,10 @@ const main = async (): Promise<void> => {
       }
       const rawSvg = await downloadSvg(url);
       const cname = componentName(v);
-      const tsx = await buildComponentSource(rawSvg, cname, v.category);
+      const tsx = await buildComponentSource(rawSvg, cname);
       const fname = fileSlug(v);
-      const filePath = join(srcRoot, v.category, `${fname}.tsx`);
-      await writeFile(filePath, tsx);
-
-      const arr = perCategory.get(v.category) ?? [];
-      arr.push({ fileName: fname, componentName: cname });
-      perCategory.set(v.category, arr);
+      await writeFile(join(srcRoot, `${fname}.tsx`), tsx);
+      entries.push({ fileName: fname, componentName: cname });
 
       done += 1;
       if (done % 25 === 0 || done === total) {
@@ -298,13 +282,10 @@ const main = async (): Promise<void> => {
     }),
   );
 
-  console.log("→ Writing index files...");
-  for (const [category, entries] of perCategory) {
-    await writeCategoryIndex(category, entries);
-  }
-  await writeRootIndex([...perCategory.keys()]);
+  console.log("→ Writing index file...");
+  await writeRootIndex(entries);
 
-  console.log(`✔ Done. Generated ${done} icon components across ${perCategory.size} categories.`);
+  console.log(`✔ Done. Generated ${done} icon components.`);
 };
 
 main().catch((err) => {
