@@ -1,0 +1,22 @@
+{
+  "name": "@sopt-mds/vite",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./plugins": "./src/plugins/merge-css.ts",
+    "./utils": "./src/utils/collect-component-entries.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "vite": "npm:rolldown-vite@latest"
+  },
+  "devDependencies": {
+    "@sopt-mds/tsconfig": "workspace:*",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0"
+  }
+}
