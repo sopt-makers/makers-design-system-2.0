@@ -1,5 +1,16 @@
 # @sopt-mds/ui
 
+## 1.0.0
+
+### Major Changes
+
+- 9c6987d: sopt-mds/ui vite rolldown build
+
+### Patch Changes
+
+- Updated dependencies [9c6987d]
+  - @sopt-mds/design-tokens@1.0.2
+
 ## 0.0.2
 
 ### Patch Changes
