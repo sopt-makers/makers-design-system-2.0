@@ -19,11 +19,6 @@ const config: StorybookConfig = {
       files: "**/*.stories.@(ts|tsx|mdx)",
       titlePrefix: "Design Tokens",
     },
-    {
-      directory: resolve(repoRoot, "packages/icons/src"),
-      files: "**/*.stories.@(ts|tsx|mdx)",
-      titlePrefix: "Icons",
-    },
   ],
   addons: [
     "@storybook/addon-essentials",
