@@ -56,16 +56,7 @@ export const body = style({
   fontSize: typography.size.t14,
   lineHeight: typography.lineHeight.t22,
   letterSpacing: typography.letterSpacing.wide,
-});
-
-export const bodyVariant = styleVariants({
-  danger: {
-    fontWeight: typography.weight.regular,
-  },
-  /** medium 토큰 부재로 raw 500 사용. weight 토큰 보강 시 typography.weight.medium 로 변경. */
-  information: {
-    fontWeight: 500,
-  },
+  fontWeight: typography.weight.regular,
 });
 
 export const action = style({

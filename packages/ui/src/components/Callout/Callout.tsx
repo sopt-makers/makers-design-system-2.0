@@ -57,9 +57,7 @@ export function Callout({
         />
       )}
       <div className={styles.contents}>
-        <p className={`${styles.body} ${styles.bodyVariant[variant]}`}>
-          {children}
-        </p>
+        <p className={styles.body}>{children}</p>
         {action && (
           <button
             type="button"
