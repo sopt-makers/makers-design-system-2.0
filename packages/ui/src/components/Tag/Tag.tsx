@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import type { HTMLAttributes, ReactElement } from "react";
+import { forwardRef, type HTMLAttributes, type ReactElement } from "react";
 import { tagColorStyleVariantKey } from "./constant";
 import {
   base,
@@ -22,29 +22,39 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   leftAddon?: ReactElement;
 }
 
-export function Tag({
-  variant = "default",
-  size = "medium",
-  shape = "rect",
-  type = "solid",
-  leftAddon,
-  children,
-  className,
-  ...rest
-}: TagProps) {
-  return (
-    <span
-      className={clsx(
-        base,
-        shapeVariants[shape],
-        sizeVariants[size],
-        tagColorStyleVariants[tagColorStyleVariantKey(variant, type)],
-        className,
-      )}
-      {...rest}
-    >
-      {leftAddon != null ? leftAddon : null}
-      {children}
-    </span>
-  );
-}
+export const Tag = forwardRef<HTMLSpanElement, TagProps>(
+  (
+    {
+      variant = "default",
+      size = "medium",
+      shape = "rect",
+      type = "solid",
+      leftAddon,
+      style,
+      children,
+      className,
+      ...rest
+    },
+    ref,
+  ) => {
+    return (
+      <span
+        ref={ref}
+        style={style}
+        className={clsx(
+          base,
+          shapeVariants[shape],
+          sizeVariants[size],
+          tagColorStyleVariants[tagColorStyleVariantKey(variant, type)],
+          className,
+        )}
+        {...rest}
+      >
+        {leftAddon != null ? leftAddon : null}
+        {children}
+      </span>
+    );
+  },
+);
+
+Tag.displayName = "Tag";
