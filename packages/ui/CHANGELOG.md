@@ -1,5 +1,11 @@
 # @sopt-mds/ui
 
+## 1.0.2
+
+### Patch Changes
+
+- 99b1018: register tag component
+
 ## 1.0.1
 
 ### Patch Changes
