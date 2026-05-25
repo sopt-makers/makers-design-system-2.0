@@ -18,6 +18,7 @@ export const _Tag: Story = {
 };
 
 export const _TagIcon: Story = {
+  name: "Tag with Addon",
   args: {
     children: "Tag",
     leftAddon: <IconSample />,

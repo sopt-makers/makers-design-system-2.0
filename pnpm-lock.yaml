@@ -170,6 +170,9 @@ importers:
       '@sopt-mds/design-tokens':
         specifier: workspace:*
         version: link:../design-tokens
+      '@sopt-mds/icons':
+        specifier: workspace:*
+        version: link:../icons
       '@vanilla-extract/css':
         specifier: ^1.15.5
         version: 1.20.1
