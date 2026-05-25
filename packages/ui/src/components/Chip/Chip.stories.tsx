@@ -14,6 +14,7 @@ const meta: Meta<typeof Chip> = {
   args: {
     size: "medium",
     disabled: false,
+    children: "Chip",
   },
   argTypes: {
     size: {
@@ -23,10 +24,13 @@ const meta: Meta<typeof Chip> = {
     disabled: {
       control: "boolean",
     },
+    children: {
+      control: "text",
+    },
   },
   parameters: {
     controls: {
-      include: ["size", "disabled"],
+      include: ["size", "disabled", "children"],
     },
     docs: {
       description: {
@@ -41,9 +45,7 @@ export default meta;
 type Story = StoryObj<typeof Chip>;
 
 export const _Chip: Story = {
-  render: (args) => (
-    <Chip {...args}>{args.size === "small" ? "Small" : "Medium"}</Chip>
-  ),
+  render: (args) => <Chip {...args}>{args.children}</Chip>,
 };
 
 export const _ChipToggle: Story = {
@@ -58,7 +60,7 @@ export const _ChipToggle: Story = {
         checked={checked}
         onCheckedChange={setChecked}
       >
-        {args.size === "small" ? "Small" : "Medium"}
+        {args.children}
       </Chip.Toggle>
     );
   },
@@ -72,7 +74,7 @@ export const _ChipWithAddon: Story = {
         leftAddon={<IconSample />}
         rightAddon={<CloseIconSample />}
       >
-        {args.size === "small" ? "Small" : "Medium"}
+        {args.children}
       </Chip>
     );
   },
