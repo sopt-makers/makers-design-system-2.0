@@ -1,5 +1,5 @@
+import { IconAlertCircleOutlined, IconChevronRight } from "@sopt-mds/icons";
 import type { ReactNode } from "react";
-import { AlertCircleIcon, ChevronRightIcon } from "./Callout.icons";
 import * as styles from "./Callout.css";
 
 /** 콜아웃의 시맨틱 톤. `danger`는 경고, `information`은 정보 안내에 사용합니다. */
@@ -52,7 +52,8 @@ export function Callout({
       className={`${styles.container} ${styles.containerVariant[variant]}`}
     >
       {showIcon && (
-        <AlertCircleIcon
+        <IconAlertCircleOutlined
+          aria-hidden="true"
           className={`${styles.icon} ${styles.iconVariant[variant]}`}
         />
       )}
@@ -65,7 +66,7 @@ export function Callout({
             className={styles.action}
           >
             {action.label}
-            <ChevronRightIcon />
+            <IconChevronRight aria-hidden="true" width={16} height={16} />
           </button>
         )}
       </div>
