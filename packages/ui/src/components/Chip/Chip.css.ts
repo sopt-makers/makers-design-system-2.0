@@ -104,8 +104,7 @@ const chipStateStyles: Record<ChipState, ChipStateStyle> = {
       [chipVars.borderColor]: CHIP_STATE_TOKENS.selected.borderColor,
     },
   },
-  /**
-   * disabled: {
+  disabled: {
     vars: {
       [chipVars.backgroundColor]: CHIP_STATE_TOKENS.disabled.backgroundColor,
       [chipVars.color]: CHIP_STATE_TOKENS.disabled.color,
@@ -113,7 +112,6 @@ const chipStateStyles: Record<ChipState, ChipStateStyle> = {
       [chipVars.borderColor]: CHIP_STATE_TOKENS.disabled.borderColor,
     },
   },
-   */
 };
 
 const chipSizeStyles: Record<ChipSize, ChipSizeStyle> = {
@@ -197,9 +195,8 @@ export const base = style({
     "&:has(input:checked)": chipStateStyles.selected,
     "&:focus-visible": focusVisibleStyle,
     "&:has(input:focus-visible)": focusVisibleStyle,
-
     "&:disabled, &[aria-disabled='true']": {
-      /**...chipStateStyles.disabled, */
+      ...chipStateStyles.disabled,
       cursor: "not-allowed",
     },
   },

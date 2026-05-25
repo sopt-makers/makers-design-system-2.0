@@ -143,7 +143,7 @@ const ChipToggle = React.forwardRef<HTMLInputElement, ChipToggleProps>(
         className={clsx(
           base,
           sizeVariants[size],
-          stateVariants.default,
+          stateVariants[disabled ? "disabled" : "default"],
           className,
         )}
       >

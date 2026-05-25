@@ -62,4 +62,10 @@ export const CHIP_STATE_TOKENS: Record<ChipState, ChipStateToken> = {
     backgroundColor: colors.bg.neutral.subtle,
     color: colors.fg.neutral.bold,
   },
+  disabled: {
+    borderWidth: "1px",
+    borderColor: colors.stroke.neutral.defaultDisabled,
+    backgroundColor: colors.bg.neutral.ghost,
+    color: colors.fg.neutral.ghost,
+  },
 };
