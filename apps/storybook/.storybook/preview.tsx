@@ -17,7 +17,7 @@ const preview: Preview = {
     options: {
       storySort: {
         method: "alphabetical",
-        order: ["Introduction", "Design Tokens", "Components"],
+        order: ["Introduction", "Design Tokens", "Icons", "Components"],
       },
     },
     backgrounds: { disable: true },

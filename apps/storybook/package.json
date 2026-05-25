@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@sopt-mds/design-tokens": "workspace:*",
+    "@sopt-mds/icons": "workspace:*",
     "@sopt-mds/ui": "workspace:*",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
