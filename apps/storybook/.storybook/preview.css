@@ -9,10 +9,20 @@ body {
     "Segoe UI", sans-serif;
 }
 
+/** 라이트 테마 토큰 — withThemeByClassName이 body에 theme-light 클래스를 붙임 */
+.theme-light {
+  --color-background: #ffffff;
+  --color-foreground: #1f2937;
+  --color-foreground-muted: #6b7280;
+  --color-surface: #f9fafb;
+  --color-border: #e5e7eb;
+}
+
 /** TODO(@wuzoo): 다크모드 static color 피드백 */
 .theme-dark {
   --color-background: #0f1012;
   --color-foreground: #f9fafb;
   --color-foreground-muted: #b0b8c1;
+  --color-surface: #1a1c20;
   --color-border: #333d4b;
 }
