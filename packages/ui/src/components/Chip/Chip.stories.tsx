@@ -1,3 +1,4 @@
+import { IconHeartFilled, IconXClose } from "@sopt-mds/icons";
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { Chip } from "./Chip";
@@ -44,11 +45,12 @@ export default meta;
 
 type Story = StoryObj<typeof Chip>;
 
-export const _Chip: Story = {
+export const ChipDefault: Story = {
+  name: "Chip",
   render: (args) => <Chip {...args}>{args.children}</Chip>,
 };
 
-export const _ChipToggle: Story = {
+export const ChipToggle: Story = {
   name: "Chip.Toggle",
   render: (args) => {
     const [checked, setChecked] = useState(false);
@@ -66,62 +68,16 @@ export const _ChipToggle: Story = {
   },
 };
 
-export const _ChipWithAddon: Story = {
+export const ChipWithAddon: Story = {
   render: (args) => {
     return (
       <Chip
         {...args}
-        leftAddon={<IconSample />}
-        rightAddon={<CloseIconSample />}
+        leftAddon={<IconHeartFilled width={16} height={16} />}
+        rightAddon={<IconXClose width={20} height={20} />}
       >
         {args.children}
       </Chip>
     );
   },
 };
-
-function IconSample() {
-  return (
-    <svg
-      width={16}
-      height={16}
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-label="Sample Icon"
-    >
-      <path
-        d="M12 3.75L14.56 8.94L20.29 9.77L16.15 13.81L17.13 19.51L12 16.81L6.87 19.51L7.85 13.81L3.71 9.77L9.44 8.94L12 3.75Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
-
-function CloseIconSample() {
-  return (
-    <svg
-      width={16}
-      height={16}
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-label="Close Icon"
-    >
-      <path
-        d="M18 6L6 18"
-        stroke="currentColor"
-        strokeWidth={2}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M6 6L18 18"
-        stroke="currentColor"
-        strokeWidth={2}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
