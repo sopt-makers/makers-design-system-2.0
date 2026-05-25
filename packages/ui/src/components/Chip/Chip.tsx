@@ -143,19 +143,19 @@ const ChipToggle = React.forwardRef<HTMLInputElement, ChipToggleProps>(
         className={clsx(
           base,
           sizeVariants[size],
-          stateVariants[disabled ? "disabled" : "default"],
+          stateVariants[resolvedDisabled ? "disabled" : "default"],
           className,
         )}
       >
         <input
+          {...inputProps}
+          {...restInputProps}
           ref={ref}
           type="checkbox"
           disabled={resolvedDisabled}
           className={clsx(input, inputProps?.className)}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
-          {...inputProps}
-          {...restInputProps}
         />
         {renderChipContent({ leftAddon, rightAddon, children })}
       </label>

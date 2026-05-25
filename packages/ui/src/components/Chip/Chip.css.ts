@@ -191,8 +191,10 @@ export const base = style({
   selectors: {
     "&:not(:disabled):not([aria-disabled='true']):not([data-selected='true']):not(:has(input:checked)):hover":
       chipStateStyles.hover,
-    "&[data-selected='true']": chipStateStyles.selected,
-    "&:has(input:checked)": chipStateStyles.selected,
+    "&:not(:disabled):not([aria-disabled='true'])[data-selected='true']":
+      chipStateStyles.selected,
+    "&:not([aria-disabled='true']):has(input:checked:not(:disabled))":
+      chipStateStyles.selected,
     "&:focus-visible": focusVisibleStyle,
     "&:has(input:focus-visible)": focusVisibleStyle,
     "&:disabled, &[aria-disabled='true']": {
