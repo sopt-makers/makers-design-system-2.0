@@ -189,11 +189,14 @@ export const base = style({
   transition:
     "background-color 150ms ease, box-shadow 150ms ease, color 150ms ease",
   selectors: {
-    "&:not(:disabled):not([aria-disabled='true']):not([data-selected='true']):not(:has(input:checked)):hover":
-      chipStateStyles.hover,
-    "&:not(:disabled):not([aria-disabled='true'])[data-selected='true']":
+    /**
+     * state priority
+     * - disabled > hover > selected > default
+     */
+    "&:not(:disabled):not([aria-disabled='true']):hover": chipStateStyles.hover,
+    "&:not(:disabled):not([aria-disabled='true'])[data-selected='true']:not(:hover)":
       chipStateStyles.selected,
-    "&:not([aria-disabled='true']):has(input:checked:not(:disabled))":
+    "&:not([aria-disabled='true']):has(input:checked:not(:disabled)):not(:hover)":
       chipStateStyles.selected,
     "&:focus-visible": focusVisibleStyle,
     "&:has(input:focus-visible)": focusVisibleStyle,
