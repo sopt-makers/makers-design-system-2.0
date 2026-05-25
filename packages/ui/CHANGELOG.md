@@ -1,5 +1,11 @@
 # @sopt-mds/ui
 
+## 1.0.3
+
+### Patch Changes
+
+- c1aca84: register chip component
+
 ## 1.0.2
 
 ### Patch Changes
