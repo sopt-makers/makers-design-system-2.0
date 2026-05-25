@@ -1,6 +1,9 @@
 import { forwardRef } from "react";
 import type { SVGProps } from "react";
-const IconFolderCheckOutlined = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>((props, ref) => (
+const IconFolderCheckOutlined = forwardRef<
+  SVGSVGElement,
+  SVGProps<SVGSVGElement>
+>((props, ref) => (
   <svg
     width={24}
     height={24}

@@ -3,7 +3,6 @@ import { mkdir, rm, writeFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { transform } from "@svgr/core";
-import * as prettier from "prettier";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const packageRoot = resolve(__dirname, "..");
@@ -175,7 +174,7 @@ const buildComponentSource = async (
 ): Promise<string> => {
   const preprocessed = isMonochromeSvg(rawSvg) ? applyCurrentColor(rawSvg) : rawSvg;
 
-  const tsx = await transform(
+  return transform(
     preprocessed,
     {
       typescript: true,
@@ -196,8 +195,6 @@ export default ${name};
     },
     { componentName },
   );
-
-  return prettier.format(tsx, { parser: "typescript", printWidth: 100 });
 };
 
 const writeRootIndex = async (
