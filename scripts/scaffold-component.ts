@@ -5,8 +5,8 @@ import { input } from "@inquirer/prompts";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(__dirname, "..");
-const componentsDir = join(repoRoot, "packages/ui/src");
-const uiBarrel = join(repoRoot, "packages/ui/src/index.ts");
+const componentsDir = join(repoRoot, "packages/ui/src/components");
+const uiBarrel = join(repoRoot, "packages/ui/src/components/index.ts");
 const introMdx = join(repoRoot, "apps/storybook/stories/Introduction.mdx");
 
 const exists = async (path: string): Promise<boolean> => {
@@ -28,18 +28,26 @@ const listUpExistingComponentNames = async (): Promise<Set<string>> => {
 
 /** 컴포넌트에 필요한 템플릿 문자열 생성 */
 const buildTemplates = (name: string) => {
-  const componentTsx = `import * as styles from "./${name}.css";
+  const componentTsx = `import clsx from "clsx";
+import type { HTMLAttributes } from "react";
+import { base } from "./${name}.css";
 
-export interface ${name}Props {}
+export interface ${name}Props extends HTMLAttributes<HTMLDivElement> {
+  /** @example 이 prop에 대한 설명을 작성하세요. */
+}
 
-export function ${name}({}: ${name}Props) {
-  return <div className={styles.root} />;
+export function ${name}({ className, children, ...rest }: ${name}Props) {
+  return (
+    <div className={clsx(base, className)} {...rest}>
+      {children}
+    </div>
+  );
 }
 `;
 
   const cssTs = `import { style } from "@vanilla-extract/css";
 
-export const root = style({});
+export const base = style({});
 `;
 
   const indexTs = `export * from "./${name}";\n`;
@@ -134,7 +142,7 @@ const main = async () => {
   }
 
   console.log(`\n✔ Created ${name}`);
-  console.log(`  packages/ui/src/${name}/`);
+  console.log(`  packages/ui/src/components/${name}/`);
   console.log(`    ├── ${name}.tsx`);
   console.log(`    ├── ${name}.css.ts`);
   console.log(`    ├── ${name}.stories.tsx`);

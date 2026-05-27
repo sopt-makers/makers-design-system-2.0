@@ -32,9 +32,17 @@ const config: StorybookConfig = {
   },
   typescript: {
     reactDocgen: "react-docgen-typescript",
+    reactDocgenTypescriptOptions: {
+      include: [resolve(repoRoot, "packages/ui/src/**/*.tsx")],
+      shouldExtractLiteralValuesFromEnum: true,
+      shouldRemoveUndefinedFromOptional: true,
+      propFilter: (prop) =>
+        prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
+    },
   },
   docs: {
     defaultName: "소개",
+    autodocs: true,
   },
   viteFinal: (viteConfig) =>
     mergeConfig(viteConfig, {
