@@ -53,10 +53,7 @@ export const contents = style({
 
 export const body = style({
   margin: 0,
-  fontSize: typography.size.t14,
-  lineHeight: typography.lineHeight.t22,
-  letterSpacing: typography.letterSpacing.wide,
-  fontWeight: typography.weight.regular,
+  ...typography.body2,
 });
 
 export const action = style({
