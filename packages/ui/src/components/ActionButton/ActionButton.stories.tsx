@@ -78,18 +78,6 @@ export const WithAddon: Story = {
   ),
 };
 
-export const Sizes: Story = {
-  render: (args) => (
-    <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-      {SIZES.map((size) => (
-        <ActionButton {...args} key={size} size={size}>
-          {size}
-        </ActionButton>
-      ))}
-    </div>
-  ),
-};
-
 export const Variants: Story = {
   render: (args) => (
     <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
