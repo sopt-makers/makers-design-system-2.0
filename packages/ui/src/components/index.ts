@@ -3,3 +3,4 @@ export * from "./Callout";
 export * from "./Chip";
 export * from "./FloatingButton";
 export * from "./Tag";
+export * from "./TextButton";
