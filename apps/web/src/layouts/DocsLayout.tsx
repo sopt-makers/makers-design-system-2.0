@@ -1,15 +1,21 @@
+import { IconXClose } from "@sopt-mds/icons";
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import * as styles from "./DocsLayout.css";
+import { TopNavigation } from "./TopNavigation";
 
 /**
  * 문서 사이트 전역 레이아웃.
- * 현재는 골격만 잡힌 placeholder이며, TopNavigation / Sidebar / Toc는
- * 각 영역 작업(Figma 시안 수령 후)에서 실제 컴포넌트로 교체한다.
+ * 상단 내비게이션은 완성됐고, Sidebar / Toc는 각 영역 작업에서
+ * placeholder를 실제 컴포넌트로 교체한다.
  */
 export function DocsLayout() {
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <div className={styles.shell}>
-      <header className={styles.topNav}>Makers design system</header>
+      <TopNavigation onMenuClick={() => setMobileMenuOpen(true)} />
+
       <div className={styles.body}>
         <aside className={styles.sidebar}>
           <span className={styles.placeholderLabel}>sidebar</span>
@@ -21,6 +27,20 @@ export function DocsLayout() {
           <span className={styles.placeholderLabel}>toc</span>
         </nav>
       </div>
+
+      {isMobileMenuOpen && (
+        <div className={styles.overlay}>
+          <button
+            type="button"
+            className={styles.overlayCloseButton}
+            onClick={() => setMobileMenuOpen(false)}
+            aria-label="메뉴 닫기"
+          >
+            <IconXClose />
+          </button>
+          <p className={styles.overlayPlaceholder}>모바일 메뉴 (준비 중)</p>
+        </div>
+      )}
     </div>
   );
 }
