@@ -83,7 +83,7 @@ export const ACTION_BUTTON_SIZE_TOKENS: Record<
  * variant × state 색상 토큰 (Figma 마스터 실측).
  * - primary: 가장 높은 위계의 밝은(흰색 계열) 솔리드 버튼.
  * - secondary: neutral subtle 솔리드.
- * - danger: fg/danger 토큰을 배경으로 사용(default/subtle).
+ * - danger: bg/danger 토큰을 배경으로 사용(default/hover/pressed).
  * - 모든 variant의 disabled는 neutral default-disabled로 통일.
  */
 export const ACTION_BUTTON_VARIANT_STATE_TOKENS: Record<
@@ -128,15 +128,15 @@ export const ACTION_BUTTON_VARIANT_STATE_TOKENS: Record<
   },
   danger: {
     default: {
-      backgroundColor: colors.fg.danger.default,
+      backgroundColor: colors.bg.danger.default,
       color: colors.fg.neutral.bold,
     },
     hover: {
-      backgroundColor: colors.fg.danger.subtle,
+      backgroundColor: colors.bg.danger.defaultHover,
       color: colors.fg.neutral.bold,
     },
     press: {
-      backgroundColor: colors.fg.danger.subtle,
+      backgroundColor: colors.bg.danger.defaultPressed,
       color: colors.fg.neutral.bold,
     },
     disabled: {
