@@ -8,6 +8,10 @@ const SIDEBAR_WIDTH = 230;
 const TOC_WIDTH = 188;
 /** 콘텐츠 최대 폭 (Figma default 1440px). */
 const CONTENT_MAX_WIDTH = 1440;
+/** 데스크탑 콘텐츠 좌우 여백 (Figma 24px). */
+const CONTENT_INLINE_PADDING = 24;
+/** 컬럼 사이 간격 (Figma 16px). */
+const COLUMN_GAP = 16;
 /** 모바일(≤375) 본문 좌우 마진. */
 const MOBILE_INLINE_MARGIN = 16;
 
@@ -20,23 +24,23 @@ export const shell = style({
 export const body = style({
   display: "grid",
   gridTemplateColumns: `${SIDEBAR_WIDTH}px minmax(0, 1fr) ${TOC_WIDTH}px`,
+  columnGap: COLUMN_GAP,
   flex: 1,
   width: "100%",
   maxWidth: CONTENT_MAX_WIDTH,
   marginInline: "auto",
-  // ≤768: 사이드바·TOC를 숨기고 본문 단일 컬럼으로 전환
+  paddingInline: CONTENT_INLINE_PADDING,
+  // ≤768: 사이드바·TOC를 숨기고 본문 단일 컬럼으로 전환 (좌우 여백은 본문이 직접 관리)
   "@media": {
     [MEDIA.tabletDown]: {
       gridTemplateColumns: "minmax(0, 1fr)",
+      paddingInline: 0,
     },
   },
 });
 
-export const sidebar = style({
-  paddingBlock: 24,
-  paddingInline: 24,
-  borderRight: `1px solid ${colors.stroke.neutral.subtle}`,
-  color: colors.fg.neutral.subtle,
+/** 사이드바 그리드 셀. 콘텐츠 스타일은 Sidebar 컴포넌트가 담당하고, 여기선 배치/숨김만. */
+export const sidebarCell = style({
   "@media": {
     [MEDIA.tabletDown]: {
       display: "none",
@@ -89,11 +93,6 @@ export const overlayCloseButton = style({
   background: "transparent",
   color: colors.fg.neutral.bold,
   cursor: "pointer",
-});
-
-export const overlayPlaceholder = style({
-  marginTop: 24,
-  color: colors.fg.neutral.ghost,
 });
 
 export const placeholderLabel = style({

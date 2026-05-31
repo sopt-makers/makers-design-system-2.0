@@ -2,6 +2,7 @@ import { IconXClose } from "@sopt-mds/icons";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import * as styles from "./DocsLayout.css";
+import { Sidebar } from "./Sidebar";
 import { TopNavigation } from "./TopNavigation";
 
 /**
@@ -17,8 +18,8 @@ export function DocsLayout() {
       <TopNavigation onMenuClick={() => setMobileMenuOpen(true)} />
 
       <div className={styles.body}>
-        <aside className={styles.sidebar}>
-          <span className={styles.placeholderLabel}>sidebar</span>
+        <aside className={styles.sidebarCell}>
+          <Sidebar />
         </aside>
         <main className={styles.article}>
           <Outlet />
@@ -38,7 +39,8 @@ export function DocsLayout() {
           >
             <IconXClose />
           </button>
-          <p className={styles.overlayPlaceholder}>모바일 메뉴 (준비 중)</p>
+          {/* 데스크탑과 동일한 Sidebar를 재사용 (chrome만 다름). 오버레이 정식 디자인은 4번 영역에서 정리 */}
+          <Sidebar />
         </div>
       )}
     </div>
