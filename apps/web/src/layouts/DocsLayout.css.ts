@@ -1,4 +1,3 @@
-import { colors } from "@sopt-mds/design-tokens";
 import { style } from "@vanilla-extract/css";
 import { MEDIA } from "../styles/breakpoints";
 
@@ -14,6 +13,8 @@ const CONTENT_INLINE_PADDING = 24;
 const COLUMN_GAP = 16;
 /** 모바일(≤375) 본문 좌우 마진. */
 const MOBILE_INLINE_MARGIN = 16;
+/** 사이드바 상단 여백 (Figma pt 48px) — Sidebar가 아닌 셀이 제공하는 chrome. */
+const SIDEBAR_TOP_PADDING = 48;
 
 export const shell = style({
   display: "flex",
@@ -39,8 +40,9 @@ export const body = style({
   },
 });
 
-/** 사이드바 그리드 셀. 콘텐츠 스타일은 Sidebar 컴포넌트가 담당하고, 여기선 배치/숨김만. */
+/** 사이드바 그리드 셀. 콘텐츠 스타일은 Sidebar 컴포넌트가 담당하고, 여기선 배치/여백/숨김만. */
 export const sidebarCell = style({
+  paddingTop: SIDEBAR_TOP_PADDING,
   "@media": {
     [MEDIA.tabletDown]: {
       display: "none",
@@ -73,27 +75,4 @@ export const tocCell = style({
       display: "none",
     },
   },
-});
-
-/**
- * 모바일 햄버거 메뉴 오버레이 placeholder.
- * 실제 메뉴(사이드바 트리)는 이후 hamburger 영역 작업에서 채운다.
- */
-export const overlay = style({
-  position: "fixed",
-  inset: 0,
-  zIndex: 10,
-  display: "flex",
-  flexDirection: "column",
-  padding: 24,
-  backgroundColor: colors.base.gray950,
-});
-
-export const overlayCloseButton = style({
-  alignSelf: "flex-end",
-  padding: 0,
-  border: "none",
-  background: "transparent",
-  color: colors.fg.neutral.bold,
-  cursor: "pointer",
 });

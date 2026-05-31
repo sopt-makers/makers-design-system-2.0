@@ -53,3 +53,18 @@ layouts/Sidebar/{Sidebar, SidebarGroup, SidebarLink}.tsx + Sidebar.css.ts + cons
 - 스크롤 스파이: `useTableOfContents` 훅에서 IntersectionObserver(rootMargin 상단 30%), 경로 변경 시 재수집(pathname 트리거 의존성 — biome-ignore로 의도 문서화). cleanup으로 observer disconnect. 외부(DOM/스크롤) 동기화라 useEffect 정당.
 - 앵커 이동: `<a href="#id">` + 헤딩 scroll-margin-top 80 + html scroll-behavior smooth.
 - DocsLayout `tocCell` sticky(top 0)로 고정, 콘텐츠 스타일은 Toc가 담당. 헤딩 없으면 Toc는 null 렌더.
+
+## MobileMenu / 햄버거 드로어 (2026-05-31, 이슈 #29)
+**요구사항(Figma 278:345):** ≤768에서만 유효. 풀스크린 아닌 **300px 좌측 드로어 + 배경 스크림**. 상단 X + 그 아래 Sidebar(검색+아코디언) 그대로.
+
+**결정:**
+- `layouts/MobileMenu/{MobileMenu.tsx, .css.ts}`. 배경 스크림(bg.dim.default)=닫기 버튼 / 300px 드로어(좌측 고정, py24) = 닫기행(X, 우측) + sidebarSlot(px24) + `<Sidebar/>`.
+- **Sidebar 재사용 + chrome 분리:** Sidebar에서 `pt48`(데스크탑 chrome) 제거 → `DocsLayout.sidebarCell`로 이동. 오버레이는 px24를 MobileMenu가 제공. Sidebar는 순수 콘텐츠(gap16)로. variant prop 없음.
+- **닫기 3경로:** X 버튼 / 스크림 클릭(스크림을 `<button>`으로 만들어 a11y 충족) / Esc(useEffect 키 핸들러). 열림 동안 body 스크롤 락(overflow hidden, cleanup 복원).
+- **네비게이션 시 닫기:** DocsLayout `useEffect([pathname])`로 경로 변경 시 close. 아코디언 토글은 경로변경 없어 안 닫힘. Sidebar에 onClose prop-drill 안 함(결합도↓). biome-ignore로 트리거 의존성 명시.
+- role="dialog"/aria-modal. (포커스 트랩은 후속 향상 여지)
+
+## MobileMenu 풀스크린 정정 (2026-05-31, 디자이너 확정)
+**정정:** 768·375 둘 다 화면 전체를 덮는 **풀스크린** 메뉴(Figma 375 프레임 290:1517에서 인스턴스 w=375/768 풀폭 확인). 앞서 잡았던 300px 좌측 드로어 + 배경 스크림은 폐기.
+- panel: position fixed inset 0, px24/py24, 닫기행(X 우측 상단) + `<Sidebar/>`. 스크림/드로어 없음.
+- Esc 닫기 + body 스크롤 락 + 네비게이션 시 닫기는 유지.

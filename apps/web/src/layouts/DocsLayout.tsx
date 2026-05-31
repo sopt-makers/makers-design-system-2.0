@@ -1,18 +1,24 @@
-import { IconXClose } from "@sopt-mds/icons";
-import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Outlet, useLocation } from "react-router-dom";
 import * as styles from "./DocsLayout.css";
+import { MobileMenu } from "./MobileMenu";
 import { Sidebar } from "./Sidebar";
 import { Toc } from "./Toc";
 import { TopNavigation } from "./TopNavigation";
 
 /**
  * 문서 사이트 전역 레이아웃.
- * 상단 내비게이션은 완성됐고, Sidebar / Toc는 각 영역 작업에서
- * placeholder를 실제 컴포넌트로 교체한다.
+ * 데스크탑은 [Sidebar | 본문 | Toc] 3컬럼, ≤768은 헤더+햄버거 드로어(MobileMenu).
  */
 export function DocsLayout() {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { pathname } = useLocation();
+
+  // 네비게이션이 일어나면(링크 클릭으로 경로 변경) 드로어를 닫는다.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: pathname 변화 자체가 트리거이며, 닫기 동작만 수행한다.
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
 
   return (
     <div className={styles.shell}>
@@ -30,20 +36,10 @@ export function DocsLayout() {
         </div>
       </div>
 
-      {isMobileMenuOpen && (
-        <div className={styles.overlay}>
-          <button
-            type="button"
-            className={styles.overlayCloseButton}
-            onClick={() => setMobileMenuOpen(false)}
-            aria-label="메뉴 닫기"
-          >
-            <IconXClose />
-          </button>
-          {/* 데스크탑과 동일한 Sidebar를 재사용 (chrome만 다름). 오버레이 정식 디자인은 4번 영역에서 정리 */}
-          <Sidebar />
-        </div>
-      )}
+      <MobileMenu
+        isOpen={isMobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+      />
     </div>
   );
 }

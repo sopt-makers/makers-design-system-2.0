@@ -11,15 +11,16 @@ const CHILD_INDENT = 24;
 const DIVIDER_WIDTH = 2;
 /** 디바이더 좌측 위치 (Figma left 12px). */
 const DIVIDER_LEFT = 12;
-/** 사이드바 상단 여백 (Figma pt 48px). */
-const SIDEBAR_TOP_PADDING = 48;
 
+/**
+ * 사이드바 콘텐츠 스택(검색 + 메뉴). 순수 콘텐츠만 담당하고,
+ * 상단 여백·좌우 여백 같은 chrome은 감싸는 쪽(데스크탑 셀 / 모바일 드로어)이 준다.
+ */
 export const sidebar = style({
   display: "flex",
   flexDirection: "column",
   gap: 16,
   width: "100%",
-  paddingTop: SIDEBAR_TOP_PADDING,
   paddingBottom: 16,
   backgroundColor: colors.base.gray950,
 });
