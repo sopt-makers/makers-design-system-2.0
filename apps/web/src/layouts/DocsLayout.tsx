@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import * as styles from "./DocsLayout.css";
 import { Sidebar } from "./Sidebar";
+import { Toc } from "./Toc";
 import { TopNavigation } from "./TopNavigation";
 
 /**
@@ -24,9 +25,9 @@ export function DocsLayout() {
         <main className={styles.article}>
           <Outlet />
         </main>
-        <nav className={styles.toc}>
-          <span className={styles.placeholderLabel}>toc</span>
-        </nav>
+        <div className={styles.tocCell}>
+          <Toc />
+        </div>
       </div>
 
       {isMobileMenuOpen && (

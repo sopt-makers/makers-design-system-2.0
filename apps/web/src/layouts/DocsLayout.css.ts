@@ -61,11 +61,13 @@ export const article = style({
   },
 });
 
-export const toc = style({
-  paddingBlock: 40,
-  paddingInline: 16,
-  color: colors.fg.neutral.subtle,
-  fontSize: 13,
+/** TOC 그리드 셀. 스크롤 시 상단에 고정, 콘텐츠 스타일은 Toc 컴포넌트가 담당. */
+export const tocCell = style({
+  position: "sticky",
+  top: 0,
+  alignSelf: "start",
+  maxHeight: "100vh",
+  overflowY: "auto",
   "@media": {
     [MEDIA.tabletDown]: {
       display: "none",
@@ -94,11 +96,4 @@ export const overlayCloseButton = style({
   background: "transparent",
   color: colors.fg.neutral.bold,
   cursor: "pointer",
-});
-
-export const placeholderLabel = style({
-  fontSize: 12,
-  color: colors.fg.neutral.ghost,
-  textTransform: "uppercase",
-  letterSpacing: "0.04em",
 });

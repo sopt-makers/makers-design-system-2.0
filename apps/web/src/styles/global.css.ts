@@ -14,6 +14,10 @@ globalStyle("html, body", {
   padding: 0,
 });
 
+globalStyle("html", {
+  scrollBehavior: "smooth",
+});
+
 globalStyle("body", {
   backgroundColor: colors.base.gray950,
   color: colors.fg.neutral.default,

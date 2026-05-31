@@ -3,10 +3,14 @@ import { style } from "@vanilla-extract/css";
 
 const MONO_FONT = '"SF Mono", "SFMono-Regular", Menlo, Consolas, monospace';
 
+/** TOC 앵커 클릭 시 헤딩이 상단에 너무 붙지 않도록 하는 여백. */
+const HEADING_SCROLL_MARGIN = 80;
+
 export const h1 = style({
   ...typography.heading1,
   margin: 0,
   marginBottom: 14,
+  scrollMarginTop: HEADING_SCROLL_MARGIN,
   color: colors.fg.neutral.bold,
 });
 
@@ -15,6 +19,7 @@ export const h2 = style({
   margin: 0,
   marginTop: 48,
   marginBottom: 12,
+  scrollMarginTop: HEADING_SCROLL_MARGIN,
   color: colors.fg.neutral.bold,
 });
 
@@ -23,6 +28,7 @@ export const h3 = style({
   margin: 0,
   marginTop: 32,
   marginBottom: 12,
+  scrollMarginTop: HEADING_SCROLL_MARGIN,
   color: colors.fg.neutral.bold,
 });
 

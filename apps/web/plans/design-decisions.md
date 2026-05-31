@@ -43,3 +43,13 @@ layouts/Sidebar/{Sidebar, SidebarGroup, SidebarLink}.tsx + Sidebar.css.ts + cons
 - Figma의 Subtitle/예시박스 같은 섹션 템플릿용 커스텀 컴포넌트(<Subtitle>/<Figure>)는 실제 문서 작성(5번)에서 필요 확정 시 추가.
 
 **주의:** `src/mdx.d.ts`(ambient `*.mdx` 선언)가 `./mdx` 폴더 import와 충돌 → `mdx-files.d.ts`로 개명.
+
+## TOC (2026-05-31, 이슈 #29)
+**요구사항(Figma 어노테이션 290:737):** ①클릭→섹션 이동 ②스크롤→해당 섹션 focused(스크롤 스파이) ③hover=selected=fg.bold.
+
+**결정:**
+- `layouts/Toc/{Toc.tsx, Toc.css.ts, useTableOfContents.ts}`. "On this page"(label3 fg.ghost) + h2·h3 앵커 링크(평소 fg.subtle / 활성·hover fg.bold).
+- 헤딩 출처: DOM 쿼리(`main h2[id], main h3[id]`) — ref prop-drill 대신 main 셀렉터(결합도↓). 헤딩 id는 **rehype-slug**(vite mdx rehypePlugins)가 부여(한글 헤딩도 slug). → 의존성 추가 승인됨.
+- 스크롤 스파이: `useTableOfContents` 훅에서 IntersectionObserver(rootMargin 상단 30%), 경로 변경 시 재수집(pathname 트리거 의존성 — biome-ignore로 의도 문서화). cleanup으로 observer disconnect. 외부(DOM/스크롤) 동기화라 useEffect 정당.
+- 앵커 이동: `<a href="#id">` + 헤딩 scroll-margin-top 80 + html scroll-behavior smooth.
+- DocsLayout `tocCell` sticky(top 0)로 고정, 콘텐츠 스타일은 Toc가 담당. 헤딩 없으면 Toc는 null 렌더.
