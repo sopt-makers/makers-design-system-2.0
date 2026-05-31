@@ -114,14 +114,13 @@ export const childrenDivider = style({
   backgroundColor: colors.stroke.neutral.subtle,
 });
 
-export const link = style({
+/** 선택 가능한 링크 공통 베이스 (대분류 단독 링크·자식 링크가 공유). */
+const selectableRow = style({
   ...typography.label2,
   boxSizing: "border-box",
   display: "flex",
   alignItems: "center",
   width: "100%",
-  paddingLeft: CHILD_INDENT,
-  paddingRight: 10,
   paddingBlock: 10,
   borderRadius: radius.r8,
   color: colors.fg.neutral.default,
@@ -132,6 +131,19 @@ export const link = style({
   },
 });
 
+/** 하위가 없는 대분류 링크 (그룹 헤더와 같은 행 스타일, 선택 가능). */
+export const topLink = style([
+  selectableRow,
+  { paddingInline: 12, justifyContent: "space-between" },
+]);
+
+/** 그룹 안의 들여쓴 자식 링크. */
+export const childLink = style([
+  selectableRow,
+  { paddingLeft: CHILD_INDENT, paddingRight: 10 },
+]);
+
+/** top/child 공통 선택(active) 스타일. */
 export const linkActive = style({
   backgroundColor: colors.base.gray800,
   color: colors.fg.neutral.bold,

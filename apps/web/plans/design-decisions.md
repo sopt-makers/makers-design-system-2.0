@@ -19,4 +19,14 @@ layouts/Sidebar/{Sidebar, SidebarGroup, SidebarLink}.tsx + Sidebar.css.ts + cons
 
 **미확정:** Typography·Spacing 자식 항목은 임의 placeholder 값(확정 시 `constant.ts` 교체).
 
+### Sidebar 대분류 동작 개정 (2026-05-31, 디자이너 요청 반영)
+**요청:** 대분류는 하위가 있을 때만 토글(선택 불가), 하위가 없으면 대분류 자체가 선택 가능 링크.
+- Colors=그룹(하위 O), Typography·Spacing=단독 링크(하위 X) 확정.
+
+**결정:**
+- 데이터 모델을 discriminated union `SidebarMenuItem = SidebarGroupItem | SidebarLinkItem`(명시적 `type` 필드)로 변경. → `items?` 유무 구조 판별(숨은 로직) 회피, narrowing 명확(predictability).
+- 컴포넌트: `SidebarGroup`(토글, 선택 불가, `<button>`이라 구조적으로 active 차단) / `SidebarTopLink`(하위 없는 대분류, 행 스타일 NavLink, 선택 가능) / `SidebarChildLink`(기존 SidebarLink 개명, 들여쓴 자식). top·child 분리는 맥락(들여쓰기) 차이로 중복 허용.
+- CSS: `selectableRow` 공통 base + `topLink`/`childLink` 합성, `linkActive` 공통.
+- 선택(active)은 링크에만, 그룹 헤더엔 안 붙음.
+
 **반응형:** Sidebar는 ≤768에서 숨김(DocsLayout `sidebarCell` display:none), 모바일 메뉴는 4번 영역(햄버거 오버레이)에서 동일 `<Sidebar />` 재사용.

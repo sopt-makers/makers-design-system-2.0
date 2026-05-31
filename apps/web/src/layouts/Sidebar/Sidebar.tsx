@@ -2,6 +2,7 @@ import { IconSearchOutlined } from "@sopt-mds/icons";
 import { SIDEBAR_MENU } from "./constant";
 import * as styles from "./Sidebar.css";
 import { SidebarGroup } from "./SidebarGroup";
+import { SidebarTopLink } from "./SidebarTopLink";
 
 /**
  * 문서 사이트 사이드바 콘텐츠 (검색 + 아코디언 메뉴).
@@ -18,9 +19,13 @@ export function Sidebar() {
       </div>
 
       <nav className={styles.nav} aria-label="문서 메뉴">
-        {SIDEBAR_MENU.map((group) => (
-          <SidebarGroup key={group.label} group={group} />
-        ))}
+        {SIDEBAR_MENU.map((item) =>
+          item.type === "group" ? (
+            <SidebarGroup key={item.label} group={item} />
+          ) : (
+            <SidebarTopLink key={item.path} link={item} />
+          ),
+        )}
       </nav>
     </div>
   );

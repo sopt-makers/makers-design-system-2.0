@@ -1,20 +1,23 @@
 import { IconChevronDown, IconChevronRight } from "@sopt-mds/icons";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import type { SidebarMenuGroup } from "./constant";
+import type { SidebarGroupItem } from "./constant";
 import * as styles from "./Sidebar.css";
-import { SidebarLink } from "./SidebarLink";
+import { SidebarChildLink } from "./SidebarChildLink";
 
-/** 그룹이 현재 경로의 항목을 포함하는지. 활성 그룹은 펼친 채로 시작한다. */
-function groupContainsPath(group: SidebarMenuGroup, path: string): boolean {
+/** 그룹이 현재 경로의 자식을 포함하는지. 활성 그룹은 펼친 채로 시작한다. */
+function groupContainsPath(group: SidebarGroupItem, path: string): boolean {
   return group.items.some((item) => item.path === path);
 }
 
 interface SidebarGroupProps {
-  group: SidebarMenuGroup;
+  group: SidebarGroupItem;
 }
 
-/** 클릭으로 펼침/접힘하는 아코디언 메뉴 그룹. */
+/**
+ * 하위가 있는 대분류. 클릭하면 자식 메뉴가 펼침/접힘하며,
+ * 그룹 헤더 자체는 선택(active) 대상이 아니다.
+ */
 export function SidebarGroup({ group }: SidebarGroupProps) {
   const { pathname } = useLocation();
   const [isOpen, setIsOpen] = useState(() =>
@@ -39,7 +42,7 @@ export function SidebarGroup({ group }: SidebarGroupProps) {
         <div className={styles.groupChildren}>
           <span className={styles.childrenDivider} aria-hidden="true" />
           {group.items.map((item) => (
-            <SidebarLink key={item.path} link={item} />
+            <SidebarChildLink key={item.path} link={item} />
           ))}
         </div>
       )}

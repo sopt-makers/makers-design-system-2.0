@@ -1,35 +1,40 @@
-export interface SidebarMenuLink {
+export interface SidebarLinkItem {
+  type: "link";
   label: string;
   path: string;
 }
 
-export interface SidebarMenuGroup {
+export interface SidebarGroupItem {
+  type: "group";
   label: string;
-  items: SidebarMenuLink[];
+  items: SidebarLinkItem[];
 }
 
-export const SIDEBAR_MENU: SidebarMenuGroup[] = [
+/** 대분류는 자식이 있으면 그룹(토글), 없으면 단독 링크(선택 가능). */
+export type SidebarMenuItem = SidebarGroupItem | SidebarLinkItem;
+
+export const SIDEBAR_MENU: SidebarMenuItem[] = [
   {
+    type: "group",
     label: "Colors",
     items: [
-      { label: "Color system", path: "/foundations/color-system" },
-      { label: "Semantic color", path: "/foundations/semantic-color" },
       {
+        type: "link",
+        label: "Color system",
+        path: "/foundations/color-system",
+      },
+      {
+        type: "link",
+        label: "Semantic color",
+        path: "/foundations/semantic-color",
+      },
+      {
+        type: "link",
         label: "Migration Reference",
         path: "/foundations/migration-reference",
       },
     ],
   },
-  // TODO Typography·Spacing 자식은 미확정 — 임의 placeholder 값 (확정 시 교체)
-  {
-    label: "Typography",
-    items: [
-      { label: "Font", path: "/foundations/typography/font" },
-      { label: "Text styles", path: "/foundations/typography/text-styles" },
-    ],
-  },
-  {
-    label: "Spacing",
-    items: [{ label: "Space scale", path: "/foundations/spacing/space-scale" }],
-  },
+  { type: "link", label: "Typography", path: "/foundations/typography" },
+  { type: "link", label: "Spacing", path: "/foundations/spacing" },
 ];
