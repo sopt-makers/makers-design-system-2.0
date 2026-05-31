@@ -79,13 +79,18 @@ export const WithAddon: Story = {
 };
 
 export const Variants: Story = {
-  render: (args) => (
+  // danger는 xsmall이 없어 size를 제외하므로 variant별로 명시적으로 렌더링합니다.
+  render: ({ size, variant: _variant, ...args }) => (
     <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-      {VARIANTS.map((variant) => (
-        <ActionButton {...args} key={variant} variant={variant}>
-          {variant}
-        </ActionButton>
-      ))}
+      <ActionButton {...args} variant="primary" size={size}>
+        primary
+      </ActionButton>
+      <ActionButton {...args} variant="secondary" size={size}>
+        secondary
+      </ActionButton>
+      <ActionButton {...args} variant="danger">
+        danger
+      </ActionButton>
     </div>
   ),
 };
