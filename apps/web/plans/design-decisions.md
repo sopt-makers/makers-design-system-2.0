@@ -30,3 +30,16 @@ layouts/Sidebar/{Sidebar, SidebarGroup, SidebarLink}.tsx + Sidebar.css.ts + cons
 - 선택(active)은 링크에만, 그룹 헤더엔 안 붙음.
 
 **반응형:** Sidebar는 ≤768에서 숨김(DocsLayout `sidebarCell` display:none), 모바일 메뉴는 4번 영역(햄버거 오버레이)에서 동일 `<Sidebar />` 재사용.
+
+## Article (2026-05-31, 이슈 #29)
+**요구사항:** Article = MDX 본문 렌더 영역. Figma(290:930)는 본문 타이포그래피 시스템 정의.
+
+**결정:**
+- 컨테이너 셸: DocsLayout `article` 패딩을 Figma대로 pt40/pb24/px32(모바일 px16).
+- MDX 요소 → 디자인 토큰 매핑(`src/mdx/mdxComponents.tsx` + `mdx.css.ts`), `MDXProvider`로 전역 1회 등록(main.tsx). 페이지마다 import 반복 회피.
+  - h1=heading1, h2=title2, h3=title3, p/li=body1, code(inline)=mono+gray800, pre=gray900 박스, img=gray900 박스, blockquote/hr=stroke 토큰.
+- 매핑 객체는 모듈 레벨 상수(렌더 재생성 방지).
+- 인라인 링크(`a`) 색은 디자인 미확정 → 임시 fg.secondary+underline, 확정 시 교체.
+- Figma의 Subtitle/예시박스 같은 섹션 템플릿용 커스텀 컴포넌트(<Subtitle>/<Figure>)는 실제 문서 작성(5번)에서 필요 확정 시 추가.
+
+**주의:** `src/mdx.d.ts`(ambient `*.mdx` 선언)가 `./mdx` 폴더 import와 충돌 → `mdx-files.d.ts`로 개명.

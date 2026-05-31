@@ -1,12 +1,24 @@
 # Getting Started
 
-이 페이지는 **MDX 툴체인**이 정상 동작하는지 확인하기 위한 샘플 문서입니다.
+makers design system 문서 사이트의 본문(Article)은 **MDX**로 작성합니다.
+이 페이지는 MDX 타이포그래피가 디자인대로 렌더되는지 확인하는 샘플입니다.
 
-- Vite + React Router + MDX 파이프라인이 연결되어 있습니다.
-- 이후 실제 문서(Color System 등)는 이 형식의 `.mdx`로 작성합니다.
+## 본문 작성
+
+문단은 `body1` 스타일로 렌더됩니다. 문장 안에 [컬러 시스템](/foundations/color-system)
+같은 인라인 링크를 넣을 수 있고, `IconMenu` 처럼 인라인 코드도 사용할 수 있습니다.
+
+- 목록 항목도 본문과 같은 타이포그래피를 따릅니다.
+- 두 번째 항목입니다.
+
+### 코드 예시
 
 ```tsx
 import { ActionButton } from "@sopt-mds/ui";
+
+export function Example() {
+  return <ActionButton>버튼</ActionButton>;
+}
 ```
 
 > 위 import는 버튼 머지 이후 사용 가능합니다.

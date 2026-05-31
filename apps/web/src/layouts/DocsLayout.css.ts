@@ -50,8 +50,9 @@ export const sidebarCell = style({
 
 export const article = style({
   minWidth: 0,
-  paddingBlock: 40,
-  paddingInline: 48,
+  paddingTop: 40,
+  paddingBottom: 24,
+  paddingInline: 32,
   // 모바일에서만 좌우 마진 16px
   "@media": {
     [MEDIA.mobileDown]: {
