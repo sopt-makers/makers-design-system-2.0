@@ -14,7 +14,7 @@ export interface ReactionButtonProps
   /** 오른쪽에 들어갈 아이콘 요소입니다. (예: chevron) */
   rightAddon?: React.ReactElement;
   /** 반응 개수입니다. */
-  count?: React.ReactNode;
+  count?: string | number;
   /** 라벨 텍스트입니다. */
   children?: React.ReactNode;
 }
