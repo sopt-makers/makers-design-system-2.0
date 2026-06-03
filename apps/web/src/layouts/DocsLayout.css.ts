@@ -63,8 +63,8 @@ export const article = style({
   },
 });
 
-/** TOC 그리드 셀. 스크롤 시 상단에 고정, 콘텐츠 스타일은 Toc 컴포넌트가 담당. */
-export const tocCell = style({
+/** 목차 그리드 셀. 스크롤 시 상단에 고정, 콘텐츠 스타일은 TableOfContents 컴포넌트가 담당. */
+export const tableOfContentsCell = style({
   position: "sticky",
   top: 0,
   alignSelf: "start",

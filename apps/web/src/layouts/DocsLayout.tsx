@@ -3,12 +3,12 @@ import { Outlet, useLocation } from "react-router-dom";
 import * as styles from "./DocsLayout.css";
 import { MobileMenu } from "./MobileMenu";
 import { Sidebar } from "./Sidebar";
-import { Toc } from "./Toc";
+import { TableOfContents } from "./TableOfContents";
 import { TopNavigation } from "./TopNavigation";
 
 /**
  * 문서 사이트 전역 레이아웃.
- * 데스크탑은 [Sidebar | 본문 | Toc] 3컬럼, ≤768은 헤더+햄버거 드로어(MobileMenu).
+ * 데스크탑은 [Sidebar | 본문 | TableOfContents] 3컬럼, ≤768은 헤더+햄버거 드로어(MobileMenu).
  */
 export function DocsLayout() {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -31,8 +31,8 @@ export function DocsLayout() {
         <main className={styles.article}>
           <Outlet />
         </main>
-        <div className={styles.tocCell}>
-          <Toc />
+        <div className={styles.tableOfContentsCell}>
+          <TableOfContents />
         </div>
       </div>
 

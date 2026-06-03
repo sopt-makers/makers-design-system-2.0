@@ -1,7 +1,7 @@
 import { colors, typography } from "@sopt-mds/design-tokens";
 import { style } from "@vanilla-extract/css";
 
-export const toc = style({
+export const tableOfContents = style({
   display: "flex",
   flexDirection: "column",
   gap: 12,

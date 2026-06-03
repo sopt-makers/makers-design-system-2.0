@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-export interface TocItem {
+export interface TableOfContentsItem {
   id: string;
   text: string;
   level: 2 | 3;
@@ -20,11 +20,12 @@ const OBSERVER_ROOT_MARGIN = "0px 0px -70% 0px";
  */
 export function useTableOfContents() {
   const { pathname } = useLocation();
-  const [items, setItems] = useState<TocItem[]>([]);
+  const [items, setItems] = useState<TableOfContentsItem[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: pathname은 본문에서 직접 읽지 않지만, 경로가 바뀌면 본문이 교체되므로 헤딩을 다시 수집하기 위한 트리거 의존성이다.
   useEffect(() => {
+    // 1) 본문에서 id가 달린 h2·h3를 문서 순서대로 수집해 목차 항목으로 만든다.
     const headings = Array.from(
       document.querySelectorAll<HTMLHeadingElement>("main h2[id], main h3[id]"),
     );
@@ -37,12 +38,15 @@ export function useTableOfContents() {
       })),
     );
 
+    // 헤딩이 없으면(목차 없는 페이지) 옵저버를 걸 필요 없이 종료.
     if (headings.length === 0) {
       setActiveId(null);
       return;
     }
+    // 스크롤 전 초기 활성값은 첫 헤딩(옵저버 콜백이 곧 덮어쓴다).
     setActiveId(headings[0]?.id ?? null);
 
+    // 2) 스크롤 스파이: 각 헤딩의 교차 여부를 추적해 "지금 보고 있는" 섹션을 활성으로.
     const visibility = new Map<string, boolean>();
     const observer = new IntersectionObserver(
       (entries) => {
@@ -63,6 +67,7 @@ export function useTableOfContents() {
       observer.observe(heading);
     }
 
+    // 페이지 전환·언마운트 시 이전 옵저버 해제(누수 방지).
     return () => observer.disconnect();
   }, [pathname]);
 
