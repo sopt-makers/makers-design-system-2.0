@@ -1,4 +1,4 @@
-import { colors, radius, typography } from "@sopt-mds/design-tokens";
+import { colors, radius, spacing, typography } from "@sopt-mds/design-tokens";
 import { style } from "@vanilla-extract/css";
 
 const MONO_FONT = '"SF Mono", "SFMono-Regular", Menlo, Consolas, monospace';
@@ -9,7 +9,7 @@ const HEADING_SCROLL_MARGIN = 80;
 export const h1 = style({
   ...typography.heading1,
   margin: 0,
-  marginBottom: 14,
+  marginBottom: spacing.s14,
   scrollMarginTop: HEADING_SCROLL_MARGIN,
   color: colors.fg.neutral.bold,
 });
@@ -17,8 +17,8 @@ export const h1 = style({
 export const h2 = style({
   ...typography.title2,
   margin: 0,
-  marginTop: 48,
-  marginBottom: 12,
+  marginTop: spacing.s48,
+  marginBottom: spacing.s12,
   scrollMarginTop: HEADING_SCROLL_MARGIN,
   color: colors.fg.neutral.bold,
 });
@@ -26,8 +26,8 @@ export const h2 = style({
 export const h3 = style({
   ...typography.title3,
   margin: 0,
-  marginTop: 32,
-  marginBottom: 12,
+  marginTop: spacing.s32,
+  marginBottom: spacing.s12,
   scrollMarginTop: HEADING_SCROLL_MARGIN,
   color: colors.fg.neutral.bold,
 });
@@ -35,20 +35,20 @@ export const h3 = style({
 export const paragraph = style({
   ...typography.body1,
   margin: 0,
-  marginBottom: 16,
+  marginBottom: spacing.s16,
   color: colors.fg.neutral.default,
 });
 
 export const list = style({
   ...typography.body1,
   margin: 0,
-  marginBottom: 16,
-  paddingLeft: 20,
+  marginBottom: spacing.s16,
+  paddingLeft: spacing.s20,
   color: colors.fg.neutral.default,
 });
 
 export const listItem = style({
-  marginBottom: 4,
+  marginBottom: spacing.s4,
 });
 
 /** 본문 인라인 링크 — 임시 색(디자인 확정 시 토큰 교체). */
@@ -60,8 +60,8 @@ export const link = style({
 export const inlineCode = style({
   ...typography.body2,
   fontFamily: MONO_FONT,
-  paddingInline: 6,
-  paddingBlock: 2,
+  paddingInline: spacing.s6,
+  paddingBlock: spacing.s2,
   borderRadius: radius.r4,
   backgroundColor: colors.base.gray800,
   color: colors.fg.neutral.bold,
@@ -69,8 +69,8 @@ export const inlineCode = style({
 
 export const codeBlock = style({
   margin: 0,
-  marginBlock: 20,
-  padding: 16,
+  marginBlock: spacing.s20,
+  padding: spacing.s16,
   borderRadius: radius.r8,
   border: `1px solid ${colors.stroke.neutral.ghost}`,
   backgroundColor: colors.base.gray900,
@@ -84,7 +84,7 @@ export const codeBlock = style({
 export const image = style({
   display: "block",
   width: "100%",
-  marginBlock: 20,
+  marginBlock: spacing.s20,
   borderRadius: radius.r8,
   border: `1px solid ${colors.stroke.neutral.ghost}`,
   backgroundColor: colors.base.gray900,
@@ -93,8 +93,8 @@ export const image = style({
 export const blockquote = style({
   ...typography.body1,
   margin: 0,
-  marginBlock: 20,
-  paddingLeft: 16,
+  marginBlock: spacing.s20,
+  paddingLeft: spacing.s16,
   borderLeft: `2px solid ${colors.stroke.neutral.subtle}`,
   color: colors.fg.neutral.subtle,
 });
@@ -102,7 +102,7 @@ export const blockquote = style({
 export const divider = style({
   border: 0,
   borderTop: `1px solid ${colors.stroke.neutral.subtle}`,
-  marginBlock: 32,
+  marginBlock: spacing.s32,
 });
 
 export const strong = style({

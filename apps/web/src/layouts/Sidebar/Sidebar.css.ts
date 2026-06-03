@@ -1,4 +1,4 @@
-import { colors, radius, typography } from "@sopt-mds/design-tokens";
+import { colors, radius, spacing, typography } from "@sopt-mds/design-tokens";
 import { style } from "@vanilla-extract/css";
 
 /** 검색 아이콘 크기 (Figma 16px). */
@@ -6,7 +6,7 @@ const SEARCH_ICON_SIZE = 16;
 /** 셰브론 아이콘 크기 (Figma 20px). */
 const CHEVRON_SIZE = 20;
 /** 자식 링크 들여쓰기 (Figma pl 24px). */
-const CHILD_INDENT = 24;
+const CHILD_INDENT = spacing.s24;
 /** 자식 영역 좌측 세로 디바이더 두께 (Figma 2px). */
 const DIVIDER_WIDTH = 2;
 /** 디바이더 좌측 위치 (Figma left 12px). */
@@ -19,9 +19,9 @@ const DIVIDER_LEFT = 12;
 export const sidebar = style({
   display: "flex",
   flexDirection: "column",
-  gap: 16,
+  gap: spacing.s16,
   width: "100%",
-  paddingBottom: 16,
+  paddingBottom: spacing.s16,
   backgroundColor: colors.base.gray950,
 });
 
@@ -30,11 +30,11 @@ export const search = style({
   boxSizing: "border-box",
   display: "flex",
   alignItems: "center",
-  gap: 4,
+  gap: spacing.s4,
   width: "100%",
-  paddingLeft: 10,
-  paddingRight: 16,
-  paddingBlock: 8,
+  paddingLeft: spacing.s10,
+  paddingRight: spacing.s16,
+  paddingBlock: spacing.s8,
   borderRadius: radius.r8,
   backgroundColor: colors.base.gray900,
 });
@@ -55,7 +55,7 @@ export const searchPlaceholder = style({
 export const nav = style({
   display: "flex",
   flexDirection: "column",
-  gap: 4,
+  gap: spacing.s4,
   width: "100%",
 });
 
@@ -71,8 +71,8 @@ export const groupHeader = style({
   alignItems: "center",
   justifyContent: "space-between",
   width: "100%",
-  paddingInline: 12,
-  paddingBlock: 10,
+  paddingInline: spacing.s12,
+  paddingBlock: spacing.s10,
   border: "none",
   borderRadius: radius.r8,
   background: "transparent",
@@ -100,8 +100,8 @@ export const groupChildren = style({
   position: "relative",
   display: "flex",
   flexDirection: "column",
-  gap: 2,
-  paddingTop: 2,
+  gap: spacing.s2,
+  paddingTop: spacing.s2,
   width: "100%",
 });
 
@@ -122,7 +122,7 @@ const selectableRow = style({
   display: "flex",
   alignItems: "center",
   width: "100%",
-  paddingBlock: 10,
+  paddingBlock: spacing.s10,
   borderRadius: radius.r8,
   color: colors.fg.neutral.default,
   selectors: {
@@ -135,13 +135,13 @@ const selectableRow = style({
 /** 하위가 없는 대분류 링크 (그룹 헤더와 같은 행 스타일, 선택 가능). */
 export const topLink = style([
   selectableRow,
-  { paddingInline: 12, justifyContent: "space-between" },
+  { paddingInline: spacing.s12, justifyContent: "space-between" },
 ]);
 
 /** 그룹 안의 들여쓴 자식 링크. */
 export const childLink = style([
   selectableRow,
-  { paddingLeft: CHILD_INDENT, paddingRight: 10 },
+  { paddingLeft: CHILD_INDENT, paddingRight: spacing.s10 },
 ]);
 
 /** top/child 공통 선택(active) 스타일. */

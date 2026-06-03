@@ -1,10 +1,10 @@
-import { colors, typography } from "@sopt-mds/design-tokens";
+import { colors, spacing, typography } from "@sopt-mds/design-tokens";
 import { style } from "@vanilla-extract/css";
 
 export const logo = style({
   display: "inline-flex",
   alignItems: "center",
-  gap: 8,
+  gap: spacing.s8,
   color: colors.fg.neutral.bold,
 });
 

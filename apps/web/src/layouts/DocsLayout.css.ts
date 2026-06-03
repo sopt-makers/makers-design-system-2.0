@@ -1,3 +1,4 @@
+import { spacing } from "@sopt-mds/design-tokens";
 import { style } from "@vanilla-extract/css";
 import { MEDIA } from "../styles/breakpoints";
 
@@ -8,13 +9,13 @@ const TOC_WIDTH = 188;
 /** 콘텐츠 최대 폭 (Figma default 1440px). */
 const CONTENT_MAX_WIDTH = 1440;
 /** 데스크탑 콘텐츠 좌우 여백 (Figma 24px). */
-const CONTENT_INLINE_PADDING = 24;
+const CONTENT_INLINE_PADDING = spacing.s24;
 /** 컬럼 사이 간격 (Figma 16px). */
-const COLUMN_GAP = 16;
+const COLUMN_GAP = spacing.s16;
 /** 모바일(≤375) 본문 좌우 마진. */
-const MOBILE_INLINE_MARGIN = 16;
+const MOBILE_INLINE_MARGIN = spacing.s16;
 /** 사이드바 상단 여백 (Figma pt 48px) — Sidebar가 아닌 셀이 제공하는 chrome. */
-const SIDEBAR_TOP_PADDING = 48;
+const SIDEBAR_TOP_PADDING = spacing.s48;
 
 export const shell = style({
   display: "flex",
@@ -52,9 +53,9 @@ export const sidebarCell = style({
 
 export const article = style({
   minWidth: 0,
-  paddingTop: 40,
-  paddingBottom: 24,
-  paddingInline: 32,
+  paddingTop: spacing.s40,
+  paddingBottom: spacing.s24,
+  paddingInline: spacing.s32,
   // 모바일에서만 좌우 마진 16px
   "@media": {
     [MEDIA.mobileDown]: {

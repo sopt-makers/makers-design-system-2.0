@@ -1,4 +1,4 @@
-import { colors } from "@sopt-mds/design-tokens";
+import { colors, spacing } from "@sopt-mds/design-tokens";
 import { style } from "@vanilla-extract/css";
 
 /**
@@ -12,9 +12,9 @@ export const panel = style({
   boxSizing: "border-box",
   display: "flex",
   flexDirection: "column",
-  gap: 16,
-  paddingBlock: 24,
-  paddingInline: 24,
+  gap: spacing.s16,
+  paddingBlock: spacing.s24,
+  paddingInline: spacing.s24,
   overflowY: "auto",
   backgroundColor: colors.base.gray950,
 });

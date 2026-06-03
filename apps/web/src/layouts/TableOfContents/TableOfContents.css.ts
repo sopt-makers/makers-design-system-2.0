@@ -1,12 +1,12 @@
-import { colors, typography } from "@sopt-mds/design-tokens";
+import { colors, spacing, typography } from "@sopt-mds/design-tokens";
 import { style } from "@vanilla-extract/css";
 
 export const tableOfContents = style({
   display: "flex",
   flexDirection: "column",
-  gap: 12,
-  paddingTop: 48,
-  paddingBottom: 8,
+  gap: spacing.s12,
+  paddingTop: spacing.s48,
+  paddingBottom: spacing.s8,
   width: "100%",
 });
 
@@ -19,7 +19,7 @@ export const title = style({
 export const list = style({
   display: "flex",
   flexDirection: "column",
-  gap: 4,
+  gap: spacing.s4,
   margin: 0,
   padding: 0,
   width: "100%",
@@ -29,7 +29,7 @@ export const list = style({
 export const link = style({
   ...typography.label3,
   display: "block",
-  paddingBlock: 4,
+  paddingBlock: spacing.s4,
   color: colors.fg.neutral.subtle,
   transition: "color 150ms ease",
   selectors: {

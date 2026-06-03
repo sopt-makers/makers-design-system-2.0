@@ -1,4 +1,4 @@
-import { colors, typography } from "@sopt-mds/design-tokens";
+import { colors, spacing, typography } from "@sopt-mds/design-tokens";
 import { style } from "@vanilla-extract/css";
 import { MEDIA } from "../../styles/breakpoints";
 
@@ -15,7 +15,7 @@ export const bar = style({
   alignItems: "stretch",
   height: BAR_HEIGHT,
   width: "100%",
-  paddingInline: 24,
+  paddingInline: spacing.s24,
   backgroundColor: colors.base.gray950,
   borderBottom: `1px solid ${colors.stroke.neutral.ghost}`,
 });
@@ -29,7 +29,7 @@ export const logoLink = style({
 export const nav = style({
   display: "flex",
   alignItems: "stretch",
-  gap: 24,
+  gap: spacing.s24,
   marginLeft: LOGO_NAV_GAP,
   "@media": {
     [MEDIA.tabletDown]: {
