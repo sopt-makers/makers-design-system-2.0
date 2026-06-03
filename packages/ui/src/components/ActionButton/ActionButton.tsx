@@ -24,7 +24,7 @@ type DefaultVariantProps = {
   size?: ActionButtonSize;
 };
 
-export type ActionButtonProps = ActionButtonBaseProps &
+type ActionButtonProps = ActionButtonBaseProps &
   (DangerVariantProps | DefaultVariantProps);
 
 const ActionButton = React.forwardRef<HTMLButtonElement, ActionButtonProps>(
