@@ -5,11 +5,11 @@ export function NotReadyPage() {
   const { pathname } = useLocation();
 
   return (
-    <article>
-      <h1>준비 중</h1>
+    <section aria-labelledby="not-ready-title">
+      <h1 id="not-ready-title">준비 중</h1>
       <p>
         <code>{pathname}</code> 페이지는 아직 준비 중입니다.
       </p>
-    </article>
+    </section>
   );
 }
