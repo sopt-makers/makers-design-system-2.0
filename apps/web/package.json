@@ -1,0 +1,34 @@
+{
+  "name": "@sopt-mds/web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@sopt-mds/design-tokens": "workspace:*",
+    "@sopt-mds/icons": "workspace:*",
+    "@sopt-mds/ui": "workspace:*",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0"
+  },
+  "devDependencies": {
+    "@mdx-js/react": "^3.1.0",
+    "@mdx-js/rollup": "^3.1.0",
+    "@sopt-mds/tsconfig": "workspace:*",
+    "@types/mdx": "^2.0.13",
+    "@types/node": "^22.0.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "@vanilla-extract/css": "^1.15.5",
+    "@vanilla-extract/vite-plugin": "^4.0.19",
+    "@vitejs/plugin-react": "^4.3.4",
+    "rehype-slug": "^6.0.0",
+    "typescript": "^5.6.0",
+    "vite": "^5.4.11"
+  }
+}

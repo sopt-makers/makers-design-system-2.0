@@ -10,6 +10,8 @@
     "versioning": "changeset version && pnpm install --lockfile-only",
     "storybook": "pnpm --filter @sopt-mds/storybook dev",
     "storybook:build": "pnpm --filter @sopt-mds/storybook build",
+    "web": "pnpm --filter @sopt-mds/web dev",
+    "web:build": "pnpm --filter @sopt-mds/web build",
     "typecheck": "pnpm -r typecheck",
     "scaffold:component": "tsx scripts/scaffold-component.ts"
   },
