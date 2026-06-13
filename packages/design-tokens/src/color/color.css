@@ -82,6 +82,7 @@
   --color-fg-neutral-default-disabled: var(--color-base-gray500);
   --color-fg-neutral-subtle: var(--color-base-gray300);
   --color-fg-neutral-ghost: var(--color-base-gray500);
+  --color-fg-neutral-ghost-disabled: var(--color-base-gray700);
   --color-fg-neutral-inverse: var(--color-base-gray950);
 
   --color-fg-brand-default: var(--color-base-orange400);

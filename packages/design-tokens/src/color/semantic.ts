@@ -7,6 +7,7 @@ export const colorFg = {
     defaultDisabled: baseColor.gray500,
     subtle: baseColor.gray300,
     ghost: baseColor.gray500,
+    ghostDisabled: baseColor.gray700,
     inverse: baseColor.gray950,
   },
   brand: {

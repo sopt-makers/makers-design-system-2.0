@@ -2,6 +2,7 @@ export * from "./ActionButton";
 export * from "./Callout";
 export * from "./Chip";
 export * from "./FloatingButton";
+export * from "./Radio";
 export * from "./ReactionButton";
 export * from "./Tag";
 export * from "./TextButton";
