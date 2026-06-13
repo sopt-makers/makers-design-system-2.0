@@ -40,10 +40,10 @@ export const nav = style({
 
 export const navLink = style({
   ...typography.label2,
+  position: "relative",
   display: "flex",
   alignItems: "center",
   color: colors.fg.neutral.ghost,
-  borderBottom: `${ACTIVE_INDICATOR_WIDTH}px solid transparent`,
   whiteSpace: "nowrap",
   transition: "color 150ms ease",
   selectors: {
@@ -55,7 +55,18 @@ export const navLink = style({
 
 export const navLinkActive = style({
   color: colors.fg.neutral.bold,
-  borderBottomColor: colors.fg.neutral.bold,
+  selectors: {
+    // 활성 인디케이터: 헤더 하단 경계에서 8px 위에 위치 (Figma 어노테이션)
+    "&::after": {
+      content: '""',
+      position: "absolute",
+      left: 0,
+      right: 0,
+      bottom: spacing.s8,
+      height: ACTIVE_INDICATOR_WIDTH,
+      backgroundColor: colors.fg.neutral.bold,
+    },
+  },
 });
 
 export const menuButton = style({
