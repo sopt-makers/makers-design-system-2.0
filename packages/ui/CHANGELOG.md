@@ -1,5 +1,13 @@
 # @sopt-mds/ui
 
+## 1.0.5
+
+### Patch Changes
+
+- 3caf2a1: register checkbox component and add fg.neutral.ghostDisabled token
+- Updated dependencies [3caf2a1]
+  - @sopt-mds/design-tokens@1.0.4
+
 ## 1.0.4
 
 ### Patch Changes
