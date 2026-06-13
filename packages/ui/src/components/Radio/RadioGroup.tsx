@@ -29,61 +29,73 @@ export interface RadioGroupProps
  *
  * 단일선택 강제·방향키 이동은 같은 `name`을 가진 native radio가 처리하며,
  * Context는 선택 값 동기화만 담당합니다.
+ *
+ * `ref`는 그룹 루트 `<div role="radiogroup">`을 가리킵니다.
  */
-function RadioGroup({
-  value,
-  defaultValue,
-  onValueChange,
-  name,
-  disabled = false,
-  size = "small",
-  orientation = "vertical",
-  className,
-  children,
-  ...rest
-}: RadioGroupProps) {
-  const generatedName = React.useId();
-  const groupName = name ?? generatedName;
-
-  const isControlled = value !== undefined;
-  const [uncontrolledValue, setUncontrolledValue] =
-    React.useState(defaultValue);
-  const currentValue = isControlled ? value : uncontrolledValue;
-
-  const handleSelect = React.useCallback(
-    (next: string) => {
-      if (!isControlled) {
-        setUncontrolledValue(next);
-      }
-      onValueChange?.(next);
+const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
+  (
+    {
+      value,
+      defaultValue,
+      onValueChange,
+      name,
+      disabled = false,
+      size = "small",
+      orientation = "vertical",
+      className,
+      children,
+      ...rest
     },
-    [isControlled, onValueChange],
-  );
+    ref,
+  ) => {
+    const generatedName = React.useId();
+    const groupName = name ?? generatedName;
 
-  const contextValue = React.useMemo(
-    () => ({
-      name: groupName,
-      value: currentValue,
-      onSelect: handleSelect,
-      disabled,
-      size,
-    }),
-    [groupName, currentValue, handleSelect, disabled, size],
-  );
+    const isControlled = value !== undefined;
+    const [uncontrolledValue, setUncontrolledValue] =
+      React.useState(defaultValue);
+    const currentValue = isControlled ? value : uncontrolledValue;
 
-  return (
-    <RadioGroupContext.Provider value={contextValue}>
-      <div
-        {...rest}
-        role="radiogroup"
-        aria-orientation={orientation}
-        className={clsx(groupRoot, orientationVariants[orientation], className)}
-      >
-        {children}
-      </div>
-    </RadioGroupContext.Provider>
-  );
-}
+    const handleSelect = React.useCallback(
+      (next: string) => {
+        if (!isControlled) {
+          setUncontrolledValue(next);
+        }
+        onValueChange?.(next);
+      },
+      [isControlled, onValueChange],
+    );
+
+    const contextValue = React.useMemo(
+      () => ({
+        name: groupName,
+        value: currentValue,
+        onSelect: handleSelect,
+        disabled,
+        size,
+      }),
+      [groupName, currentValue, handleSelect, disabled, size],
+    );
+
+    return (
+      <RadioGroupContext.Provider value={contextValue}>
+        <div
+          {...rest}
+          ref={ref}
+          role="radiogroup"
+          aria-orientation={orientation}
+          className={clsx(
+            groupRoot,
+            orientationVariants[orientation],
+            className,
+          )}
+        >
+          {children}
+        </div>
+      </RadioGroupContext.Provider>
+    );
+  },
+);
 
 RadioGroup.displayName = "RadioGroup";
 
