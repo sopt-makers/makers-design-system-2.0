@@ -1,0 +1,57 @@
+# Typography System
+
+타이포그래피는 정보의 우선순위와 읽기 흐름을 전달하는 중요한 요소예요. MDS는 개별 속성을 조합해 사용하는 대신, 목적과 역할에 맞게 정의된 텍스트 스타일 단위로 관리해요. 이를 통해 디자이너와 개발자가 동일한 기준으로 텍스트를 사용하고, 제품 전반에서 일관된 정보 위계를 유지할 수 있어요.
+
+## 1. Base token
+
+프로덕트에서 사용하는 모든 타이포그래피 속성 값을 수치 기반으로 체계화한 원자 값들의 정의예요. weight, size, lineHeight, letterSpacing을 각각 분리 관리하며, Semantic token이 이를 조합해 실제 Typography Style을 구성해요.
+
+### weight
+
+텍스트의 굵기를 정의해요.
+
+![weight 이름 규칙](/images/img_typography_01.png)
+
+![weight 예시](/images/img_typography_02.png)
+
+### size
+
+텍스트의 크기를 정의해요.
+
+![size 이름 규칙](/images/img_typography_03.png)
+
+![size 예시](/images/img_typography_04.png)
+
+### line height
+
+텍스트의 행간을 정의해요.
+
+![line height 이름 규칙](/images/img_typography_05.png)
+
+![line height 예시](/images/img_typography_06.png)
+
+### letter spacing
+
+텍스트의 자간을 정의해요.
+
+![letter spacing 이름 규칙](/images/img_typography_07.png)
+
+![letter spacing 예시](/images/img_typography_08.png)
+
+> weight와 letter spacing은 수치 대신 의미 기반 이름(bold, semibold, wide 등)으로 구성돼요. 수치 자체보다 상대적인 역할과 사용 의도를 더 직관적으로 인식하기 위함이에요.
+
+## 2. Semantic token
+
+UI에 직접 사용되는 타이포그래피 스타일 조합이에요. Base token의 weight, size, lineHeight, letterSpacing을 묶어 하나의 텍스트 스타일로 정의하여, 역할과 위계에 따라 heading / title / body / label로 분류돼요.
+
+- **heading**&nbsp; 페이지의 핵심 제목
+- **title**&nbsp; 섹션이나 컴포넌트의 제목
+- **body**&nbsp; 본문 텍스트
+- **label**&nbsp; 버튼, 태그, 입력 필드 등 UI 요소에 부착되는 짧은 텍스트
+
+![Semantic token 이름 규칙](/images/img_typography_09.png)
+
+> level은 동일 role 안에서의 시각적 위계를 의미해요. 숫자가 작을수록 더 높은 강조 수준을 가져요.
+
+![Semantic token 예시](/images/img_typography_10.png)
+<div style={{paddingBottom: '100px'}} />
