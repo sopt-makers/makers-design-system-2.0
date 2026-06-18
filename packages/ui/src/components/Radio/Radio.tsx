@@ -33,6 +33,8 @@ export interface RadioProps
  *
  * - `RadioGroup` 안에서는 `name`·선택 상태·`disabled`·`size`를 그룹에서 주입받습니다.
  *   이때 항목을 식별하기 위해 `value`가 필요합니다.
+ * - 그룹 안에서는 단일선택이 깨지지 않도록 그룹의 `name`이 우선합니다(개별 `name`은 무시되며,
+ *   폼 제출용 name이 필요하면 `RadioGroup`의 `name`에 지정하세요).
  * - 단독으로 쓸 때는 `checked`/`defaultChecked`·`onCheckedChange`로 제어/비제어합니다.
  * - `className`·`style`은 바깥 `<label>`에 적용됩니다.
  * - `ref`(forwardRef)는 내부 `<input>`을, `rootRef`는 바깥 `<label>`을 가리킵니다.
@@ -59,7 +61,8 @@ const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
     const inGroup = group != null;
 
     const size = sizeProp ?? group?.size ?? "small";
-    const name = nameProp ?? group?.name;
+    // 그룹 안에서는 그룹 name이 우선(단일선택 보장), 그룹 밖에서는 개별 name을 사용한다.
+    const name = group?.name ?? nameProp;
     const disabled = Boolean(disabledProp) || Boolean(group?.disabled);
     // 그룹 안에서는 선택 상태를 그룹 value가 결정하고, 단독에서는 props를 따른다.
     const checked = inGroup

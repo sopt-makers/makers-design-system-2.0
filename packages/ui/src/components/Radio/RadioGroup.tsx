@@ -84,6 +84,7 @@ const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
           ref={ref}
           role="radiogroup"
           aria-orientation={orientation}
+          aria-disabled={disabled || undefined}
           className={clsx(
             groupRoot,
             orientationVariants[orientation],
