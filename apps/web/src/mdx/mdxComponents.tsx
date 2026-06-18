@@ -10,6 +10,7 @@ export const mdxComponents: MDXComponents = {
   h1: (props) => <h1 className={styles.h1} {...props} />,
   h2: (props) => <h2 className={styles.h2} {...props} />,
   h3: (props) => <h3 className={styles.h3} {...props} />,
+  h4: (props) => <h4 className={styles.h4} {...props} />,
   p: (props) => <p className={styles.paragraph} {...props} />,
   a: (props) => <a className={styles.link} {...props} />,
   ul: (props) => <ul className={styles.list} {...props} />,

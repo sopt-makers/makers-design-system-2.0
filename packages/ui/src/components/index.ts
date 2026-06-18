@@ -1,5 +1,6 @@
 export * from "./ActionButton";
 export * from "./Callout";
+export * from "./Checkbox";
 export * from "./Chip";
 export * from "./FloatingButton";
 export * from "./Radio";
