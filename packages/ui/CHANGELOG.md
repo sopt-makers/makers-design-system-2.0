@@ -1,5 +1,13 @@
 # @sopt-mds/ui
 
+## 1.0.6
+
+### Patch Changes
+
+- 1a8f276: register radio component (Radio, RadioGroup) and add fg.neutral.ghostDisabled token
+- Updated dependencies [1a8f276]
+  - @sopt-mds/design-tokens@1.0.5
+
 ## 1.0.5
 
 ### Patch Changes
