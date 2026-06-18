@@ -67,14 +67,22 @@ function CopyableCell({ text, color }: { text: string; color: string }) {
   };
 
   return (
-    <span
+    <button
+      type="button"
       onClick={handleClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => { setHovered(false); setPressed(false); }}
       onMouseDown={() => setPressed(true)}
       onMouseUp={() => setPressed(false)}
       style={{
+        border: "none",
+        background: "none",
+        padding: 0,
+        margin: 0,
+        fontFamily: "inherit",
         fontSize: "16px",
+        lineHeight: "inherit",
+        textAlign: "left",
         color,
         cursor: "pointer",
         opacity: pressed ? 0.8 : hovered ? 0.8 : 1,
@@ -83,7 +91,7 @@ function CopyableCell({ text, color }: { text: string; color: string }) {
       }}
     >
       {text}
-    </span>
+    </button>
   );
 }
 
