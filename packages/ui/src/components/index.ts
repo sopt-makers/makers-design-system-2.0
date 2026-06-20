@@ -6,3 +6,4 @@ export * from "./FloatingButton";
 export * from "./ReactionButton";
 export * from "./Tag";
 export * from "./TextButton";
+export * from "./Toggle";
