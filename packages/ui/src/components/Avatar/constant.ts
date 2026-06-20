@@ -19,6 +19,18 @@ export const AVATAR_SIZE_PX: Record<AvatarSize, string> = {
   180: "180px",
 };
 
+/** size별 stroke 두께. inset으로 적용되며 Figma inner stroke 값과 동일합니다. */
+export const AVATAR_STROKE_WIDTH_PX: Record<AvatarSize, string> = {
+  24: "1px",
+  32: "1px",
+  48: "2px",
+  56: "2px",
+  72: "3px",
+  80: "3px",
+  120: "3px",
+  180: "3.6px",
+};
+
 /**
  * fallback 아이콘(IconUsersFilled)의 size는 avatar size의 1/2입니다.
  * 예: size 120 → 아이콘 60.
@@ -52,7 +64,6 @@ export type AvatarDefaultToken = {
   borderRadius: string;
   backgroundColor: string;
   fallbackColor: string;
-  strokeWidth: string;
   strokeColor: string;
 };
 
@@ -60,12 +71,11 @@ export type AvatarDefaultToken = {
  * CSS variable 기본값.
  * - fallbackColor: src가 없거나 로드 실패 시 노출되는 fallback 아이콘 색상입니다.
  * - strokeColor: `stroke.secondary.default` 토큰을 사용합니다.
- * - strokeWidth: 실제 stroke 유무와 무관하게 size가 유지되도록 inset으로 적용됩니다.
+ * - strokeWidth는 size별로 다르므로 `AVATAR_STROKE_WIDTH_PX`에서 size variant로 적용됩니다.
  */
 export const AVATAR_DEFAULT_TOKENS: AvatarDefaultToken = {
   borderRadius: radius.full,
   backgroundColor: colors.bg.neutral.subtle,
   fallbackColor: colors.fg.neutral.ghost,
-  strokeWidth: "1px",
   strokeColor: colors.stroke.secondary.default,
 };

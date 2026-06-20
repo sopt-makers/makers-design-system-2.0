@@ -2,6 +2,7 @@ import { createGlobalVar, style, styleVariants } from "@vanilla-extract/css";
 import {
   AVATAR_DEFAULT_TOKENS,
   AVATAR_SIZE_PX,
+  AVATAR_STROKE_WIDTH_PX,
   DEFAULT_AVATAR_SIZE,
 } from "./constant";
 
@@ -50,7 +51,7 @@ export const base = style({
     [avatarVars.borderRadius]: AVATAR_DEFAULT_TOKENS.borderRadius,
     [avatarVars.backgroundColor]: AVATAR_DEFAULT_TOKENS.backgroundColor,
     [avatarVars.fallbackColor]: AVATAR_DEFAULT_TOKENS.fallbackColor,
-    [avatarVars.strokeWidth]: AVATAR_DEFAULT_TOKENS.strokeWidth,
+    [avatarVars.strokeWidth]: AVATAR_STROKE_WIDTH_PX[DEFAULT_AVATAR_SIZE],
     [avatarVars.strokeColor]: AVATAR_DEFAULT_TOKENS.strokeColor,
   },
   position: "relative",
@@ -67,9 +68,10 @@ export const base = style({
   overflow: "hidden",
 });
 
-export const sizeVariants = styleVariants(AVATAR_SIZE_PX, (value) => ({
+export const sizeVariants = styleVariants(AVATAR_SIZE_PX, (value, size) => ({
   vars: {
     [avatarVars.size]: value,
+    [avatarVars.strokeWidth]: AVATAR_STROKE_WIDTH_PX[size],
   },
 }));
 
