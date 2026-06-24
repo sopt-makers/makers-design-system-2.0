@@ -1,5 +1,11 @@
 # @sopt-mds/ui
 
+## 1.0.7
+
+### Patch Changes
+
+- f884af9: add toggle component
+
 ## 1.0.6
 
 ### Patch Changes
