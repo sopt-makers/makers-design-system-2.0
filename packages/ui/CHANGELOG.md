@@ -1,5 +1,11 @@
 # @sopt-mds/ui
 
+## 1.0.8
+
+### Patch Changes
+
+- bef0ec2: add avatar component
+
 ## 1.0.7
 
 ### Patch Changes
