@@ -37,6 +37,7 @@ const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
         {...inputProps}
         ref={ref}
         role="switch"
+        checked={checked}
         aria-checked={checked}
         type="checkbox"
         disabled={disabled}

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { useState } from "react";
 import { Toggle } from "./Toggle";
 
 const COMPONENT_DESCRIPTION = `
@@ -45,5 +46,8 @@ type Story = StoryObj<typeof Toggle>;
 
 export const ToggleDefault: Story = {
   name: "Toggle",
-  render: (args) => <Toggle {...args} />,
+  render: (args) => {
+    const [checked, setChecked] = useState(false);
+    return <Toggle {...args} checked={checked} onCheckedChange={setChecked} />;
+  },
 };
