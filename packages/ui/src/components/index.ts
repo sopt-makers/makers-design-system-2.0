@@ -1,4 +1,5 @@
 export * from "./ActionButton";
+export * from "./Avatar";
 export * from "./Callout";
 export * from "./Checkbox";
 export * from "./Chip";
@@ -7,4 +8,4 @@ export * from "./Radio";
 export * from "./ReactionButton";
 export * from "./Tag";
 export * from "./TextButton";
-export * from "./Avatar";
+export * from "./Toggle";
