@@ -1,5 +1,11 @@
 # @sopt-mds/design-tokens
 
+## 1.0.6
+
+### Patch Changes
+
+- 6d78418: Add background layer color tokens.
+
 ## 1.0.5
 
 ### Patch Changes

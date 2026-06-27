@@ -1,5 +1,12 @@
 # @sopt-mds/ui
 
+## 1.0.9
+
+### Patch Changes
+
+- Updated dependencies [6d78418]
+  - @sopt-mds/design-tokens@1.0.6
+
 ## 1.0.8
 
 ### Patch Changes
