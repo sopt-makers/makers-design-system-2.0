@@ -79,6 +79,12 @@ export const colorBg = {
     defaultPressed: baseColor.red600,
     ghost: baseColor.red950,
   },
+  layer: {
+    basement: baseColor.gray950,
+    basementHover: baseColor.gray800,
+    default: baseColor.gray900,
+    defaultHover: baseColor.gray800,
+  },
   dim: {
     default: "rgba(15, 16, 18, 0.8)",
   },
