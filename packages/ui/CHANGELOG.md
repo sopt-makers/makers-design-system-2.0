@@ -1,5 +1,11 @@
 # @sopt-mds/ui
 
+## 1.0.10
+
+### Patch Changes
+
+- 2e621f7: Export bundled component styles as index.css.
+
 ## 1.0.9
 
 ### Patch Changes
