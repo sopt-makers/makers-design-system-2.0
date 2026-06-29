@@ -50,6 +50,12 @@ export const semanticTypography = {
   },
   title4: {
     fontWeight: typographyWeight.semibold,
+    fontSize: typographySize.t18,
+    lineHeight: typographyLineHeight.t26,
+    letterSpacing: typographyLetterSpacing.default,
+  },
+  title5: {
+    fontWeight: typographyWeight.semibold,
     fontSize: typographySize.t16,
     lineHeight: typographyLineHeight.t24,
     letterSpacing: typographyLetterSpacing.wide,
@@ -64,6 +70,12 @@ export const semanticTypography = {
     fontWeight: typographyWeight.regular,
     fontSize: typographySize.t14,
     lineHeight: typographyLineHeight.t22,
+    letterSpacing: typographyLetterSpacing.wide,
+  },
+  body3: {
+    fontWeight: typographyWeight.regular,
+    fontSize: typographySize.t12,
+    lineHeight: typographyLineHeight.t18,
     letterSpacing: typographyLetterSpacing.wide,
   },
   label1: {
