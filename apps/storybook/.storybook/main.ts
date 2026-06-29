@@ -1,4 +1,5 @@
 import { resolve } from "node:path";
+import "@sopt-mds/ui/index.css";
 import type { StorybookConfig } from "@storybook/react-vite";
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 import { mergeConfig } from "vite";
