@@ -1,5 +1,11 @@
 # @sopt-mds/design-tokens
 
+## 1.0.7
+
+### Patch Changes
+
+- 6c23137: add new title, body typo token
+
 ## 1.0.6
 
 ### Patch Changes
