@@ -1,5 +1,11 @@
 # @sopt-mds/icons
 
+## 0.1.0
+
+### Minor Changes
+
+- e1b2461: Add IconDotsHorizontal and sync icons with Figma (bellActive redesigned with orange badge).
+
 ## 0.0.2
 
 ### Patch Changes

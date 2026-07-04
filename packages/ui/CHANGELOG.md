@@ -1,5 +1,12 @@
 # @sopt-mds/ui
 
+## 1.0.13
+
+### Patch Changes
+
+- Updated dependencies [e1b2461]
+  - @sopt-mds/icons@0.1.0
+
 ## 1.0.12
 
 ### Patch Changes
