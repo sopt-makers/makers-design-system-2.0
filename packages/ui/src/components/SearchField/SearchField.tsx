@@ -1,5 +1,6 @@
 import { IconSearchOutlined, IconXCircleFilled } from "@sopt-mds/icons";
 import clsx from "clsx";
+import * as React from "react";
 import {
   clearButton,
   clearIcon,
@@ -9,7 +10,6 @@ import {
   searchIcon,
 } from "./SearchField.css";
 import type { SearchFieldVariant } from "./types";
-import { forwardRef, useImperativeHandle, useRef, useState, type ChangeEvent, type KeyboardEvent } from "react";
 
 export interface SearchFieldProps
   extends Omit<
@@ -46,7 +46,7 @@ const isComposing = (event: React.KeyboardEvent<HTMLInputElement>) =>
  * - `ref`(forwardRef)는 내부 `<input>`을, `rootRef`는 바깥 `<div>`를 가리킵니다.
  * - 접근 가능한 이름을 위해 `aria-label`(또는 연결된 `<label>`)을 권장합니다.
  */
-const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
+const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>(
   (
     {
       variant = "default",
@@ -66,18 +66,18 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
     },
     ref,
   ) => {
-    const inputRef = useRef<HTMLInputElement>(null);
-    useImperativeHandle(ref, () => inputRef.current as HTMLInputElement);
+    const inputRef = React.useRef<HTMLInputElement>(null);
+    React.useImperativeHandle(ref, () => inputRef.current as HTMLInputElement);
 
     const isControlled = value !== undefined;
     // :placeholder-shown은 placeholder 미지정 시 오판하므로 값 존재를 직접 추적한다.
-    const [uncontrolledHasValue, setUncontrolledHasValue] = useState(
+    const [uncontrolledHasValue, setUncontrolledHasValue] = React.useState(
       Boolean(defaultValue),
     );
     const hasValue = isControlled ? value !== "" : uncontrolledHasValue;
     const showClear = hasValue && !disabled && !readOnly;
 
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       onChange?.(event);
       onValueChange?.(event.target.value);
       if (!isControlled) {
@@ -136,6 +136,8 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
     };
 
     return (
+      // biome-ignore lint/a11y/noStaticElementInteractions: 클릭은 내부 input으로의 포커스 위임일 뿐이다.
+      // biome-ignore lint/a11y/useKeyWithClickEvents: 키보드 접근은 내부 input이 담당한다.
       <div
         ref={rootRef}
         style={style}
