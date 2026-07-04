@@ -11,7 +11,7 @@ const IconKakao = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>(
       ref={ref}
       {...props}
     >
-      <g clipPath="url(#clip0_125_703)">
+      <g clipPath="url(#clip0_1010_627)">
         <path
           fillRule="evenodd"
           clipRule="evenodd"
@@ -20,7 +20,7 @@ const IconKakao = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>(
         />
       </g>
       <defs>
-        <clipPath id="clip0_125_703">
+        <clipPath id="clip0_1010_627">
           <rect width={24} height={24} fill="currentColor" />
         </clipPath>
       </defs>

@@ -11,7 +11,7 @@ const IconInstagram = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>(
       ref={ref}
       {...props}
     >
-      <g clipPath="url(#clip0_125_710)">
+      <g clipPath="url(#clip0_1010_625)">
         <path
           fillRule="evenodd"
           clipRule="evenodd"
@@ -28,7 +28,7 @@ const IconInstagram = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>(
         />
       </g>
       <defs>
-        <clipPath id="clip0_125_710">
+        <clipPath id="clip0_1010_625">
           <rect width={24} height={24} fill="currentColor" />
         </clipPath>
       </defs>

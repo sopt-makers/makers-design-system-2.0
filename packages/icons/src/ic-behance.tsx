@@ -11,7 +11,7 @@ const IconBehance = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>(
       ref={ref}
       {...props}
     >
-      <g clipPath="url(#clip0_125_708)">
+      <g clipPath="url(#clip0_1010_619)">
         <path
           d="M8.73179 10.7801C9.08348 10.7801 9.37194 10.6853 9.59323 10.5233C9.81452 10.3612 9.91331 10.0767 9.91331 9.72504C9.91331 9.53142 9.88169 9.34174 9.81847 9.21529C9.75525 9.08884 9.66041 8.99005 9.53001 8.89522C9.40356 8.83199 9.27316 8.76877 9.11509 8.73715C8.95703 8.70554 8.79502 8.70554 8.60534 8.70554H6.75207V10.7841C6.75207 10.7801 8.73179 10.7801 8.73179 10.7801Z"
           fill="currentColor"
@@ -32,7 +32,7 @@ const IconBehance = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>(
         />
       </g>
       <defs>
-        <clipPath id="clip0_125_708">
+        <clipPath id="clip0_1010_619">
           <rect width={24} height={24} fill="currentColor" />
         </clipPath>
       </defs>
