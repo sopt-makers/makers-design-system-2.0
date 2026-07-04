@@ -56,16 +56,10 @@ export default meta;
 
 type Story = StoryObj<typeof TextButton>;
 
-export const Default: Story = {};
-
-export const Emphasis: Story = {
-  args: { variant: "emphasis" },
+export const TextButtonDefault: Story = {
+  name: "TextButton",
 };
 
 export const WithAddon: Story = {
   render: (args) => <TextButton {...args} rightAddon={<IconChevronRight />} />,
-};
-
-export const Disabled: Story = {
-  args: { disabled: true },
 };

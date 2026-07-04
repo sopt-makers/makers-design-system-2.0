@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
 import { Radio } from "./Radio";
 import { RadioGroup } from "./RadioGroup";
 
@@ -54,30 +53,6 @@ export const RadioDefault: Story = {
   render: (args) => <Radio {...args} />,
 };
 
-export const States: Story = {
-  name: "상태",
-  parameters: { controls: { include: ["size"] } },
-  render: ({ size }) => (
-    <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
-      <Radio size={size} name="states-unselected" label="미선택" />
-      <Radio size={size} name="states-selected" label="선택" defaultChecked />
-      <Radio
-        size={size}
-        name="states-disabled"
-        label="비활성·미선택"
-        disabled
-      />
-      <Radio
-        size={size}
-        name="states-disabled-selected"
-        label="비활성·선택"
-        disabled
-        defaultChecked
-      />
-    </div>
-  ),
-};
-
 const TRACK_OPTIONS = [
   { value: "design", label: "디자인" },
   { value: "frontend", label: "프론트엔드" },
@@ -86,65 +61,10 @@ const TRACK_OPTIONS = [
 ];
 
 export const Group: Story = {
-  name: "RadioGroup (제어)",
-  parameters: { controls: { include: ["size"] } },
-  render: ({ size }) => {
-    const [value, setValue] = useState("frontend");
-
-    return (
-      <RadioGroup
-        name="track"
-        size={size}
-        value={value}
-        onValueChange={setValue}
-      >
-        {TRACK_OPTIONS.map((option) => (
-          <Radio key={option.value} value={option.value} label={option.label} />
-        ))}
-      </RadioGroup>
-    );
-  },
-};
-
-export const GroupUncontrolled: Story = {
-  name: "RadioGroup (비제어)",
+  name: "RadioGroup",
   parameters: { controls: { include: ["size"] } },
   render: ({ size }) => (
-    <RadioGroup name="track-uncontrolled" size={size} defaultValue="design">
-      {TRACK_OPTIONS.map((option) => (
-        <Radio key={option.value} value={option.value} label={option.label} />
-      ))}
-    </RadioGroup>
-  ),
-};
-
-export const GroupHorizontal: Story = {
-  name: "RadioGroup (가로)",
-  parameters: { controls: { include: ["size"] } },
-  render: ({ size }) => (
-    <RadioGroup
-      name="track-horizontal"
-      size={size}
-      defaultValue="frontend"
-      orientation="horizontal"
-    >
-      {TRACK_OPTIONS.map((option) => (
-        <Radio key={option.value} value={option.value} label={option.label} />
-      ))}
-    </RadioGroup>
-  ),
-};
-
-export const GroupDisabled: Story = {
-  name: "RadioGroup (비활성)",
-  parameters: { controls: { include: ["size"] } },
-  render: ({ size }) => (
-    <RadioGroup
-      name="track-disabled"
-      size={size}
-      defaultValue="frontend"
-      disabled
-    >
+    <RadioGroup name="track" size={size} defaultValue="frontend">
       {TRACK_OPTIONS.map((option) => (
         <Radio key={option.value} value={option.value} label={option.label} />
       ))}
