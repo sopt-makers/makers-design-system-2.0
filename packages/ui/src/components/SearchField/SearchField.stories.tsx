@@ -1,3 +1,4 @@
+import { useArgs } from "@storybook/preview-api";
 import type { Meta, StoryObj } from "@storybook/react";
 import { SearchField } from "./SearchField";
 
@@ -15,6 +16,7 @@ const meta: Meta<typeof SearchField> = {
   tags: ["autodocs"],
   args: {
     variant: "default",
+    value: "",
     placeholder: "검색어를 입력해 주세요",
     disabled: false,
     "aria-label": "검색",
@@ -23,6 +25,9 @@ const meta: Meta<typeof SearchField> = {
     variant: {
       control: "inline-radio",
       options: ["default", "ghost"],
+    },
+    value: {
+      control: "text",
     },
     placeholder: {
       control: "text",
@@ -33,7 +38,7 @@ const meta: Meta<typeof SearchField> = {
   },
   parameters: {
     controls: {
-      include: ["variant", "placeholder", "disabled"],
+      include: ["variant", "value", "placeholder", "disabled"],
     },
     docs: {
       description: {
@@ -49,9 +54,17 @@ type Story = StoryObj<typeof SearchField>;
 
 export const SearchFieldDefault: Story = {
   name: "SearchField",
-  render: (args) => (
-    <div style={{ width: STORY_WIDTH }}>
-      <SearchField {...args} />
-    </div>
-  ),
+  // 캔버스 타이핑과 Controls의 value가 양방향으로 동기화되도록 args에 연결한다.
+  render: function Render(args) {
+    const [, updateArgs] = useArgs();
+
+    return (
+      <div style={{ width: STORY_WIDTH }}>
+        <SearchField
+          {...args}
+          onValueChange={(value) => updateArgs({ value })}
+        />
+      </div>
+    );
+  },
 };
