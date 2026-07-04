@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
 import { SearchField } from "./SearchField";
 
 const COMPONENT_DESCRIPTION = `
@@ -7,6 +6,7 @@ const COMPONENT_DESCRIPTION = `
   값이 있으면 클리어 버튼이 항상 표시되고, Enter는 \`onSearch\`를, Escape·클리어 버튼은 값을 비우고 \`onClear\`를 호출합니다(한국어 IME 조합 중에는 동작하지 않습니다). 접근 가능한 이름을 위해 \`aria-label\`을 권장합니다.
 `;
 
+// Figma 예시 프레임 폭 (node 1223:1334, 335×46)
 const STORY_WIDTH = 335;
 
 const meta: Meta<typeof SearchField> = {
@@ -54,76 +54,4 @@ export const SearchFieldDefault: Story = {
       <SearchField {...args} />
     </div>
   ),
-};
-
-export const Ghost: Story = {
-  name: "Ghost",
-  args: { variant: "ghost" },
-  parameters: { controls: { include: ["placeholder", "disabled"] } },
-  render: (args) => (
-    <div style={{ width: STORY_WIDTH }}>
-      <SearchField {...args} />
-    </div>
-  ),
-};
-
-const FRUITS = ["사과", "바나나", "딸기", "포도", "복숭아"];
-
-export const Controlled: Story = {
-  name: "제어 컴포넌트",
-  parameters: { controls: { include: ["variant"] } },
-  render: (args) => {
-    const [keyword, setKeyword] = useState("");
-    const filtered = FRUITS.filter((fruit) => fruit.includes(keyword));
-
-    return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 12,
-          width: STORY_WIDTH,
-        }}
-      >
-        <SearchField
-          {...args}
-          value={keyword}
-          onValueChange={setKeyword}
-          aria-label="과일 검색"
-          placeholder="과일 이름으로 필터링"
-        />
-        <ul style={{ margin: 0, paddingLeft: 20 }}>
-          {filtered.map((fruit) => (
-            <li key={fruit}>{fruit}</li>
-          ))}
-        </ul>
-      </div>
-    );
-  },
-};
-
-export const Search: Story = {
-  name: "검색 실행",
-  parameters: { controls: { include: ["variant"] } },
-  render: (args) => {
-    const [submitted, setSubmitted] = useState<string | null>(null);
-
-    return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 12,
-          width: STORY_WIDTH,
-        }}
-      >
-        <SearchField {...args} onSearch={setSubmitted} />
-        <p style={{ margin: 0 }}>
-          {submitted == null
-            ? "Enter를 눌러 검색을 실행하세요."
-            : `검색 실행: "${submitted}"`}
-        </p>
-      </div>
-    );
-  },
 };
