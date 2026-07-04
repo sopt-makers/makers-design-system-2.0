@@ -41,17 +41,7 @@ export default meta;
 
 type Story = StoryObj<typeof FloatingButton>;
 
-export const WithLabel: Story = {
-  render: (args) => <FloatingButton {...args} icon={<IconPlus />} />,
-};
-
-export const IconOnly: Story = {
-  render: ({ children: _children, ...args }) => (
-    <FloatingButton {...args} icon={<IconPlus />} aria-label="글쓰기" />
-  ),
-};
-
-export const Disabled: Story = {
-  args: { disabled: true },
+export const FloatingButtonDefault: Story = {
+  name: "FloatingButton",
   render: (args) => <FloatingButton {...args} icon={<IconPlus />} />,
 };

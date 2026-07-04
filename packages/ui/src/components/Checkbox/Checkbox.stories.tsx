@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
 import { Checkbox } from "./Checkbox";
 
 const COMPONENT_DESCRIPTION = `
@@ -51,64 +50,4 @@ type Story = StoryObj<typeof Checkbox>;
 export const CheckboxDefault: Story = {
   name: "Checkbox",
   render: (args) => <Checkbox {...args} />,
-};
-
-export const Controlled: Story = {
-  name: "제어 컴포넌트",
-  parameters: { controls: { include: ["size", "label", "disabled"] } },
-  render: (args) => {
-    const [checked, setChecked] = useState(true);
-
-    return (
-      <Checkbox
-        {...args}
-        checked={checked}
-        onCheckedChange={setChecked}
-        defaultChecked={undefined}
-      />
-    );
-  },
-};
-
-export const States: Story = {
-  name: "상태",
-  parameters: { controls: { include: ["size"] } },
-  render: ({ size }) => (
-    <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
-      <Checkbox size={size} label="미선택" />
-      <Checkbox size={size} label="선택" defaultChecked />
-      <Checkbox size={size} label="비활성·미선택" disabled />
-      <Checkbox size={size} label="비활성·선택" disabled defaultChecked />
-    </div>
-  ),
-};
-
-const MULTI_OPTIONS = ["디자인", "프론트엔드", "백엔드", "기획"];
-
-export const MultiSelect: Story = {
-  name: "복수 선택",
-  parameters: { controls: { include: ["size"] } },
-  render: ({ size }) => {
-    const [selected, setSelected] = useState<string[]>(["프론트엔드"]);
-
-    const toggle = (value: string) => (checked: boolean) => {
-      setSelected((prev) =>
-        checked ? [...prev, value] : prev.filter((item) => item !== value),
-      );
-    };
-
-    return (
-      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-        {MULTI_OPTIONS.map((option) => (
-          <Checkbox
-            key={option}
-            size={size}
-            label={option}
-            checked={selected.includes(option)}
-            onCheckedChange={toggle(option)}
-          />
-        ))}
-      </div>
-    );
-  },
 };

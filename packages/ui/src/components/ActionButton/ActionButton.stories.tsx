@@ -55,15 +55,8 @@ export default meta;
 
 type Story = StoryObj<typeof ActionButton>;
 
-export const Primary: Story = {};
-
-export const Secondary: Story = {
-  args: { variant: "secondary" },
-};
-
-export const Danger: Story = {
-  // 디자인상 danger는 xsmall을 제공하지 않습니다.
-  args: { variant: "danger", size: "small" },
+export const ActionButtonDefault: Story = {
+  name: "ActionButton",
 };
 
 export const WithAddon: Story = {
@@ -76,25 +69,4 @@ export const WithAddon: Story = {
       {args.children}
     </ActionButton>
   ),
-};
-
-export const Variants: Story = {
-  // danger는 xsmall이 없어 size를 제외하므로 variant별로 명시적으로 렌더링합니다.
-  render: ({ size, variant: _variant, ...args }) => (
-    <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-      <ActionButton {...args} variant="primary" size={size}>
-        primary
-      </ActionButton>
-      <ActionButton {...args} variant="secondary" size={size}>
-        secondary
-      </ActionButton>
-      <ActionButton {...args} variant="danger">
-        danger
-      </ActionButton>
-    </div>
-  ),
-};
-
-export const Disabled: Story = {
-  args: { disabled: true },
 };

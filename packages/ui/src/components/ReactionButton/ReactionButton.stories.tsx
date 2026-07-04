@@ -1,6 +1,5 @@
 import { IconHeartFilled } from "@sopt-mds/icons";
 import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
 import { ReactionButton } from "./ReactionButton";
 import type { ReactionButtonSize } from "./types";
 
@@ -55,36 +54,9 @@ export default meta;
 
 type Story = StoryObj<typeof ReactionButton>;
 
-const renderWithIcon: Story["render"] = (args) => (
-  <ReactionButton {...args} leftAddon={<IconHeartFilled />} />
-);
-
-export const Default: Story = {
-  render: renderWithIcon,
-};
-
-export const Selected: Story = {
-  args: { selected: true },
-  render: renderWithIcon,
-};
-
-export const Disabled: Story = {
-  args: { disabled: true },
-  render: renderWithIcon,
-};
-
-export const Toggleable: Story = {
-  render: (args) => {
-    const [selected, setSelected] = useState(false);
-
-    return (
-      <ReactionButton
-        {...args}
-        selected={selected}
-        onClick={() => setSelected((prev) => !prev)}
-        leftAddon={<IconHeartFilled />}
-        count={selected ? 13 : 12}
-      />
-    );
-  },
+export const ReactionButtonDefault: Story = {
+  name: "ReactionButton",
+  render: (args) => (
+    <ReactionButton {...args} leftAddon={<IconHeartFilled />} />
+  ),
 };
