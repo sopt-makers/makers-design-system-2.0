@@ -193,16 +193,23 @@ export const base = style({
      * state priority
      * - disabled > hover > selected > default
      */
-    "&:not(:disabled):not([aria-disabled='true']):hover": chipStateStyles.hover,
-    "&:not(:disabled):not([aria-disabled='true'])[data-selected='true']:not(:hover)":
+    "&:not(:disabled):not([aria-disabled='true'])[data-selected='true']":
       chipStateStyles.selected,
-    "&:not([aria-disabled='true']):has(input:checked:not(:disabled)):not(:hover)":
+    "&:not([aria-disabled='true']):has(input:checked:not(:disabled))":
       chipStateStyles.selected,
     "&:focus-visible": focusVisibleStyle,
     "&:has(input:focus-visible)": focusVisibleStyle,
     "&:disabled, &[aria-disabled='true']": {
       ...chipStateStyles.disabled,
       cursor: "not-allowed",
+    },
+  },
+  "@media": {
+    "(hover: hover) and (pointer: fine)": {
+      selectors: {
+        "&:not(:disabled):not([aria-disabled='true']):hover":
+          chipStateStyles.hover,
+      },
     },
   },
 });
