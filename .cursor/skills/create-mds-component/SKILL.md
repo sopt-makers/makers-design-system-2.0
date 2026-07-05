@@ -1,15 +1,22 @@
 ---
-name: mds-component-scaffold
+name: create-mds-component
 description: >-
-  Scaffold a new @sopt-mds/ui component following this design system's
-  conventions. Use whenever the user asks to create, add, or scaffold a UI
-  component in packages/ui (e.g. "Badge 컴포넌트 만들어줘", "add a Tooltip
-  component", "새 컴포넌트 추가").
+  Create a new @sopt-mds/ui component following this design system's
+  conventions. Use when the user asks to create, add, or scaffold a new UI
+  component in packages/ui.
 ---
 
-# MDS Component Scaffold
+# Create MDS Component
 
 이 스킬은 `@sopt-mds/ui`에 새 컴포넌트를 추가할 때 디자인 시스템이 강제하는 구조·패턴을 지키도록 안내합니다. 목표는 사용자가 전달한 요구사항(크기/상태/props 등)을 이 레포의 관례에 맞게 구현하는 것입니다.
+
+## When to Use
+
+- 사용자가 `@sopt-mds/ui`(`packages/ui`)에 새 컴포넌트를 만들거나 추가·스캐폴딩해 달라고 할 때.
+- 예시 발화: "Badge 컴포넌트 만들어줘", "add a Tooltip component", "새 컴포넌트 추가".
+- 기존 컴포넌트의 단순 수정·버그 픽스에는 사용하지 않습니다 (신규 컴포넌트 생성 전용).
+
+## 레퍼런스
 
 가장 정확한 레퍼런스는 실제 코드입니다. 작업 전 다음 두 파일을 열어 패턴을 확인하세요. 새 컴포넌트는 이 둘을 그대로 따릅니다.
 
