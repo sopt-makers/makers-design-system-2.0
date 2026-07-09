@@ -6,6 +6,7 @@ export * from "./Chip";
 export * from "./FloatingButton";
 export * from "./Radio";
 export * from "./ReactionButton";
+export * from "./SearchField";
 export * from "./Tag";
 export * from "./TextButton";
 export * from "./Toggle";

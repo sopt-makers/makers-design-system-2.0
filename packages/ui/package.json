@@ -27,6 +27,7 @@
     "@sopt-mds/tsconfig": "workspace:*",
     "@sopt-mds/vite": "workspace:*",
     "@storybook/blocks": "^8.4.7",
+    "@storybook/preview-api": "^8.4.7",
     "@storybook/react": "^8.4.7",
     "@types/node": "^22.0.0",
     "@types/react": "^18.3.0",
