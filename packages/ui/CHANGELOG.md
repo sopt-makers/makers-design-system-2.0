@@ -1,5 +1,11 @@
 # @sopt-mds/ui
 
+## 1.1.0
+
+### Minor Changes
+
+- 0620cf4: Add SearchField component.
+
 ## 1.0.14
 
 ### Patch Changes
