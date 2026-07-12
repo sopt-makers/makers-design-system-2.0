@@ -7,5 +7,6 @@ export * from "./FloatingButton";
 export * from "./Radio";
 export * from "./ReactionButton";
 export * from "./Tag";
+export * from "./TextArea";
 export * from "./TextButton";
 export * from "./Toggle";
