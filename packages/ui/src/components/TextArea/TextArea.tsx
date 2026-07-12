@@ -97,10 +97,7 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
     const textAreaId = id ?? generatedId;
     const helperId = `${textAreaId}-helper`;
 
-    const { ref: autoSizeRef, resize: resizeToContent } = useAutoSize(
-      autoSize,
-      value,
-    );
+    const [autoSizeRef, resizeToContent] = useAutoSize(autoSize, value);
     const textAreaRef = mergeRefs(ref, autoSizeRef);
 
     const isControlled = value !== undefined;

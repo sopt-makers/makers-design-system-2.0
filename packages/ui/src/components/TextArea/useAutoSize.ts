@@ -1,4 +1,5 @@
 import {
+  type RefObject,
   type TextareaHTMLAttributes,
   useCallback,
   useLayoutEffect,
@@ -9,7 +10,7 @@ import {
 export function useAutoSize(
   enabled: boolean,
   value?: TextareaHTMLAttributes<HTMLTextAreaElement>["value"],
-) {
+): [RefObject<HTMLTextAreaElement | null>, () => void] {
   const ref = useRef<HTMLTextAreaElement | null>(null);
 
   const resize = useCallback(() => {
@@ -54,8 +55,5 @@ export function useAutoSize(
     return () => observer.disconnect();
   }, [enabled, value, resize]);
 
-  return {
-    ref,
-    resize,
-  };
+  return [ref, resize];
 }
