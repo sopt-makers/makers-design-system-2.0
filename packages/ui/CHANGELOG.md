@@ -1,5 +1,11 @@
 # @sopt-mds/ui
 
+## 1.2.0
+
+### Minor Changes
+
+- 80b21d4: Rename SearchField `variant="ghost"` to `variant="bold"` and change the caret color from brand orange to `fg.neutral.bold`.
+
 ## 1.1.1
 
 ### Patch Changes
