@@ -10,12 +10,12 @@ export const FIELD_CONTAINER_TOKENS = {
   focusBorderColor: colors.stroke.neutral.defaultFocused,
 } as const;
 
-/** 입력 텍스트 공통 토큰 — body1 + 캐럿(brand orange)/placeholder 색. */
+/** 입력 텍스트 공통 토큰 — body1 + 캐럿/placeholder 색. */
 export const FIELD_INPUT_TOKENS = {
   ...typography.body1,
   fontWeight: `${typography.body1.fontWeight}`,
   color: colors.fg.neutral.bold,
-  caretColor: colors.base.orange400,
+  caretColor: colors.fg.neutral.bold,
   placeholderColor: colors.fg.neutral.ghost,
 } as const;
 
@@ -26,7 +26,11 @@ export type SearchFieldVariantToken = {
   backgroundColor: string;
 };
 
-/** variant별 배경 — default는 layer 표면 위, ghost는 기본 표면 위에 놓일 때. */
+/**
+ * variant별 배경 — default는 layer 표면 위, bold는 기본 표면 위에 놓일 때.
+ * bold의 배경은 이름과 달리 bg.neutral.ghost다. 디자인이 variant명만 Ghost→Bold로
+ * 바꾼 것이고 색은 그대로라, 토큰 스케일(bold > default > subtle > ghost)과 어긋난다.
+ */
 export const SEARCH_FIELD_VARIANT_TOKENS: Record<
   SearchFieldVariant,
   SearchFieldVariantToken
@@ -34,7 +38,7 @@ export const SEARCH_FIELD_VARIANT_TOKENS: Record<
   default: {
     backgroundColor: colors.bg.layer.default,
   },
-  ghost: {
+  bold: {
     backgroundColor: colors.bg.neutral.ghost,
   },
 };
