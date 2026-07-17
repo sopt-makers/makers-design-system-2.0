@@ -1,5 +1,11 @@
 # @sopt-mds/ui
 
+## 1.3.0
+
+### Minor Changes
+
+- ee4a51c: expose checkbox dimensions as --mds-checkbox-\* variables so ancestors can inject size
+
 ## 1.2.0
 
 ### Minor Changes
