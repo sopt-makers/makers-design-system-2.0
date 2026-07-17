@@ -76,8 +76,10 @@ export type TextFieldVariantToken = {
 };
 
 /**
- * variant별 배경 — default는 layer 표면 위, ghost는 기본 표면 위에 놓일 때.
- * ghost의 disabled placeholder는 Figma상 일반 placeholder와 값이 같아 흐려지지 않는다.
+ * variant별 배경 — default는 layer 표면 위, bold는 기본 표면 위에 놓일 때.
+ * bold의 배경은 이름과 달리 bg.neutral.ghost다. 디자인이 variant명만 Ghost→Bold로
+ * 바꾼 것이고 색은 그대로라, 토큰 스케일(bold > default > subtle > ghost)과 어긋난다.
+ * bold의 disabled placeholder는 Figma상 일반 placeholder와 값이 같아 흐려지지 않는다.
  */
 export const TEXT_FIELD_VARIANT_TOKENS: Record<
   TextFieldVariant,
@@ -87,7 +89,7 @@ export const TEXT_FIELD_VARIANT_TOKENS: Record<
     backgroundColor: colors.bg.layer.default,
     disabledPlaceholderColor: colors.fg.neutral.ghostDisabled,
   },
-  ghost: {
+  bold: {
     backgroundColor: colors.bg.neutral.ghost,
     disabledPlaceholderColor: colors.fg.neutral.defaultDisabled,
   },

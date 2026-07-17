@@ -29,7 +29,7 @@ const meta: Meta<typeof TextField> = {
   argTypes: {
     variant: {
       control: "inline-radio",
-      options: ["default", "ghost"],
+      options: ["default", "bold"],
     },
     label: {
       control: "text",

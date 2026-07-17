@@ -87,12 +87,12 @@ const textFieldVariantStyles: Record<TextFieldVariant, TextFieldVariantStyle> =
           TEXT_FIELD_VARIANT_TOKENS.default.disabledPlaceholderColor,
       },
     },
-    ghost: {
+    bold: {
       vars: {
         [textFieldVars.backgroundColor]:
-          TEXT_FIELD_VARIANT_TOKENS.ghost.backgroundColor,
+          TEXT_FIELD_VARIANT_TOKENS.bold.backgroundColor,
         [textFieldVars.disabledPlaceholderColor]:
-          TEXT_FIELD_VARIANT_TOKENS.ghost.disabledPlaceholderColor,
+          TEXT_FIELD_VARIANT_TOKENS.bold.disabledPlaceholderColor,
       },
     },
   };
