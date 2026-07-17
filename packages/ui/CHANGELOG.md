@@ -1,5 +1,11 @@
 # @sopt-mds/ui
 
+## 1.1.1
+
+### Patch Changes
+
+- 945dd5c: fix toggle story missing accessible name
+
 ## 1.1.0
 
 ### Minor Changes
