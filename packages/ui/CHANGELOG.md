@@ -1,5 +1,11 @@
 # @sopt-mds/ui
 
+## 1.4.0
+
+### Minor Changes
+
+- 3db2ca5: Add TextField component.
+
 ## 1.3.0
 
 ### Minor Changes
