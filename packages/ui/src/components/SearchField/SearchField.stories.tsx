@@ -24,7 +24,7 @@ const meta: Meta<typeof SearchField> = {
   argTypes: {
     variant: {
       control: "inline-radio",
-      options: ["default", "ghost"],
+      options: ["default", "bold"],
     },
     value: {
       control: "text",
