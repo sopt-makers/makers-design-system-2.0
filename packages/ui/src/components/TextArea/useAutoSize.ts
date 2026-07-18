@@ -1,16 +1,18 @@
 import {
   type RefObject,
-  type TextareaHTMLAttributes,
   useCallback,
   useLayoutEffect,
   useRef,
 } from "react";
 
-/** 입력되는 값의 변경에 따라 높이를 조절합니다. */
+/**
+ * textarea가 콘텐츠 높이에 맞춰 늘어나도록 합니다.
+ * value 변경 시 높이를 맞추며, 반환된 ref를 textarea에 바인딩해야 합니다.
+ */
 export function useAutoSize(
   enabled: boolean,
-  value?: TextareaHTMLAttributes<HTMLTextAreaElement>["value"],
-): [RefObject<HTMLTextAreaElement | null>, () => void] {
+  value: string,
+): RefObject<HTMLTextAreaElement | null> {
   const ref = useRef<HTMLTextAreaElement | null>(null);
 
   const resize = useCallback(() => {
@@ -24,7 +26,7 @@ export function useAutoSize(
     element.style.height = `${element.scrollHeight}px`;
   }, []);
 
-  /** biome-ignore lint/correctness/useExhaustiveDependencies: value 변경 시 재실행이 필요 */
+  // biome-ignore lint/correctness/useExhaustiveDependencies: value 변경 시 재실행이 필요합니다.
   useLayoutEffect(() => {
     const element = ref.current;
 
@@ -33,7 +35,6 @@ export function useAutoSize(
     }
 
     if (!enabled) {
-      // autoSize가 꺼지면 inline height를 제거해 CSS의 maxHeight/스크롤로 복귀합니다.
       element.style.height = "";
       return;
     }
@@ -55,5 +56,5 @@ export function useAutoSize(
     return () => observer.disconnect();
   }, [enabled, value, resize]);
 
-  return [ref, resize];
+  return ref;
 }

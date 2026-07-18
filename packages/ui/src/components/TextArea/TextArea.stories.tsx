@@ -1,14 +1,7 @@
-import {
-  IconChevronRight,
-  IconHeartFilled,
-  IconPlusCircleFilled,
-  IconSendFilled,
-} from "@sopt-mds/icons";
+import { IconHeartFilled, IconSendFilled } from "@sopt-mds/icons";
 import type { Meta, StoryObj } from "@storybook/react";
 import { type ComponentProps, useState } from "react";
 import { ActionButton } from "../ActionButton";
-import { FloatingButton } from "../FloatingButton";
-import { TextButton } from "../TextButton";
 import { TextArea } from "./TextArea";
 
 const COMPONENT_DESCRIPTION = `

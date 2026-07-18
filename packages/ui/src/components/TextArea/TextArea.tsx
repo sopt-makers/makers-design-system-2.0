@@ -2,6 +2,7 @@ import { IconAlertCircleFilled } from "@sopt-mds/icons";
 import clsx from "clsx";
 import * as React from "react";
 import { mergeRefs } from "../../utils/mergeRefs";
+import { syncDomValue } from "./dom";
 import {
   addon,
   autoSize as autoSizeStyle,
@@ -22,13 +23,21 @@ import {
 import type { TextAreaVariant } from "./types";
 import { useAddonInset } from "./useAddonInset";
 import { useAutoSize } from "./useAutoSize";
+import { clampValueToMaxLength } from "./util";
 
 const HELPER_ICON_SIZE = 16;
 
 export interface TextAreaProps
-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  extends Omit<
+    React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+    "defaultValue" | "value"
+  > {
   /** TextArea의 배경/테두리 스타일을 결정합니다. */
   variant?: TextAreaVariant;
+  /** 제어 컴포넌트의 현재 값입니다. */
+  value: string;
+  /** 값이 변경될 때 변경된 문자열 값을 인자로 호출됩니다. `onChange`와 함께 사용할 수 있습니다. */
+  onValueChange?: (value: string) => void;
   /** TextArea 상단에 표시되는 라벨입니다. */
   label?: React.ReactNode;
   /** label 하단에 표시되는 보조 설명입니다. */
@@ -47,24 +56,8 @@ export interface TextAreaProps
   rightAddon?: React.ReactNode;
   /** true이면 스크롤 없이 입력되는 텍스트 높이에 맞춰 height가 자동으로 조절됩니다. */
   autoSize?: boolean;
-  /** 값이 변경될 때 변경된 문자열 값을 인자로 호출됩니다. `onChange`와 함께 사용할 수 있습니다. */
-  onValueChange?: (value: string) => void;
   /** 루트 컨테이너에 전달되는 클래스명입니다. */
   className?: string;
-}
-
-function getValueLength(
-  value: React.TextareaHTMLAttributes<HTMLTextAreaElement>["value"],
-): number {
-  if (value == null) {
-    return 0;
-  }
-
-  if (Array.isArray(value)) {
-    return value.join("").length;
-  }
-
-  return String(value).length;
 }
 
 const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
@@ -82,7 +75,6 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
       autoSize = false,
       maxLength,
       value,
-      defaultValue,
       disabled,
       id,
       className,
@@ -97,27 +89,22 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
     const textAreaId = id ?? generatedId;
     const helperId = `${textAreaId}-helper`;
 
-    const [autoSizeRef, resizeToContent] = useAutoSize(autoSize, value);
-    const textAreaRef = mergeRefs(ref, autoSizeRef);
-
-    const isControlled = value !== undefined;
-    const [innerCount, setInnerCount] = React.useState(() =>
-      getValueLength(defaultValue),
-    );
-    const currentCount = isControlled ? getValueLength(value) : innerCount;
+    const currentCount = value.length;
 
     const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+      const nextValue = clampValueToMaxLength(
+        event.currentTarget.value,
+        maxLength,
+      );
+
+      syncDomValue(event.currentTarget, nextValue);
+
       onChange?.(event);
-      onValueChange?.(event.currentTarget.value);
-
-      if (!isControlled) {
-        setInnerCount(event.currentTarget.value.length);
-      }
-
-      if (autoSize) {
-        resizeToContent();
-      }
+      onValueChange?.(nextValue);
     };
+
+    const autoSizeRef = useAutoSize(autoSize, value);
+    const textAreaRef = mergeRefs(ref, autoSizeRef);
 
     const helperVariant = disabled ? "disabled" : error ? "error" : "default";
     const hasLabel = label != null && label !== "";
@@ -167,7 +154,6 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
             ref={textAreaRef}
             id={textAreaId}
             value={value}
-            defaultValue={defaultValue}
             maxLength={maxLength}
             disabled={disabled}
             required={required}
