@@ -15,6 +15,7 @@ import {
   TEXTAREA_LABEL_DESCRIPTION_GAP,
   TEXTAREA_LABEL_TYPOGRAPHY,
   TEXTAREA_MAX_HEIGHT,
+  TEXTAREA_META_PADDING_INLINE,
   TEXTAREA_MIN_HEIGHT,
   TEXTAREA_PADDING_BLOCK,
   TEXTAREA_PADDING_INLINE,
@@ -126,6 +127,7 @@ export const label = style({
   display: "flex",
   alignItems: "center",
   gap: TEXTAREA_REQUIRED_GAP,
+  paddingInline: TEXTAREA_META_PADDING_INLINE,
   color: TEXTAREA_LABEL_COLOR,
   fontFamily: "inherit",
   fontWeight: TEXTAREA_LABEL_TYPOGRAPHY.fontWeight,
@@ -146,6 +148,7 @@ export const requiredMark = style({
 export const description = style({
   margin: 0,
   marginTop: TEXTAREA_LABEL_DESCRIPTION_GAP,
+  paddingInline: TEXTAREA_META_PADDING_INLINE,
   color: TEXTAREA_DESCRIPTION_COLOR,
   fontFamily: "inherit",
   fontWeight: TEXTAREA_DESCRIPTION_TYPOGRAPHY.fontWeight,
@@ -313,6 +316,7 @@ export const footer = style({
   justifyContent: "space-between",
   gap: TEXTAREA_FOOTER_GAP,
   marginTop: TEXTAREA_INPUT_FOOTER_GAP,
+  paddingInline: TEXTAREA_META_PADDING_INLINE,
 });
 
 const footerTextBase = {

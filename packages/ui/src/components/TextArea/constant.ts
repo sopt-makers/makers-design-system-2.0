@@ -35,8 +35,10 @@ export const TEXTAREA_ADDON_GAP_VALUE = 8;
 export const TEXTAREA_ADDON_GAP = `${TEXTAREA_ADDON_GAP_VALUE}px`;
 
 export const TEXTAREA_LABEL_DESCRIPTION_GAP = spacing.s4;
-export const TEXTAREA_DESCRIPTION_INPUT_GAP = spacing.s12;
+export const TEXTAREA_DESCRIPTION_INPUT_GAP = spacing.s10;
 export const TEXTAREA_INPUT_FOOTER_GAP = spacing.s6;
+/** label / description / helper 영역의 좌우 패딩 */
+export const TEXTAREA_META_PADDING_INLINE = spacing.s2;
 /** footer 내 helper text와 count 사이 최소 간격 */
 export const TEXTAREA_FOOTER_GAP = spacing.s8;
 /** error 아이콘과 에러 메시지 사이 간격 */
@@ -60,8 +62,8 @@ export const TEXTAREA_TYPOGRAPHY: TextAreaTypographyToken = {
 };
 
 export const TEXTAREA_FOOTER_TYPOGRAPHY: TextAreaTypographyToken = {
-  ...typography.body2,
-  fontWeight: `${typography.body2.fontWeight}`,
+  ...typography.body3,
+  fontWeight: `${typography.body3.fontWeight}`,
 };
 
 /** variant는 기본/비활성 배경을 결정합니다. border는 state로만 제어됩니다. */
@@ -107,7 +109,7 @@ export const TEXTAREA_TEXT_COLOR = {
 
 export const TEXTAREA_LABEL_COLOR = colors.fg.neutral.bold;
 export const TEXTAREA_REQUIRED_COLOR = colors.fg.brand.default;
-export const TEXTAREA_DESCRIPTION_COLOR = colors.fg.neutral.subtle;
+export const TEXTAREA_DESCRIPTION_COLOR = colors.fg.neutral.default;
 
 export const TEXTAREA_HELPER_COLOR = {
   default: colors.fg.neutral.ghost,
