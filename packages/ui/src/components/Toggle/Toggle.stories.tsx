@@ -15,6 +15,7 @@ const meta: Meta<typeof Toggle> = {
     size: "small",
     disabled: false,
     defaultChecked: false,
+    "aria-label": "토글",
   },
   argTypes: {
     size: {

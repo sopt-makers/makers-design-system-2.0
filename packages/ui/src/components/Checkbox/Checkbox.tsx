@@ -17,7 +17,12 @@ export interface CheckboxProps
     React.InputHTMLAttributes<HTMLInputElement>,
     "size" | "type" | "children"
   > {
-  /** Checkbox의 크기를 결정합니다. */
+  /**
+   * Checkbox의 크기를 결정합니다.
+   *
+   * 생략하면 크기 클래스가 붙지 않아 조상이 주입한 `--mds-checkbox-*` 값을 상속받습니다.
+   * 상속값이 없으면 `small` 치수로 렌더링됩니다.
+   */
   size?: CheckboxSize;
   /** Checkbox 오른쪽에 표시할 라벨입니다. 생략 시 컨트롤만 렌더링되며, 이때 `aria-label`을 권장합니다. */
   label?: React.ReactNode;
@@ -35,11 +40,13 @@ export interface CheckboxProps
  * - 그 외 native input 속성(`checked`, `defaultChecked`, `disabled`, `name`, `value` 등)은
  *   내부 `<input>`으로 그대로 전달됩니다.
  * - `ref`(forwardRef)는 내부 `<input>`을, `rootRef`는 바깥 `<label>`을 가리킵니다.
+ * - 치수/타이포는 `--mds-checkbox-*` 변수로 오버라이드할 수 있습니다. `size`를 생략하면
+ *   조상이 주입한 값을 상속받고, `size`를 명시하면 그 값이 상속을 덮어씁니다.
  */
 const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   (
     {
-      size = "small",
+      size,
       label,
       className,
       style,
@@ -59,7 +66,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       <label
         ref={rootRef}
         style={style}
-        className={clsx(root, rootSizeVariants[size], className)}
+        className={clsx(root, size && rootSizeVariants[size], className)}
       >
         <span className={control}>
           <input

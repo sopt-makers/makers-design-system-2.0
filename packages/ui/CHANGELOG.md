@@ -1,5 +1,35 @@
 # @sopt-mds/ui
 
+## 1.4.0
+
+### Minor Changes
+
+- 3db2ca5: Add TextField component.
+
+## 1.3.0
+
+### Minor Changes
+
+- ee4a51c: expose checkbox dimensions as --mds-checkbox-\* variables so ancestors can inject size
+
+## 1.2.0
+
+### Minor Changes
+
+- 80b21d4: Rename SearchField `variant="ghost"` to `variant="bold"` and change the caret color from brand orange to `fg.neutral.bold`.
+
+## 1.1.1
+
+### Patch Changes
+
+- 945dd5c: fix toggle story missing accessible name
+
+## 1.1.0
+
+### Minor Changes
+
+- 0620cf4: Add SearchField component.
+
 ## 1.0.14
 
 ### Patch Changes
