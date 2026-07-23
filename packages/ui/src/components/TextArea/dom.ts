@@ -17,6 +17,13 @@ export function syncDomValue(element: HTMLTextAreaElement, nextValue: string) {
     }
   )._valueTracker;
 
+  if (tracker == null) {
+    console.warn(
+      "[@sopt-mds/ui] TextArea: React _valueTracker가 없습니다. DOM 값은 동기화했지만, 이후 변경 감지가 불안정할 수 있습니다.",
+    );
+    return;
+  }
+
   // DOM과 동일하게 맞춰야 다음 입력에서 변경 감지가 정상 동작합니다.
-  tracker?.setValue(nextValue);
+  tracker.setValue(nextValue);
 }
