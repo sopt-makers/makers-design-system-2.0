@@ -3,6 +3,7 @@ export * from "./Avatar";
 export * from "./Callout";
 export * from "./Checkbox";
 export * from "./Chip";
+export * from "./Dialog";
 export * from "./FloatingButton";
 export * from "./Radio";
 export * from "./ReactionButton";
