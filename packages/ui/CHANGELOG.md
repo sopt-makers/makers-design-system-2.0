@@ -1,5 +1,11 @@
 # @sopt-mds/ui
 
+## 1.5.0
+
+### Minor Changes
+
+- c03db71: add Dialog compound component built on the native dialog element
+
 ## 1.4.0
 
 ### Minor Changes
