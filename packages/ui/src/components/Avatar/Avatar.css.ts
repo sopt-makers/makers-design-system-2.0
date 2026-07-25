@@ -3,8 +3,10 @@ import {
   AVATAR_DEFAULT_TOKENS,
   AVATAR_SIZE_PX,
   AVATAR_STROKE_WIDTH_PX,
+  AVATAR_TYPE_TOKENS,
   DEFAULT_AVATAR_SIZE,
 } from "./constant";
+import type { AvatarType } from "./types";
 
 /*
  * Avatar CSS variables
@@ -74,6 +76,16 @@ export const sizeVariants = styleVariants(AVATAR_SIZE_PX, (value, size) => ({
     [avatarVars.strokeWidth]: AVATAR_STROKE_WIDTH_PX[size],
   },
 }));
+
+/** type별 fallback 배경색. */
+export const typeVariants = styleVariants(
+  AVATAR_TYPE_TOKENS satisfies Record<AvatarType, { backgroundColor: string }>,
+  (token) => ({
+    vars: {
+      [avatarVars.backgroundColor]: token.backgroundColor,
+    },
+  }),
+);
 
 export const image = style({
   display: "block",

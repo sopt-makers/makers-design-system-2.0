@@ -1,3 +1,4 @@
+import { colors } from "@sopt-mds/design-tokens";
 import { IconUserFilled } from "@sopt-mds/icons";
 import clsx from "clsx";
 import * as React from "react";
@@ -8,13 +9,15 @@ import {
   image as imageClass,
   sizeVariants,
   stroke,
+  typeVariants,
 } from "./Avatar.css";
 import {
   AVATAR_STROKE_COLORS,
   DEFAULT_AVATAR_SIZE,
+  DEFAULT_AVATAR_TYPE,
   getAvatarFallbackIconSize,
 } from "./constant";
-import type { AvatarSize, AvatarStrokeColor } from "./types";
+import type { AvatarSize, AvatarStrokeColor, AvatarType } from "./types";
 
 export interface AvatarProps
   extends Omit<React.HTMLAttributes<HTMLSpanElement>, "children"> {
@@ -24,6 +27,12 @@ export interface AvatarProps
   alt?: string;
   /** 아바타의 크기(px)입니다. 24/32/48/56/72/80/120/180 중 하나입니다. */
   size?: AvatarSize;
+  /**
+   * fallback(사람 아이콘)이 렌더링될 때 배경 스타일입니다.
+   * - ghost: `bg.neutral.ghost`
+   * - subtle: `bg.neutral.subtle`
+   */
+  type?: AvatarType;
   /**
    * stroke(테두리) 색상입니다. stroke 시맨틱 컬러 토큰의 카멜 케이스 key를 받습니다.
    * "neutralDefault", "brandSubtle", "secondaryDefault"
@@ -37,6 +46,7 @@ export const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
       src,
       alt = "",
       size = DEFAULT_AVATAR_SIZE,
+      type = DEFAULT_AVATAR_TYPE,
       strokeColor,
       className,
       style,
@@ -60,13 +70,19 @@ export const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
         {...rest}
         ref={ref}
         style={resolvedStyle}
-        className={clsx(base, sizeVariants[size], className)}
+        className={clsx(
+          base,
+          sizeVariants[size],
+          typeVariants[type],
+          className,
+        )}
       >
         {showFallback ? (
           <span className={fallback} role="img" aria-label={alt || undefined}>
             <IconUserFilled
               width={fallbackIconSize}
               height={fallbackIconSize}
+              color={colors.fg.neutral.ghost}
               aria-hidden="true"
             />
           </span>
