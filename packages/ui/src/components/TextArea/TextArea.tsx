@@ -1,4 +1,4 @@
-import { IconAlertCircleFilled } from "@sopt-mds/icons";
+import { IconAlertCircleOutlined } from "@sopt-mds/icons";
 import clsx from "clsx";
 import * as React from "react";
 import { mergeRefs } from "../../utils/mergeRefs";
@@ -175,7 +175,7 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
             {hasHelperText ? (
               <span id={helperId} className={helper[helperVariant]}>
                 {error && !disabled ? (
-                  <IconAlertCircleFilled
+                  <IconAlertCircleOutlined
                     className={helperIcon}
                     width={HELPER_ICON_SIZE}
                     height={HELPER_ICON_SIZE}
@@ -187,7 +187,7 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
             ) : null}
 
             {showCount ? (
-              <span className={counter}>
+              <span className={counter[disabled ? "disabled" : "default"]}>
                 {maxLength != null
                   ? `${currentCount}/${maxLength}`
                   : currentCount}

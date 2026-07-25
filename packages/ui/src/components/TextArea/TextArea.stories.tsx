@@ -1,4 +1,4 @@
-import { IconHeartFilled, IconSendFilled } from "@sopt-mds/icons";
+import { IconHeartFilled, IconSendOutlined } from "@sopt-mds/icons";
 import type { Meta, StoryObj } from "@storybook/react";
 import { type ComponentProps, useState } from "react";
 import { ActionButton } from "../ActionButton";
@@ -133,7 +133,7 @@ export const AddonExample: Story = {
                 alignSelf: "end",
               }}
             >
-              <IconSendFilled width={20} height={20} />
+              <IconSendOutlined width={20} height={20} />
             </button>
           }
         />

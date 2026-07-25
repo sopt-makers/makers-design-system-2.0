@@ -34,7 +34,7 @@ export const TEXTAREA_ADDON_GAP_VALUE = 8;
 /** addon과 textarea 사이 간격 */
 export const TEXTAREA_ADDON_GAP = `${TEXTAREA_ADDON_GAP_VALUE}px`;
 
-export const TEXTAREA_LABEL_DESCRIPTION_GAP = spacing.s4;
+export const TEXTAREA_LABEL_DESCRIPTION_GAP = spacing.s2;
 export const TEXTAREA_DESCRIPTION_INPUT_GAP = spacing.s10;
 export const TEXTAREA_INPUT_FOOTER_GAP = spacing.s6;
 /** label / description / helper 영역의 좌우 패딩 */
@@ -47,13 +47,13 @@ export const TEXTAREA_HELPER_ICON_GAP = spacing.s4;
 export const TEXTAREA_REQUIRED_GAP = spacing.s4;
 
 export const TEXTAREA_LABEL_TYPOGRAPHY: TextAreaTypographyToken = {
-  ...typography.title4,
+  ...typography.title5,
   fontWeight: `${typography.title4.fontWeight}`,
 };
 
 export const TEXTAREA_DESCRIPTION_TYPOGRAPHY: TextAreaTypographyToken = {
-  ...typography.label3,
-  fontWeight: `${typography.label3.fontWeight}`,
+  ...typography.body2,
+  fontWeight: `${typography.body2.fontWeight}`,
 };
 
 export const TEXTAREA_TYPOGRAPHY: TextAreaTypographyToken = {
@@ -75,7 +75,7 @@ export const TEXTAREA_VARIANT_TOKENS: Record<
     backgroundColor: colors.bg.layer.default,
     disabledBackgroundColor: colors.bg.layer.default,
   },
-  ghost: {
+  bold: {
     backgroundColor: colors.bg.neutral.ghost,
     disabledBackgroundColor: colors.bg.neutral.ghost,
   },
@@ -105,6 +105,7 @@ export const TEXTAREA_TEXT_COLOR = {
   default: colors.fg.neutral.bold,
   disabled: colors.fg.neutral.defaultDisabled,
   placeholder: colors.fg.neutral.ghost,
+  placeholderDisabled: colors.fg.neutral.ghostDisabled,
 } as const;
 
 export const TEXTAREA_LABEL_COLOR = colors.fg.neutral.bold;
@@ -117,5 +118,8 @@ export const TEXTAREA_HELPER_COLOR = {
   disabled: colors.fg.neutral.ghostDisabled,
 } as const;
 
-/** count(1/nnn)는 error 상태의 영향을 받지 않습니다. */
-export const TEXTAREA_COUNTER_COLOR = colors.fg.neutral.ghost;
+/** count(1/nnn)는 error 상태의 영향을 받지 않습니다. disabled일 때만 흐려집니다. */
+export const TEXTAREA_COUNTER_COLOR = {
+  default: colors.fg.neutral.ghost,
+  disabled: colors.fg.neutral.ghostDisabled,
+} as const;

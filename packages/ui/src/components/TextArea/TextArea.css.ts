@@ -102,12 +102,12 @@ const textAreaVariantStyles: Record<TextAreaVariant, TextAreaVariantStyle> = {
         TEXTAREA_VARIANT_TOKENS.default.disabledBackgroundColor,
     },
   },
-  ghost: {
+  bold: {
     vars: {
       [textAreaVars.backgroundColor]:
-        TEXTAREA_VARIANT_TOKENS.ghost.backgroundColor,
+        TEXTAREA_VARIANT_TOKENS.bold.backgroundColor,
       [textAreaVars.disabledBackgroundColor]:
-        TEXTAREA_VARIANT_TOKENS.ghost.disabledBackgroundColor,
+        TEXTAREA_VARIANT_TOKENS.bold.disabledBackgroundColor,
     },
   },
 };
@@ -292,11 +292,21 @@ export const base = style({
       // Firefox 등에서 placeholder에 기본 opacity(<1)가 적용되는 것을 정규화
       opacity: 1,
     },
+    // 브라우저 기본 disabled 흐림을 끄고 토큰 색으로만 표현합니다.
     "&:disabled": {
       vars: {
         [textAreaVars.color]: TEXTAREA_TEXT_COLOR.disabled,
+        [textAreaVars.placeholderColor]:
+          TEXTAREA_TEXT_COLOR.placeholderDisabled,
       },
       cursor: "not-allowed",
+      opacity: 1,
+      WebkitTextFillColor: textAreaVars.color,
+    },
+    "&:disabled::placeholder": {
+      color: textAreaVars.placeholderColor,
+      opacity: 1,
+      WebkitTextFillColor: textAreaVars.placeholderColor,
     },
   },
 });
@@ -356,9 +366,17 @@ export const helperIcon = style({
   color: "currentColor",
 });
 
-export const counter = style({
-  ...footerTextBase,
-  flexShrink: 0,
-  marginLeft: "auto",
-  color: TEXTAREA_COUNTER_COLOR,
+export const counter = styleVariants({
+  default: {
+    ...footerTextBase,
+    flexShrink: 0,
+    marginLeft: "auto",
+    color: TEXTAREA_COUNTER_COLOR.default,
+  },
+  disabled: {
+    ...footerTextBase,
+    flexShrink: 0,
+    marginLeft: "auto",
+    color: TEXTAREA_COUNTER_COLOR.disabled,
+  },
 });
