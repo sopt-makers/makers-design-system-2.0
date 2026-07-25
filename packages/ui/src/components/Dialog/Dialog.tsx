@@ -212,7 +212,7 @@ export interface DialogActionsProps
  * 버튼 행입니다.
  *
  * Dialog.Cancel과 Dialog.Action을 함께 넣으면 둘이 폭을 절반씩 나누고,
- * Dialog.Action만 넣으면 Information 변형이 됩니다.
+ * Dialog.Action만 넣으면 Information 변형이 되어 그 버튼이 행 전체를 채웁니다.
  */
 const DialogActions = React.forwardRef<HTMLDivElement, DialogActionsProps>(
   ({ className, ...rest }, ref) => (

@@ -9,7 +9,7 @@ const COMPONENT_DESCRIPTION = `
   \`Dialog\`는 확인이나 안내를 위한 모달 다이얼로그입니다. 네이티브 \`<dialog>\` 기반이라 포커스 트랩·top layer·Esc·\`::backdrop\`이 브라우저에서 그대로 동작합니다.\n
   **Figma의 변형은 대부분 prop이 아니라 합성으로 표현합니다.** \`Dialog.Cancel\`을 렌더하지 않으면 Information(버튼 1개)이 되고, \`Dialog.Action\`에 \`variant="danger"\`를 주면 Danger가 됩니다. 체크박스와 설명도 넣고 빼는 것으로 결정됩니다. 그래서 루트가 받는 건 \`open\`과 \`onOpenChange\`뿐입니다.\n
   파트는 \`Dialog.Title\`(필수, \`aria-labelledby\` 자동 연결), \`Dialog.Description\`(선택, \`aria-describedby\` 자동 연결), \`Dialog.Actions\`, \`Dialog.Cancel\`, \`Dialog.Action\`입니다. Cancel과 Action은 클릭 시 자동으로 닫히며, \`onClick\`에서 \`event.preventDefault()\`로 막을 수 있습니다.\n
-  레이아웃은 뷰포트가 아니라 **Dialog 자신의 폭**에서 파생됩니다(컨테이너 쿼리). 앱은 자기 브레이크포인트에 맞춰 \`--mds-dialog-width\`만 덮어쓰면 여백·타이포·버튼 배치·체크박스 크기가 함께 따라옵니다.\n
+  레이아웃은 뷰포트가 아니라 **Dialog 자신의 폭**에서 파생됩니다(컨테이너 쿼리). 앱은 자기 브레이크포인트에 맞춰 \`--mds-dialog-width\`만 덮어쓰면 여백·타이포·체크박스 크기가 함께 따라옵니다. 버튼은 개수와 폭에 무관하게 항상 행을 채웁니다.\n
   \`\`\`tsx
   const responsiveDialog = style({
     vars: { "--mds-dialog-width": "303px" },
