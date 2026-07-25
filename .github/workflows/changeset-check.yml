@@ -8,6 +8,10 @@ concurrency:
   group: changeset-check-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   changeset:
     name: changeset 존재 확인
@@ -20,6 +24,7 @@ jobs:
           fetch-depth: 0
 
       - name: changeset 확인
+        id: check
         env:
           BASE: ${{ github.event.pull_request.base.sha }}
           HEAD: ${{ github.event.pull_request.head.sha }}
@@ -32,14 +37,40 @@ jobs:
 
           if [ -z "$pkg_changed" ]; then
             echo "✅ packages/** 변경 없음 → changeset 불필요"
+            echo "missing=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
           if [ -n "$cs_added" ]; then
             echo "✅ changeset 발견:"
             echo "$cs_added"
+            echo "missing=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
-          echo "::error title=changeset 누락::packages/** 를 변경했는데 changeset이 없습니다. \`pnpm changeset\` 으로 추가해 주세요. (없으면 Version Packages PR이 생성되지 않아 npm 릴리즈가 누락됩니다.)"
-          exit 1
+          echo "⚠️ packages/** 변경이 있지만 changeset이 없습니다."
+          echo "missing=true" >> "$GITHUB_OUTPUT"
+
+      - name: changeset 없음 안내 코멘트
+        if: steps.check.outputs.missing == 'true'
+        uses: thollander/actions-comment-pull-request@v3
+        with:
+          comment-tag: changeset-missing
+          mode: upsert
+          message: |
+            ### ⚠️ Changeset이 없습니다
+
+            `packages/**` 변경이 감지되었지만 changeset 파일이 추가되지 않았습니다.
+
+            이 PR이 **npm 배포가 필요한 변경**이라면 `pnpm changeset`으로 changeset을 추가해 주세요.
+            배포가 필요 없는 작업(문서, CI, 내부 리팩터 등)이라면 이 안내는 무시해도 됩니다.
+
+            > changeset이 없으면 Version Packages PR이 생성되지 않아 npm 릴리즈가 누락될 수 있습니다.
+
+      - name: changeset 안내 코멘트 제거
+        if: steps.check.outputs.missing == 'false'
+        continue-on-error: true
+        uses: thollander/actions-comment-pull-request@v3
+        with:
+          comment-tag: changeset-missing
+          mode: delete
