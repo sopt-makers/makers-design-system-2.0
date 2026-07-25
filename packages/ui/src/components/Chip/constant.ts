@@ -1,5 +1,5 @@
 import { colors, spacing, typography } from "@sopt-mds/design-tokens";
-import type { ChipSize, ChipState } from "./types";
+import type { ChipSize, ChipState, ChipType } from "./types";
 
 export type ChipSizeToken = {
   fontWeight: string;
@@ -43,29 +43,60 @@ export const CHIP_SIZE_TOKENS: Record<ChipSize, ChipSizeToken> = {
   },
 };
 
-export const CHIP_STATE_TOKENS: Record<ChipState, ChipStateToken> = {
-  default: {
-    borderWidth: "1px",
-    borderColor: colors.stroke.neutral.subtle,
-    backgroundColor: colors.bg.neutral.ghost,
-    color: colors.fg.neutral.subtle,
+export const CHIP_TYPE_STATE_TOKENS: Record<
+  ChipType,
+  Record<ChipState, ChipStateToken>
+> = {
+  outlined: {
+    default: {
+      borderWidth: "1px",
+      borderColor: colors.stroke.neutral.subtle,
+      backgroundColor: colors.bg.neutral.ghost,
+      color: colors.fg.neutral.subtle,
+    },
+    hover: {
+      borderWidth: "0px",
+      borderColor: "transparent",
+      backgroundColor: colors.bg.neutral.subtle,
+      color: colors.fg.neutral.bold,
+    },
+    selected: {
+      borderWidth: "1px",
+      borderColor: colors.stroke.neutral.inverse,
+      backgroundColor: colors.bg.neutral.subtle,
+      color: colors.fg.neutral.bold,
+    },
+    disabled: {
+      borderWidth: "1px",
+      borderColor: colors.stroke.neutral.defaultDisabled,
+      backgroundColor: colors.bg.neutral.ghost,
+      color: colors.fg.neutral.ghost,
+    },
   },
-  hover: {
-    borderWidth: "0px",
-    borderColor: "transparent",
-    backgroundColor: colors.bg.neutral.subtle,
-    color: colors.fg.neutral.bold,
-  },
-  selected: {
-    borderWidth: "1px",
-    borderColor: colors.stroke.neutral.inverse,
-    backgroundColor: colors.bg.neutral.subtle,
-    color: colors.fg.neutral.bold,
-  },
-  disabled: {
-    borderWidth: "1px",
-    borderColor: colors.stroke.neutral.defaultDisabled,
-    backgroundColor: colors.bg.neutral.ghost,
-    color: colors.fg.neutral.ghost,
+  solid: {
+    default: {
+      borderWidth: "0px",
+      borderColor: "transparent",
+      backgroundColor: colors.bg.neutral.ghost,
+      color: colors.fg.neutral.subtle,
+    },
+    hover: {
+      borderWidth: "0px",
+      borderColor: "transparent",
+      backgroundColor: colors.bg.neutral.inverse,
+      color: colors.fg.neutral.inverse,
+    },
+    selected: {
+      borderWidth: "0px",
+      borderColor: "transparent",
+      backgroundColor: colors.bg.neutral.inverse,
+      color: colors.fg.neutral.inverse,
+    },
+    disabled: {
+      borderWidth: "0px",
+      borderColor: "transparent",
+      backgroundColor: colors.bg.neutral.ghost,
+      color: colors.fg.neutral.ghost,
+    },
   },
 };

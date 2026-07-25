@@ -6,19 +6,33 @@ import {
   content,
   input,
   sizeVariants,
-  stateVariants,
+  typeVariants,
 } from "./Chip.css";
-import type { ChipSize } from "./types";
+import type { ChipSize, ChipType } from "./types";
 
-export interface ChipProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+type ChipOwnProps = {
   /** Chip의 크기를 결정합니다. */
   size?: ChipSize;
+  /** Chip의 표현 방식을 결정합니다. */
+  type?: ChipType;
   /** Chip의 왼쪽에 들어갈 아이콘 요소입니다. */
   leftAddon?: React.ReactElement;
   /** Chip의 오른쪽에 들어갈 아이콘 요소입니다. */
   rightAddon?: React.ReactElement;
-}
+};
+
+export type ChipProps<E extends React.ElementType = "button"> = ChipOwnProps &
+  Omit<React.ComponentPropsWithoutRef<E>, keyof ChipOwnProps> & {
+    /** Chip을 렌더링할 HTML 요소 또는 컴포넌트입니다. */
+    as?: E;
+  };
+
+type ChipComponent = {
+  <E extends React.ElementType = "button">(
+    props: ChipProps<E> & { ref?: React.ComponentPropsWithRef<E>["ref"] },
+  ): React.ReactElement | null;
+  displayName?: string;
+};
 
 type ChipToggleRootProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -33,6 +47,8 @@ type ChipToggleNestedInputProps = Omit<
 export interface ChipToggleProps extends ChipToggleRootProps {
   /** Chip.Toggle의 크기를 결정합니다. */
   size?: ChipSize;
+  /** Chip.Toggle의 표현 방식을 결정합니다. */
+  type?: ChipType;
   /** Chip의 왼쪽에 들어갈 아이콘 요소입니다. */
   leftAddon?: React.ReactElement;
   /** Chip의 오른쪽에 들어갈 아이콘 요소입니다. */
@@ -53,7 +69,9 @@ function renderChipContent({
   leftAddon,
   rightAddon,
   children,
-}: Pick<ChipProps, "leftAddon" | "rightAddon" | "children">) {
+}: Pick<ChipOwnProps, "leftAddon" | "rightAddon"> & {
+  children?: React.ReactNode;
+}) {
   return (
     <>
       {leftAddon != null ? <span className={addon}>{leftAddon}</span> : null}
@@ -63,41 +81,45 @@ function renderChipContent({
   );
 }
 
-const ChipRoot = React.forwardRef<HTMLButtonElement, ChipProps>(
+const ChipRoot = React.forwardRef(
   (
     {
+      as,
       size = "medium",
-      type = "button",
+      type = "outlined",
       leftAddon,
       rightAddon,
       children,
       className,
       ...rest
-    },
-    ref,
+    }: ChipProps,
+    ref: React.ForwardedRef<Element>,
   ) => {
+    const Component = as ?? "button";
+
     return (
-      <button
+      <Component
         {...rest}
-        ref={ref}
-        type={type}
+        {...(Component === "button" ? { type: "button" as const } : null)}
+        ref={ref as never}
         className={clsx(
           base,
           sizeVariants[size],
-          stateVariants.default,
+          typeVariants[type],
           className,
         )}
       >
         {renderChipContent({ leftAddon, rightAddon, children })}
-      </button>
+      </Component>
     );
   },
-);
+) as ChipComponent;
 
 const ChipToggle = React.forwardRef<HTMLInputElement, ChipToggleProps>(
   (
     {
       size = "medium",
+      type = "outlined",
       leftAddon,
       rightAddon,
 
@@ -143,7 +165,7 @@ const ChipToggle = React.forwardRef<HTMLInputElement, ChipToggleProps>(
         className={clsx(
           base,
           sizeVariants[size],
-          stateVariants[resolvedDisabled ? "disabled" : "default"],
+          typeVariants[type],
           className,
         )}
       >
