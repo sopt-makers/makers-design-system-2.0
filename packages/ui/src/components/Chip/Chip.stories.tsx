@@ -5,7 +5,9 @@ import { Chip } from "./Chip";
 
 const COMPONENT_DESCRIPTION = `
   \`Chip\`은 사용자가 선택하거나 입력하는 값을 표시하는 컴포넌트입니다. 기본적으로 버튼의 성격을 가지고 있습니다.\n
-  \`Chip.Toggle\`은 Control 가능한 Chip 컴포넌트입니다. 기본적으로 Checkbox의 성격을 가지고 있습니다.
+  \`Chip.Toggle\`은 Control 가능한 Chip 컴포넌트입니다. 기본적으로 Checkbox의 성격을 가지고 있습니다.\n
+  - **type**: \`outlined\` / \`solid\`. 기본값은 \`outlined\`입니다.\n
+  - **asChild**: \`true\`면 Chip 스타일을 자식 요소에 병합합니다. 예: \`<Chip asChild><a href="...">...</a></Chip>\`
 `;
 
 const meta: Meta<typeof Chip> = {
@@ -14,6 +16,7 @@ const meta: Meta<typeof Chip> = {
   tags: ["autodocs"],
   args: {
     size: "medium",
+    type: "outlined",
     disabled: false,
     children: "Chip",
   },
@@ -21,6 +24,10 @@ const meta: Meta<typeof Chip> = {
     size: {
       control: "inline-radio",
       options: ["small", "medium"],
+    },
+    type: {
+      control: "inline-radio",
+      options: ["outlined", "solid"],
     },
     disabled: {
       control: "boolean",
@@ -31,7 +38,7 @@ const meta: Meta<typeof Chip> = {
   },
   parameters: {
     controls: {
-      include: ["size", "disabled", "children"],
+      include: ["size", "type", "disabled", "children"],
     },
     docs: {
       description: {
@@ -58,6 +65,7 @@ export const ChipToggle: Story = {
     return (
       <Chip.Toggle
         size={args.size}
+        type={args.type}
         disabled={args.disabled}
         checked={checked}
         onCheckedChange={setChecked}
