@@ -8,7 +8,7 @@ const COMPONENT_DESCRIPTION = `
   - **variant**: \`default\`(기본) / \`emphasis\`(더 밝게 강조)\n
   - **size**: \`small\`(12px) / \`medium\`(14px)\n
   - \`rightAddon\`으로 텍스트 뒤에 아이콘을 둘 수 있습니다. 아이콘 크기는 size에 따라 자동 조정됩니다.\n
-  - hover / press 시 텍스트 아래 밑줄이 나타납니다.
+  - hover / press에 별도 시각 변화는 없습니다. 상태 표시는 focus 링과 disabled 색뿐입니다.
 `;
 
 const VARIANTS: TextButtonVariant[] = ["default", "emphasis"];

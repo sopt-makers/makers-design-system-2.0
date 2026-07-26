@@ -8,7 +8,6 @@ import {
 import {
   TEXT_BUTTON_DISABLED_COLOR,
   TEXT_BUTTON_SIZE_TOKENS,
-  TEXT_BUTTON_UNDERLINE_COLOR,
   TEXT_BUTTON_VARIANT_COLOR,
 } from "./constant";
 
@@ -28,27 +27,21 @@ export const base = style({
   width: "fit-content",
   margin: 0,
   padding: 0,
+  // hover/press 밑줄이 사라지면서(2026-07-26 디자인 QA) 자리를 예약하던
+  // `border-bottom: 1px solid transparent`도 함께 걷어냈다. 남겨 두면 아무 역할 없이
+  // 렌더 높이만 1px 늘린다(height 미지정 + padding 0이라 border-box가 흡수하지 못한다).
   border: "none",
-  // 밑줄 자리를 미리 예약해 hover 시 레이아웃 시프트를 방지합니다.
-  borderBottom: "1px solid transparent",
   background: "transparent",
   appearance: "none",
   cursor: "pointer",
   fontFamily: "inherit",
   whiteSpace: "nowrap",
   userSelect: "none",
-  transition: "color 150ms ease, border-color 150ms ease",
+  transition: "color 150ms ease",
   selectors: {
-    "&:not(:disabled):not([aria-disabled='true']):hover": {
-      borderBottomColor: TEXT_BUTTON_UNDERLINE_COLOR,
-    },
-    "&:not(:disabled):not([aria-disabled='true']):active": {
-      borderBottomColor: TEXT_BUTTON_UNDERLINE_COLOR,
-    },
     "&:focus-visible": focusVisibleStyle,
     "&:disabled, &[aria-disabled='true']": {
       color: TEXT_BUTTON_DISABLED_COLOR,
-      borderBottomColor: "transparent",
       cursor: "not-allowed",
     },
   },
