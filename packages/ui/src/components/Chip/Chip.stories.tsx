@@ -81,7 +81,7 @@ export const ChipWithAddon: Story = {
     return (
       <Chip
         {...args}
-        leftAddon={<IconHeartFilled width={16} height={16} />}
+        leftAddon={<IconHeartFilled width={20} height={20} />}
         rightAddon={<IconXClose width={20} height={20} />}
       >
         {args.children}
