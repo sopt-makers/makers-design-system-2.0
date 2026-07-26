@@ -5,7 +5,13 @@ import type {
   ActionButtonVariant,
 } from "./types";
 
-/* Figma `action button` 마스터(node 237:478) 실측값 기준. */
+/*
+ * Figma `action button` 마스터(node 237:478) 실측값 기준.
+ *
+ * 2026-07-26 디자인 QA로 small 높이(36→38)와 좌우 여백(small 14→12, medium 20→16,
+ * large 24→20)이 조정됐다. paddingBlock은 고정 높이 안에서 흡수되므로(box-sizing:
+ * border-box + align-items: center) 실제 픽셀을 움직이는 건 paddingInline뿐이다.
+ */
 
 export type ActionButtonSizeToken = {
   fontWeight: string;
@@ -28,7 +34,7 @@ export type ActionButtonStateToken = {
 /** size별 높이(확정값). */
 export const ACTION_BUTTON_HEIGHT_FOR_SIZE: Record<ActionButtonSize, string> = {
   xsmall: "32px",
-  small: "36px",
+  small: "38px",
   medium: "46px",
   large: "56px",
 };
@@ -50,7 +56,7 @@ export const ACTION_BUTTON_SIZE_TOKENS: Record<
   small: {
     ...typography.label3,
     fontWeight: `${typography.label3.fontWeight}`,
-    paddingInline: spacing.s14,
+    paddingInline: spacing.s12,
     paddingBlock: spacing.s10,
     height: ACTION_BUTTON_HEIGHT_FOR_SIZE.small,
     borderRadius: radius.r8,
@@ -60,7 +66,7 @@ export const ACTION_BUTTON_SIZE_TOKENS: Record<
   medium: {
     ...typography.label2,
     fontWeight: `${typography.label2.fontWeight}`,
-    paddingInline: spacing.s20,
+    paddingInline: spacing.s16,
     paddingBlock: spacing.s12,
     height: ACTION_BUTTON_HEIGHT_FOR_SIZE.medium,
     borderRadius: radius.r10,
@@ -70,7 +76,7 @@ export const ACTION_BUTTON_SIZE_TOKENS: Record<
   large: {
     ...typography.label1,
     fontWeight: `${typography.label1.fontWeight}`,
-    paddingInline: spacing.s24,
+    paddingInline: spacing.s20,
     paddingBlock: spacing.s16,
     height: ACTION_BUTTON_HEIGHT_FOR_SIZE.large,
     borderRadius: radius.r12,
