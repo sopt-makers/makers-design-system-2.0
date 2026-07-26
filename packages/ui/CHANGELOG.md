@@ -1,5 +1,11 @@
 # @sopt-mds/ui
 
+## 1.6.0
+
+### Minor Changes
+
+- 60ef994: add text area component
+
 ## 1.5.1
 
 ### Patch Changes
