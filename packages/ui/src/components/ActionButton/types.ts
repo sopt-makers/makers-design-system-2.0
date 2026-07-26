@@ -5,7 +5,7 @@ export type ActionButtonVariant = "primary" | "secondary" | "danger";
 
 /**
  * Action Button의 크기를 결정합니다.
- * - xsmall: 32px / small: 36px / medium: 46px / large: 56px
+ * - xsmall: 32px / small: 38px / medium: 46px / large: 56px
  * - 디자인상 `danger`는 xsmall을 제공하지 않습니다.
  */
 export type ActionButtonSize = Extract<
