@@ -2,9 +2,8 @@ import { colors, spacing } from "@sopt-mds/design-tokens";
 import type { TagSize, TagType, TagVariant } from "./types";
 
 export const TAG_HEIGHT_FOR_SIZE: Record<TagSize, string> = {
-  small: "22px",
-  medium: spacing.s24,
-  large: spacing.s28,
+  small: spacing.s24,
+  medium: "26px",
 };
 
 export const TAG_COLOR_STYLE_VARIANT = {

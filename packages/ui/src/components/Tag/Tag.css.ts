@@ -22,18 +22,12 @@ export const sizeVariants = styleVariants({
     ...typography.label4,
     paddingInline: spacing.s8,
     height: TAG_HEIGHT_FOR_SIZE.small,
-    gap: spacing.s2,
+    gap: spacing.s4,
   },
   medium: {
     ...typography.label3,
     paddingInline: spacing.s8,
     height: TAG_HEIGHT_FOR_SIZE.medium,
-    gap: spacing.s2,
-  },
-  large: {
-    ...typography.label2,
-    paddingInline: spacing.s10,
-    height: TAG_HEIGHT_FOR_SIZE.large,
     gap: spacing.s4,
   },
 });

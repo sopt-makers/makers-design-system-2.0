@@ -1,11 +1,14 @@
 import { colors, radius } from "@sopt-mds/design-tokens";
-import type { AvatarSize, AvatarStrokeColor } from "./types";
+import type { AvatarSize, AvatarStrokeColor, AvatarType } from "./types";
 
 /** 선택 가능한 모든 size 목록(px). */
 export const AVATAR_SIZES: AvatarSize[] = [24, 32, 48, 56, 72, 80, 120, 180];
 
 /** 기본 size. */
 export const DEFAULT_AVATAR_SIZE: AvatarSize = 48;
+
+/** 기본 type. */
+export const DEFAULT_AVATAR_TYPE: AvatarType = "ghost";
 
 /** size별 width/height 값. */
 export const AVATAR_SIZE_PX: Record<AvatarSize, string> = {
@@ -60,6 +63,24 @@ export const AVATAR_STROKE_COLORS: Record<AvatarStrokeColor, string> = (() => {
   return result;
 })();
 
+export type AvatarTypeToken = {
+  backgroundColor: string;
+};
+
+/**
+ * type별 fallback 배경색.
+ * - ghost: `bg.neutral.ghost`
+ * - subtle: `bg.neutral.subtle`
+ */
+export const AVATAR_TYPE_TOKENS: Record<AvatarType, AvatarTypeToken> = {
+  ghost: {
+    backgroundColor: colors.bg.neutral.ghost,
+  },
+  subtle: {
+    backgroundColor: colors.bg.neutral.subtle,
+  },
+};
+
 export type AvatarDefaultToken = {
   borderRadius: string;
   backgroundColor: string;
@@ -69,13 +90,14 @@ export type AvatarDefaultToken = {
 
 /**
  * CSS variable 기본값.
+ * - backgroundColor: type 기본값(subtle)의 배경색입니다.
  * - fallbackColor: src가 없거나 로드 실패 시 노출되는 fallback 아이콘 색상입니다.
  * - strokeColor: `stroke.secondary.default` 토큰을 사용합니다.
  * - strokeWidth는 size별로 다르므로 `AVATAR_STROKE_WIDTH_PX`에서 size variant로 적용됩니다.
  */
 export const AVATAR_DEFAULT_TOKENS: AvatarDefaultToken = {
   borderRadius: radius.full,
-  backgroundColor: colors.bg.neutral.subtle,
+  backgroundColor: AVATAR_TYPE_TOKENS[DEFAULT_AVATAR_TYPE].backgroundColor,
   fallbackColor: colors.fg.neutral.ghost,
   strokeColor: colors.stroke.secondary.default,
 };
