@@ -1,5 +1,11 @@
 # @sopt-mds/ui
 
+## 1.7.0
+
+### Minor Changes
+
+- f966640: add type prop to Chip component
+
 ## 1.6.0
 
 ### Minor Changes
