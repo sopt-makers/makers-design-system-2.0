@@ -1,22 +1,26 @@
 import { forwardRef } from "react";
-import type { SVGProps } from "react";
-const IconArrowUpRight = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>(
-  (props, ref) => (
-    <svg
-      width={24}
-      height={24}
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
-      {...props}
-    >
-      <path
-        d="M17.75 17C17.75 17.4142 17.4142 17.75 17 17.75C16.5858 17.75 16.25 17.4142 16.25 17V8.81055L7.53027 17.5303C7.23738 17.8232 6.76262 17.8232 6.46973 17.5303C6.17683 17.2374 6.17683 16.7626 6.46973 16.4697L15.1895 7.75H7C6.58579 7.75 6.25 7.41421 6.25 7C6.25 6.58579 6.58579 6.25 7 6.25H17C17.4142 6.25 17.75 6.58579 17.75 7V17Z"
-        fill="currentColor"
-      />
-    </svg>
-  ),
+import { type IconProps, resolveIconSize } from "./icon-size";
+
+const IconArrowUpRight = forwardRef<SVGSVGElement, IconProps>(
+  ({ size, ...rest }, ref) => {
+    const props = { ...resolveIconSize(size), ...rest };
+    return (
+      <svg
+        width={24}
+        height={24}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        ref={ref}
+        {...props}
+      >
+        <path
+          d="M17.75 17C17.75 17.4142 17.4142 17.75 17 17.75C16.5858 17.75 16.25 17.4142 16.25 17V8.81055L7.53027 17.5303C7.23738 17.8232 6.76262 17.8232 6.46973 17.5303C6.17683 17.2374 6.17683 16.7626 6.46973 16.4697L15.1895 7.75H7C6.58579 7.75 6.25 7.41421 6.25 7C6.25 6.58579 6.58579 6.25 7 6.25H17C17.4142 6.25 17.75 6.58579 17.75 7V17Z"
+          fill="currentColor"
+        />
+      </svg>
+    );
+  },
 );
 IconArrowUpRight.displayName = "IconArrowUpRight";
 export default IconArrowUpRight;

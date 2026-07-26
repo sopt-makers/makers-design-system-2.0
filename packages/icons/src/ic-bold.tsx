@@ -1,22 +1,26 @@
 import { forwardRef } from "react";
-import type { SVGProps } from "react";
-const IconBold = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>(
-  (props, ref) => (
-    <svg
-      width={24}
-      height={24}
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
-      {...props}
-    >
-      <path
-        d="M18.25 16C18.25 14.2051 16.7949 12.75 15 12.75H6.75V19.25H15C16.7949 19.25 18.25 17.7949 18.25 16ZM17.25 8C17.25 6.20507 15.7949 4.75 14 4.75H6.75V11.25H14C15.7949 11.25 17.25 9.79493 17.25 8ZM18.75 8C18.75 9.48909 18.0635 10.8166 16.9912 11.6875C18.6197 12.4407 19.75 14.0879 19.75 16C19.75 18.6234 17.6234 20.75 15 20.75H6C5.58579 20.75 5.25 20.4142 5.25 20V4C5.25 3.58579 5.58579 3.25 6 3.25H14C16.6234 3.25 18.75 5.37665 18.75 8Z"
-        fill="currentColor"
-      />
-    </svg>
-  ),
+import { type IconProps, resolveIconSize } from "./icon-size";
+
+const IconBold = forwardRef<SVGSVGElement, IconProps>(
+  ({ size, ...rest }, ref) => {
+    const props = { ...resolveIconSize(size), ...rest };
+    return (
+      <svg
+        width={24}
+        height={24}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        ref={ref}
+        {...props}
+      >
+        <path
+          d="M18.25 16C18.25 14.2051 16.7949 12.75 15 12.75H6.75V19.25H15C16.7949 19.25 18.25 17.7949 18.25 16ZM17.25 8C17.25 6.20507 15.7949 4.75 14 4.75H6.75V11.25H14C15.7949 11.25 17.25 9.79493 17.25 8ZM18.75 8C18.75 9.48909 18.0635 10.8166 16.9912 11.6875C18.6197 12.4407 19.75 14.0879 19.75 16C19.75 18.6234 17.6234 20.75 15 20.75H6C5.58579 20.75 5.25 20.4142 5.25 20V4C5.25 3.58579 5.58579 3.25 6 3.25H14C16.6234 3.25 18.75 5.37665 18.75 8Z"
+          fill="currentColor"
+        />
+      </svg>
+    );
+  },
 );
 IconBold.displayName = "IconBold";
 export default IconBold;
