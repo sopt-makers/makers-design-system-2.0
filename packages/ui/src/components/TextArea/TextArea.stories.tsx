@@ -97,56 +97,25 @@ export const AddonExample: Story = {
     helperText: undefined,
   },
   render: (args) => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-      <div style={{ display: "flex", gap: "16px" }}>
-        <ControlledTextArea
-          {...args}
-          leftAddon={
-            <button
-              type="button"
-              aria-label="전송"
-              style={{
-                padding: 0,
-                border: "none",
-                background: "none",
-                cursor: "pointer",
-                color: "inherit",
-                alignSelf: "start",
-              }}
-            >
-              <IconHeartFilled width={20} height={20} />
-            </button>
-          }
-        />
-        <ControlledTextArea
-          {...args}
-          rightAddon={
-            <button
-              type="button"
-              aria-label="전송"
-              style={{
-                padding: 0,
-                border: "none",
-                background: "none",
-                cursor: "pointer",
-                color: "inherit",
-                alignSelf: "end",
-              }}
-            >
-              <IconSendOutlined width={20} height={20} />
-            </button>
-          }
-        />
-        <ControlledTextArea
-          {...args}
-          rightAddon={
-            <ActionButton size="xsmall" type="button">
-              예시 버튼
-            </ActionButton>
-          }
-        />
-      </div>
-    </div>
+    <ControlledTextArea
+      {...args}
+      rightAddon={
+        <button
+          type="button"
+          aria-label="전송"
+          style={{
+            padding: 0,
+            border: "none",
+            background: "none",
+            cursor: "pointer",
+            color: "inherit",
+            alignSelf: "end",
+          }}
+        >
+          <IconSendOutlined width={20} height={20} />
+        </button>
+      }
+    />
   ),
 };
 
