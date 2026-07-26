@@ -72,6 +72,7 @@ export const TEXT_FIELD_HELPER_TOKENS = {
 
 export type TextFieldVariantToken = {
   backgroundColor: string;
+  disabledColor: string;
   disabledPlaceholderColor: string;
 };
 
@@ -80,6 +81,10 @@ export type TextFieldVariantToken = {
  * bold의 배경은 이름과 달리 bg.neutral.ghost다. 디자인이 variant명만 Ghost→Bold로
  * 바꾼 것이고 색은 그대로라, 토큰 스케일(bold > default > subtle > ghost)과 어긋난다.
  * bold의 disabled placeholder는 Figma상 일반 placeholder와 값이 같아 흐려지지 않는다.
+ *
+ * `disabledColor`(입력값 텍스트)는 2026-07-26 디자인 QA로 확정됐다. 지금은 variant별로
+ * disabled placeholder와 값이 같지만, 둘은 다른 슬롯이라 변수를 나눠 둔다.
+ * (Figma에 Filled + disabled 프레임이 없어 그동안 미정의로 남아 있던 자리다.)
  */
 export const TEXT_FIELD_VARIANT_TOKENS: Record<
   TextFieldVariant,
@@ -87,10 +92,12 @@ export const TEXT_FIELD_VARIANT_TOKENS: Record<
 > = {
   default: {
     backgroundColor: colors.bg.layer.default,
+    disabledColor: colors.fg.neutral.ghostDisabled,
     disabledPlaceholderColor: colors.fg.neutral.ghostDisabled,
   },
   bold: {
     backgroundColor: colors.bg.neutral.ghost,
+    disabledColor: colors.fg.neutral.defaultDisabled,
     disabledPlaceholderColor: colors.fg.neutral.defaultDisabled,
   },
 };
