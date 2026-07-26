@@ -1,5 +1,11 @@
 # @sopt-mds/ui
 
+## 1.8.0
+
+### Minor Changes
+
+- 1170bc8: adjust UI layout and spacing based on design QA
+
 ## 1.7.0
 
 ### Minor Changes
