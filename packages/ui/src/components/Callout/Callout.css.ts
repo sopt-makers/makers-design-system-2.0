@@ -3,7 +3,6 @@ import { style, styleVariants } from "@vanilla-extract/css";
 
 /** s18 토큰 부재로 raw 18px 사용. 디자이너 측 토큰 보강 시 spacing.s18 로 교체. */
 const containerPaddingHorizontal = "18px";
-const contentsGap = "18px";
 
 export const container = style({
   display: "flex",
@@ -42,11 +41,12 @@ export const iconVariant = styleVariants({
   },
 });
 
+/** 본문과 액션 버튼 사이 세로 간격. 2026-07-26 디자인 QA로 raw 18px → s16. */
 export const contents = style({
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-start",
-  gap: contentsGap,
+  gap: spacing.s16,
   flex: "1 0 0",
   minWidth: 0,
 });
