@@ -28,7 +28,7 @@ const meta: Meta<typeof TextArea> = {
   argTypes: {
     variant: {
       control: "inline-radio",
-      options: ["default", "ghost"],
+      options: ["default", "bold"],
     },
     label: { control: "text" },
     description: { control: "text" },
