@@ -172,29 +172,17 @@ export const actions = style({
 });
 
 /**
- * 버튼 폭 — Figma를 그대로 옮긴 것이다.
+ * 버튼 폭 — 개수와 컨테이너 폭에 무관하게 항상 행을 채운다.
+ * 2개면 gap을 뺀 폭을 절반씩 나누고, 1개면 행 전체를 차지한다.
  *
- * 버튼이 2개면 좁든 넓든 항상 절반씩 채운다. 1개일 때만 갈리는데,
- * 좁으면 내용만큼(hug), 넓으면 가득 찬다.
+ * 처음에는 좁은 컨테이너에서 버튼이 1개일 때만 내용 폭에 맞췄다. Figma가 그렇게
+ * 그려져 있었기 때문인데, 이는 Figma의 실수였고 디자이너가 Figma를 full width로
+ * 수정했다(2026-07-25 디자인 QA 확정). 그래서 예외를 지웠다.
  *
- * `:only-child`라서 "버튼이 1개"라는 조건이 곧 Information 변형이 된다 —
- * Dialog.Cancel을 렌더하지 않는 것만으로 축이 파생되므로 prop이 필요 없다.
+ * 덕분에 "버튼이 1개"(Information 변형)라는 조건을 CSS가 알아야 할 이유도 없어졌다.
+ * 변형은 Dialog.Cancel을 렌더하지 않는 합성으로만 파생되고, 폭 규칙은 flex 하나로 끝난다.
  */
 export const actionButton = style({
   flex: "1 1 0%",
   minWidth: 0,
-  selectors: {
-    "&:only-child": {
-      flex: "0 0 auto",
-    },
-  },
-  "@container": {
-    [wideContainer]: {
-      selectors: {
-        "&:only-child": {
-          flex: "1 1 0%",
-        },
-      },
-    },
-  },
 });

@@ -9,6 +9,7 @@ export * from "./Radio";
 export * from "./ReactionButton";
 export * from "./SearchField";
 export * from "./Tag";
+export * from "./TextArea";
 export * from "./TextButton";
 export * from "./TextField";
 export * from "./Toggle";

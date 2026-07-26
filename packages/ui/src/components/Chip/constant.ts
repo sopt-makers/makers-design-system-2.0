@@ -52,7 +52,7 @@ export const CHIP_TYPE_STATE_TOKENS: Record<
       borderWidth: "1px",
       borderColor: colors.stroke.neutral.subtle,
       backgroundColor: colors.bg.neutral.ghost,
-      color: colors.fg.neutral.subtle,
+      color: colors.fg.neutral.default,
     },
     hover: {
       borderWidth: "0px",
@@ -78,7 +78,7 @@ export const CHIP_TYPE_STATE_TOKENS: Record<
       borderWidth: "0px",
       borderColor: "transparent",
       backgroundColor: colors.bg.neutral.ghost,
-      color: colors.fg.neutral.subtle,
+      color: colors.fg.neutral.default,
     },
     hover: {
       borderWidth: "0px",

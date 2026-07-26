@@ -1,5 +1,18 @@
 # @sopt-mds/ui
 
+## 1.6.0
+
+### Minor Changes
+
+- 60ef994: add text area component
+
+## 1.5.1
+
+### Patch Changes
+
+- 94dc217: derive floating button label from rendered content so empty, whitespace-only, and array children fall back to the icon-only form
+- 94dc217: make dialog action buttons always fill the actions row regardless of button count and container width
+
 ## 1.5.0
 
 ### Minor Changes

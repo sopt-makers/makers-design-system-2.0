@@ -7,7 +7,7 @@ const COMPONENT_DESCRIPTION = `
   \`Chip\`은 사용자가 선택하거나 입력하는 값을 표시하는 컴포넌트입니다. 기본적으로 버튼의 성격을 가지고 있습니다.\n
   \`Chip.Toggle\`은 Control 가능한 Chip 컴포넌트입니다. 기본적으로 Checkbox의 성격을 가지고 있습니다.\n
   - **type**: \`outlined\` / \`solid\`. 기본값은 \`outlined\`입니다.\n
-  - **as**: 렌더링할 HTML 요소 또는 컴포넌트. 기본값은 \`button\`입니다.
+  - **asChild**: \`true\`면 Chip 스타일을 자식 요소에 병합합니다. 예: \`<Chip asChild><a href="...">...</a></Chip>\`
 `;
 
 const meta: Meta<typeof Chip> = {
@@ -81,7 +81,7 @@ export const ChipWithAddon: Story = {
     return (
       <Chip
         {...args}
-        leftAddon={<IconHeartFilled width={16} height={16} />}
+        leftAddon={<IconHeartFilled width={20} height={20} />}
         rightAddon={<IconXClose width={20} height={20} />}
       >
         {args.children}
