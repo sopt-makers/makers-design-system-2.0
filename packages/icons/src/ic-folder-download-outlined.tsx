@@ -3,7 +3,10 @@ import { type IconProps, resolveIconSize } from "./icon-size";
 
 const IconFolderDownloadOutlined = forwardRef<SVGSVGElement, IconProps>(
   ({ size, ...rest }, ref) => {
-    const props = { ...resolveIconSize(size), ...rest };
+    const props = {
+      ...resolveIconSize(size),
+      ...rest,
+    };
     return (
       <svg
         width={24}
