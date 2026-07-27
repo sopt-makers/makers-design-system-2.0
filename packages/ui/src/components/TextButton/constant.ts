@@ -35,6 +35,3 @@ export const TEXT_BUTTON_VARIANT_COLOR: Record<TextButtonVariant, string> = {
 
 /** disabled 텍스트 색 (variant 무관). */
 export const TEXT_BUTTON_DISABLED_COLOR = colors.fg.neutral.defaultDisabled;
-
-/** hover/press 시 나타나는 밑줄 색. */
-export const TEXT_BUTTON_UNDERLINE_COLOR = colors.stroke.neutral.defaultFocused;

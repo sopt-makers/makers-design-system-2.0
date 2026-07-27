@@ -191,11 +191,20 @@ const buildComponentSource = async (
       expandProps: "end",
       jsxRuntime: "automatic",
       plugins: ["@svgr/plugin-jsx"],
+      /*
+       * `size`는 svg 안에서 풀지 않고 props를 합성해 넘긴다. svgr이 뱉는 jsx는
+       * `width={24} ... {...props}` 순서라, 합성한 객체에 width/height가 들어 있으면
+       * 원본 24를 덮고 없으면 그대로 남는다. `...rest`를 뒤에 두어 소비자가
+       * width/height를 직접 넘긴 경우가 size보다 우선하게 한다.
+       */
       template: ({ jsx, componentName: name }, { tpl }) => tpl`
 import { forwardRef } from "react";
-import type { SVGProps } from "react";
+import { type IconProps, resolveIconSize } from "./icon-size";
 
-const ${name} = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>((props, ref) => ${jsx});
+const ${name} = forwardRef<SVGSVGElement, IconProps>(({ size, ...rest }, ref) => {
+  const props = { ...resolveIconSize(size), ...rest };
+  return ${jsx};
+});
 
 ${name}.displayName = "${name}";
 
@@ -213,7 +222,9 @@ const writeRootIndex = async (
   const lines = sorted.map(
     (e) => `export { default as ${e.componentName} } from "./${e.fileName}";`,
   );
-  await writeFile(join(srcRoot, "index.ts"), `${lines.join("\n")}\n`);
+  // 손으로 쓰는 모듈이라 생성 대상이 아니지만, 배럴은 매번 새로 쓰므로 여기서 같이 내보낸다.
+  const shared = `export { ICON_SIZES, type IconProps, type IconSize } from "./icon-size";`;
+  await writeFile(join(srcRoot, "index.ts"), `${shared}\n${lines.join("\n")}\n`);
 };
 
 const cleanPreviousOutput = async (): Promise<void> => {

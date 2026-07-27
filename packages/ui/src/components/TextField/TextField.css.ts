@@ -25,6 +25,7 @@ const TEXT_FIELD_BORDER_RADIUS_VARIABLE = "--mds-text-field-border-radius";
 const TEXT_FIELD_PADDING_BLOCK_VARIABLE = "--mds-text-field-padding-block";
 const TEXT_FIELD_PADDING_INLINE_VARIABLE = "--mds-text-field-padding-inline";
 const TEXT_FIELD_COLOR_VARIABLE = "--mds-text-field-color";
+const TEXT_FIELD_DISABLED_COLOR_VARIABLE = "--mds-text-field-disabled-color";
 const TEXT_FIELD_PLACEHOLDER_COLOR_VARIABLE =
   "--mds-text-field-placeholder-color";
 const TEXT_FIELD_DISABLED_PLACEHOLDER_COLOR_VARIABLE =
@@ -40,6 +41,7 @@ type TextFieldCssVariableName =
   | typeof TEXT_FIELD_PADDING_BLOCK_VARIABLE
   | typeof TEXT_FIELD_PADDING_INLINE_VARIABLE
   | typeof TEXT_FIELD_COLOR_VARIABLE
+  | typeof TEXT_FIELD_DISABLED_COLOR_VARIABLE
   | typeof TEXT_FIELD_PLACEHOLDER_COLOR_VARIABLE
   | typeof TEXT_FIELD_DISABLED_PLACEHOLDER_COLOR_VARIABLE
   | typeof TEXT_FIELD_CARET_COLOR_VARIABLE
@@ -61,6 +63,7 @@ export const textFieldVars = {
   paddingBlock: createTextFieldVar(TEXT_FIELD_PADDING_BLOCK_VARIABLE),
   paddingInline: createTextFieldVar(TEXT_FIELD_PADDING_INLINE_VARIABLE),
   color: createTextFieldVar(TEXT_FIELD_COLOR_VARIABLE),
+  disabledColor: createTextFieldVar(TEXT_FIELD_DISABLED_COLOR_VARIABLE),
   placeholderColor: createTextFieldVar(TEXT_FIELD_PLACEHOLDER_COLOR_VARIABLE),
   disabledPlaceholderColor: createTextFieldVar(
     TEXT_FIELD_DISABLED_PLACEHOLDER_COLOR_VARIABLE,
@@ -71,6 +74,7 @@ export const textFieldVars = {
 
 type TextFieldVariantVar =
   | typeof textFieldVars.backgroundColor
+  | typeof textFieldVars.disabledColor
   | typeof textFieldVars.disabledPlaceholderColor;
 
 type TextFieldVariantStyle = {
@@ -83,6 +87,8 @@ const textFieldVariantStyles: Record<TextFieldVariant, TextFieldVariantStyle> =
       vars: {
         [textFieldVars.backgroundColor]:
           TEXT_FIELD_VARIANT_TOKENS.default.backgroundColor,
+        [textFieldVars.disabledColor]:
+          TEXT_FIELD_VARIANT_TOKENS.default.disabledColor,
         [textFieldVars.disabledPlaceholderColor]:
           TEXT_FIELD_VARIANT_TOKENS.default.disabledPlaceholderColor,
       },
@@ -91,6 +97,8 @@ const textFieldVariantStyles: Record<TextFieldVariant, TextFieldVariantStyle> =
       vars: {
         [textFieldVars.backgroundColor]:
           TEXT_FIELD_VARIANT_TOKENS.bold.backgroundColor,
+        [textFieldVars.disabledColor]:
+          TEXT_FIELD_VARIANT_TOKENS.bold.disabledColor,
         [textFieldVars.disabledPlaceholderColor]:
           TEXT_FIELD_VARIANT_TOKENS.bold.disabledPlaceholderColor,
       },
@@ -166,6 +174,8 @@ export const container = style({
   vars: {
     [textFieldVars.backgroundColor]:
       TEXT_FIELD_VARIANT_TOKENS.default.backgroundColor,
+    [textFieldVars.disabledColor]:
+      TEXT_FIELD_VARIANT_TOKENS.default.disabledColor,
     [textFieldVars.disabledPlaceholderColor]:
       TEXT_FIELD_VARIANT_TOKENS.default.disabledPlaceholderColor,
     [textFieldVars.borderColor]: TEXT_FIELD_BORDER_TOKENS.none,
@@ -230,11 +240,16 @@ export const input = style({
     "&::placeholder": {
       color: textFieldVars.placeholderColor,
     },
-    // Figma는 disabled를 placeholder 색으로만 표현한다 — 브라우저 기본 흐림을 끈다.
+    /*
+     * disabled 텍스트 색. `color`만 바꾸면 WebKit/Blink는 `-webkit-text-fill-color`를
+     * 우선해 칠하므로 두 선언을 반드시 함께 바꾼다. `opacity: 1`은 UA 기본 흐림이
+     * 색 위에 한 번 더 곱해지는 것을 막는다.
+     */
     "&:disabled": {
       cursor: "not-allowed",
       opacity: 1,
-      WebkitTextFillColor: textFieldVars.color,
+      color: textFieldVars.disabledColor,
+      WebkitTextFillColor: textFieldVars.disabledColor,
     },
     "&:disabled::placeholder": {
       color: textFieldVars.disabledPlaceholderColor,
