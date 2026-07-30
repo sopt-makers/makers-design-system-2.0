@@ -33,8 +33,34 @@ export const SIDEBAR_MENU: SidebarMenuItem[] = [
         label: "Migration Reference",
         path: "/foundations/migration-reference",
       },
-    ],
+      ],
   },
   { type: "link", label: "Typography", path: "/foundations/typography" },
   { type: "link", label: "Spacing", path: "/foundations/spacing" },
-];
+  {
+    type: "group",
+    label: "Writing",
+    items: [
+      {
+        type: "link",
+        label: "Tone of Voice",
+        path: "/foundations/tone-of-voice",
+      },
+      {
+        type: "link",
+        label: "Writing Principles",
+        path: "/foundations/writing-principles",
+      },
+      {
+        type: "link",
+        label: "Language",
+        path: "/foundations/language",
+      },
+      {
+        type: "link",
+        label: "Grammar",
+        path: "/foundations/grammar",
+      },
+      ],
+  },
+  ];
