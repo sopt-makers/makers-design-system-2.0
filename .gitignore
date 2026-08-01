@@ -18,6 +18,9 @@ packages/tokens/generated/
 .env.local
 .env.*.local
 
+# design-token sync (agent-generated update spec)
+.sync-design-tokens/
+
 # TypeScript
 *.tsbuildinfo
 

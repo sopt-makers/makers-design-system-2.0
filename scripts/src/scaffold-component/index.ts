@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 import { input } from "@inquirer/prompts";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const repoRoot = resolve(__dirname, "..");
+const repoRoot = resolve(__dirname, "../../..");
 const componentsDir = join(repoRoot, "packages/ui/src/components");
 const uiBarrel = join(repoRoot, "packages/ui/src/components/index.ts");
 const introMdx = join(repoRoot, "apps/storybook/stories/Introduction.mdx");
