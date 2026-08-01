@@ -1,5 +1,19 @@
 # @sopt-mds/ui
 
+## 1.9.0
+
+### Minor Changes
+
+- ab95a1a: dim the text field value when the input is disabled — `default` uses fg.neutral.ghostDisabled and `bold` uses fg.neutral.defaultDisabled. adds a `--mds-text-field-disabled-color` variable for overriding it; the value used to stay at full-strength fg.neutral.bold because `-webkit-text-fill-color` pinned it there.
+
+### Patch Changes
+
+- ab95a1a: set the callout gap between the body text and the action button to the s16 spacing token, replacing the raw 18px value.
+- ab95a1a: drop the text button underline on hover and press, along with the transparent border that reserved its space. the rendered height shrinks by 1px in both sizes.
+- ab95a1a: adjust action button metrics to the reviewed design: small height 36px to 38px, and horizontal padding small 14px to 12px, medium 20px to 16px, large 24px to 20px.
+- Updated dependencies [ab95a1a]
+  - @sopt-mds/icons@0.2.0
+
 ## 1.8.0
 
 ### Minor Changes
