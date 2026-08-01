@@ -3,7 +3,7 @@
 에이전트가 Figma `token.json`을 해석한 뒤 스크립트에 넘기는 **정규화 명세** 형식이다.
 
 경로(기본): `.sync-design-tokens/update-spec.json`  
-실행: `pnpm tokens:sync --spec .sync-design-tokens/update-spec.json`
+실행: `pnpm tokens:sync -- --spec .sync-design-tokens/update-spec.json`
 
 ## 원칙
 

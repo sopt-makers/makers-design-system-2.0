@@ -12,19 +12,13 @@
     "storybook:build": "pnpm --filter @sopt-mds/storybook build",
     "web": "pnpm --filter @sopt-mds/web dev",
     "web:build": "pnpm --filter @sopt-mds/web build",
-    "typecheck": "pnpm -r typecheck && pnpm typecheck:scripts",
-    "typecheck:scripts": "tsc --noEmit -p scripts/tsconfig.json",
-    "scaffold:component": "tsx scripts/scaffold-component.ts",
-    "tokens:sync": "tsx scripts/sync-design-tokens/index.ts"
+    "typecheck": "pnpm -r typecheck",
+    "scaffold:component": "pnpm --filter @sopt-mds/scripts scaffold:component",
+    "tokens:sync": "pnpm --filter @sopt-mds/scripts tokens:sync"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.6",
-    "@changesets/cli": "^2.27.0",
-    "@inquirer/prompts": "^7.2.0",
-    "@types/node": "^22.19.17",
-    "es-toolkit": "^1.50.0",
-    "tsx": "^4.21.0",
-    "typescript": "^5.6.0"
+    "@changesets/cli": "^2.27.0"
   },
   "packageManager": "pnpm@10.26.2",
   "engines": {

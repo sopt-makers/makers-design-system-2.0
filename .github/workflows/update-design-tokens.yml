@@ -57,7 +57,7 @@ jobs:
       - name: Apply update-spec
         id: sync
         run: |
-          pnpm tokens:sync --spec .sync-design-tokens/update-spec.json
+          pnpm tokens:sync -- --spec .sync-design-tokens/update-spec.json
 
           if git diff --quiet -- packages/design-tokens/src token.json; then
             echo "changed=false" >> "$GITHUB_OUTPUT"

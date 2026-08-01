@@ -3,7 +3,7 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-export const REPO_ROOT = resolve(__dirname, "../..");
+export const REPO_ROOT = resolve(__dirname, "../../..");
 export const DESIGN_TOKENS_SRC = join(REPO_ROOT, "packages/design-tokens/src");
 
 /** 에이전트가 작성하는 정규화 명세 기본 경로 */

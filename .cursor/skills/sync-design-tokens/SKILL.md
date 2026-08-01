@@ -42,7 +42,7 @@ Figma payload를 [references/mapping.md](references/mapping.md) 규칙으로 해
 스키마·예시는 다음을 따른다.
 
 - [references/mapping.md](references/mapping.md) — Figma → spec 변환
-- `scripts/sync-design-tokens/references/update-spec.md` — spec JSON 스키마
+- `scripts/src/sync-design-tokens/references/update-spec.md` — spec JSON 스키마
 
 포함 섹션만 넣는다. 예:
 
@@ -80,10 +80,10 @@ Figma payload를 [references/mapping.md](references/mapping.md) 규칙으로 해
 ### 3. 스크립트로 적용
 
 ```bash
-pnpm tokens:sync --spec .sync-design-tokens/update-spec.json
+pnpm tokens:sync -- --spec .sync-design-tokens/update-spec.json
 ```
 
-- 구현: `scripts/sync-design-tokens/index.ts` (+ `format/`, `utils/`)
+- 구현: `scripts/src/sync-design-tokens/index.ts` (+ `format/`, `utils/`)
 - 명세에 있는 섹션의 TS 파일만 통째로 교체 (SSOT)
 
 실패 시 명세/스크립트를 고치고 재실행한다. 출력만 일회성 패치하지 않는다.
@@ -114,7 +114,7 @@ pnpm --filter @sopt-mds/design-tokens typecheck
 | 원인 | 조치 |
 |---|---|
 | 명세 오해석 | update-spec 수정 → step 3 재실행 |
-| 스크립트 버그 | `scripts/sync-design-tokens` 수정 → step 3 재실행 |
+| 스크립트 버그 | `scripts/src/sync-design-tokens` 수정 → step 3 재실행 |
 | 출력만 수동 수정 | **금지** (다음 sync에서 회귀) |
 
 ### 6. 결과 보고
@@ -160,7 +160,7 @@ pnpm --filter @sopt-mds/design-tokens typecheck
 ## 스크립트 구조
 
 ```
-scripts/sync-design-tokens/
+scripts/src/sync-design-tokens/
   index.ts      # spec 읽기 → format → write
   types.ts      # TokenUpdateSpec
   format/       # TS 문자열 생성 (결정적)
