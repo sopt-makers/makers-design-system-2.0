@@ -1,5 +1,6 @@
 import { colors, spacing } from "@sopt-mds/design-tokens";
 import { style } from "@vanilla-extract/css";
+import { Z_INDEX } from "../../styles/layout";
 
 /**
  * ≤768에서 햄버거로 여는 풀스크린 메뉴.
@@ -8,7 +9,7 @@ import { style } from "@vanilla-extract/css";
 export const panel = style({
   position: "fixed",
   inset: 0,
-  zIndex: 20,
+  zIndex: Z_INDEX.mobileMenu,
   boxSizing: "border-box",
   display: "flex",
   flexDirection: "column",

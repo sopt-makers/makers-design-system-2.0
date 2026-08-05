@@ -32,3 +32,20 @@ export const TOP_NAVIGATION_HEIGHT = 64;
  * 콘텐츠 942는 이 폭에서 나머지를 뺀 결과라 `1fr`로 두고, 여기서 상한만 건다.
  */
 export const SHELL_MAX_WIDTH = `calc(${SIDEBAR_WIDTH}px + ${CONTENT_MAX_WIDTH}px + ${TOC_WIDTH}px + 2 * ${COLUMN_GAP} + 2 * ${SHELL_INLINE_PADDING})`;
+
+/** 상단바 아래로 고정되는 열(사이드바·TOC)이 쓸 수 있는 세로 공간. */
+export const BELOW_TOP_NAVIGATION_HEIGHT = `calc(100vh - ${TOP_NAVIGATION_HEIGHT}px)`;
+
+/**
+ * 겹침 순서.
+ *
+ * 고정된 셋(상단바·사이드바·TOC)은 전부 sticky라 각자 쌓임 맥락을 만든다. DOM 순서대로면
+ * 뒤에 오는 사이드바·TOC가 상단바 위에 그려지므로, 상단바에만 z-index를 얹어 되돌린다.
+ * 모바일 드로어는 그 위를 덮어야 하므로 항상 최상단이다.
+ */
+export const Z_INDEX = {
+  /** 스크롤에도 남아 있는 상단바. */
+  topNavigation: 10,
+  /** 화면 전체를 덮는 모바일 메뉴. */
+  mobileMenu: 20,
+} as const;

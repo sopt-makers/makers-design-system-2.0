@@ -2,11 +2,13 @@ import { spacing } from "@sopt-mds/design-tokens";
 import { style } from "@vanilla-extract/css";
 import { MEDIA } from "../styles/breakpoints";
 import {
+  BELOW_TOP_NAVIGATION_HEIGHT,
   COLUMN_GAP,
   SHELL_INLINE_PADDING,
   SHELL_MAX_WIDTH,
   SIDEBAR_WIDTH,
   TOC_WIDTH,
+  TOP_NAVIGATION_HEIGHT,
 } from "../styles/layout";
 
 /** 모바일(≤375) 본문 좌우 마진. */
@@ -47,8 +49,19 @@ export const body = style({
   },
 });
 
-/** 사이드바 그리드 셀. 콘텐츠 스타일은 Sidebar 컴포넌트가 담당하고, 여기선 배치/여백/숨김만. */
+/**
+ * 사이드바 그리드 셀. 콘텐츠 스타일은 Sidebar 컴포넌트가 담당하고, 여기선 배치/여백/숨김만.
+ *
+ * 스크롤과 무관하게 상단바 아래에 고정된다(디자인 QA). 메뉴가 화면보다 길면 셀 안에서만
+ * 스크롤되고, `border-box`라 상단 여백 48이 높이를 넘기지 않는다.
+ */
 export const sidebarCell = style({
+  position: "sticky",
+  top: TOP_NAVIGATION_HEIGHT,
+  alignSelf: "start",
+  boxSizing: "border-box",
+  height: BELOW_TOP_NAVIGATION_HEIGHT,
+  overflowY: "auto",
   paddingTop: SIDEBAR_TOP_PADDING,
   "@media": {
     [MEDIA.tabletDown]: {
@@ -70,12 +83,18 @@ export const article = style({
   },
 });
 
-/** 목차 그리드 셀. 스크롤 시 상단에 고정, 콘텐츠 스타일은 TableOfContents 컴포넌트가 담당. */
+/**
+ * 목차 그리드 셀. 콘텐츠 스타일은 TableOfContents 컴포넌트가 담당.
+ *
+ * 사이드바와 같은 기준으로 고정된다. 이전에는 `top: 0`이었는데, 상단바가 고정되면서
+ * 그대로 두면 목차가 상단바 뒤로 파고들어 가려진다.
+ */
 export const tableOfContentsCell = style({
   position: "sticky",
-  top: 0,
+  top: TOP_NAVIGATION_HEIGHT,
   alignSelf: "start",
-  maxHeight: "100vh",
+  boxSizing: "border-box",
+  maxHeight: BELOW_TOP_NAVIGATION_HEIGHT,
   overflowY: "auto",
   "@media": {
     [MEDIA.tabletDown]: {

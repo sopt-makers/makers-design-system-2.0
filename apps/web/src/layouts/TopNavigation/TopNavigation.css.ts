@@ -5,6 +5,7 @@ import {
   SHELL_INLINE_PADDING,
   SHELL_MAX_WIDTH,
   TOP_NAVIGATION_HEIGHT,
+  Z_INDEX,
 } from "../../styles/layout";
 
 /** 로고와 내비게이션 사이 간격 (Figma gap 67px). */
@@ -15,8 +16,13 @@ const ACTIVE_INDICATOR_WIDTH = 2;
 /**
  * 바깥 껍데기 — 배경과 하단 보더만 화면 폭 전체로 늘린다.
  * 넓은 모니터에서 바가 본문 폭에서 잘려 보이지 않게 하기 위함이다.
+ *
+ * 스크롤과 무관하게 상단에 남는다(디자인 QA). 배경이 불투명해야 본문이 비치지 않는다.
  */
 export const bar = style({
+  position: "sticky",
+  top: 0,
+  zIndex: Z_INDEX.topNavigation,
   boxSizing: "border-box",
   height: TOP_NAVIGATION_HEIGHT,
   width: "100%",
