@@ -17,38 +17,40 @@ interface TopNavigationProps {
 export function TopNavigation({ onMenuClick }: TopNavigationProps) {
   return (
     <header className={styles.bar}>
-      <Link
-        to="/"
-        className={styles.logoLink}
-        aria-label="Makers design system 홈"
-      >
-        <Logo />
-      </Link>
+      <div className={styles.inner}>
+        <Link
+          to="/"
+          className={styles.logoLink}
+          aria-label="Makers design system 홈"
+        >
+          <Logo />
+        </Link>
 
-      <nav className={styles.nav} aria-label="주요 메뉴">
-        {NAV_ITEMS.map((item) => (
-          <NavLink
-            key={item.path}
-            to={item.path}
-            className={({ isActive }) =>
-              isActive
-                ? `${styles.navLink} ${styles.navLinkActive}`
-                : styles.navLink
-            }
-          >
-            {item.label}
-          </NavLink>
-        ))}
-      </nav>
+        <nav className={styles.nav} aria-label="주요 메뉴">
+          {NAV_ITEMS.map((item) => (
+            <NavLink
+              key={item.path}
+              to={item.path}
+              className={({ isActive }) =>
+                isActive
+                  ? `${styles.navLink} ${styles.navLinkActive}`
+                  : styles.navLink
+              }
+            >
+              {item.label}
+            </NavLink>
+          ))}
+        </nav>
 
-      <button
-        type="button"
-        className={styles.menuButton}
-        onClick={onMenuClick}
-        aria-label="메뉴 열기"
-      >
-        <IconMenu />
-      </button>
+        <button
+          type="button"
+          className={styles.menuButton}
+          onClick={onMenuClick}
+          aria-label="메뉴 열기"
+        >
+          <IconMenu />
+        </button>
+      </div>
     </header>
   );
 }
