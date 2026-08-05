@@ -6,11 +6,12 @@ import {
   actionButton,
   actions,
   description,
+  deviceVariants,
   panel,
   root,
   title,
 } from "./Dialog.css";
-import type { DialogActionVariant } from "./types";
+import type { DialogActionVariant, DialogDevice } from "./types";
 
 export interface DialogProps
   extends Omit<
@@ -25,6 +26,12 @@ export interface DialogProps
    * Esc, Dialog.Cancel/Dialog.Action 클릭 등 모든 닫힘 경로에서 `false`로 호출됩니다.
    */
   onOpenChange: (open: boolean) => void;
+  /**
+   * 폭과 그에 딸린 내부 치수를 결정합니다. `mobile`은 303px, `pc`는 400px 고정입니다.
+   *
+   * 화면 크기에 반응하지 않으므로, 화면에 따라 다른 폭이 필요하면 앱이 직접 골라 넘깁니다.
+   */
+  device?: DialogDevice;
   /**
    * Dialog.Title / Dialog.Description / Dialog.Actions와 임의의 본문(Checkbox 등)을 조합합니다.
    *
@@ -68,13 +75,14 @@ function restoreFocus(chain: HTMLElement[]) {
  * - Figma의 action 축은 prop이 아니라 **합성**으로 표현합니다.
  *   Dialog.Cancel을 렌더하지 않으면 Information(버튼 1개), Dialog.Action에
  *   `variant="danger"`를 주면 Danger가 됩니다.
- * - 레이아웃은 뷰포트가 아니라 Dialog 자신의 폭에서 파생됩니다.
- *   앱의 브레이크포인트에 맞춰 `--mds-dialog-width`를 덮어쓰면 됩니다.
+ * - 폭은 `device`가 정하는 고정값입니다. 뷰포트나 컨테이너 폭에 반응하지 않으므로
+ *   화면에 따라 다른 폭이 필요하면 앱이 직접 `device`를 골라 넘깁니다.
  * - 배경 클릭으로는 닫히지 않습니다. 확인을 요구하는 다이얼로그의 기본 동작입니다.
  */
 const DialogRoot = ({
   open,
   onOpenChange,
+  device = "mobile",
   children,
   className,
   ...rest
@@ -158,7 +166,7 @@ const DialogRoot = ({
     <dialog
       {...rest}
       ref={dialogRef}
-      className={clsx(root, className)}
+      className={clsx(root, deviceVariants[device], className)}
       aria-labelledby={titleId}
       aria-describedby={descriptionCount > 0 ? descriptionId : undefined}
     >
