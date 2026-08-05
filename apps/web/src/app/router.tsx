@@ -1,32 +1,25 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import { DocsLayout } from "../layouts/DocsLayout";
-import { HomePage } from "../pages/HomePage";
-import { NotReadyPage } from "../pages/NotReadyPage";
-
-// Overview
-import DesignTokens from "../content/foundations/design-tokens.mdx";
-
-// Foundations
+// 문서 파일은 전부 content/foundations 아래 있고, 어느 탭에 속하는지는 아래 라우트 표가 정한다.
+// (import 순서는 포매터가 알파벳순으로 정렬하므로 여기서 묶어봐야 유지되지 않는다.)
 import ColorSystem from "../content/foundations/color-system.mdx";
 import ColorTokenReference from "../content/foundations/color-token-reference.mdx";
-import TypographySystem from "../content/foundations/typography-system.mdx";
+import DesignTokens from "../content/foundations/design-tokens.mdx";
+import Grammar from "../content/foundations/grammar.mdx";
+import Language from "../content/foundations/language.mdx";
+import MigrationReference from "../content/foundations/migration-reference.mdx";
 import RadiusSystem from "../content/foundations/radius-system.mdx";
 import RadiusTokenReference from "../content/foundations/radius-token-reference.mdx";
+import SemanticColor from "../content/foundations/semantic-color.mdx";
+import Spacing from "../content/foundations/spacing.mdx";
 import SpacingSystem from "../content/foundations/spacing-system.mdx";
 import SpacingTokenReference from "../content/foundations/spacing-token-reference.mdx";
 import ToneOfVoice from "../content/foundations/tone-of-voice.mdx";
-import WritingPrinciples from "../content/foundations/writing-principles.mdx";
-import Language from "../content/foundations/language.mdx";
-import Grammar from "../content/foundations/grammar.mdx";
-
-// Developments
-import MigrationReference from "../content/foundations/migration-reference.mdx";
-
-// 메뉴에서 빠진 문서 — 새 구조에 자리가 없지만 내용이 다른 문서로 흡수될지 정해지지 않아
-// 경로만 살려둔다. 사이드바에는 노출되지 않고 직접 URL로만 닿는다.
-import SemanticColor from "../content/foundations/semantic-color.mdx";
 import Typography from "../content/foundations/typography.mdx";
-import Spacing from "../content/foundations/spacing.mdx";
+import TypographySystem from "../content/foundations/typography-system.mdx";
+import WritingPrinciples from "../content/foundations/writing-principles.mdx";
+import { DocsLayout } from "../layouts/DocsLayout";
+import { HomePage } from "../pages/HomePage";
+import { NotReadyPage } from "../pages/NotReadyPage";
 
 export const router = createBrowserRouter([
   {
@@ -74,7 +67,10 @@ export const router = createBrowserRouter([
 
       // UX Writing
       { path: "foundations/tone-of-voice", element: <ToneOfVoice /> },
-      { path: "foundations/writing-principles", element: <WritingPrinciples /> },
+      {
+        path: "foundations/writing-principles",
+        element: <WritingPrinciples />,
+      },
       { path: "foundations/language", element: <Language /> },
       { path: "foundations/grammar", element: <Grammar /> },
 
