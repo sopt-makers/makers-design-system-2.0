@@ -1,3 +1,75 @@
 # Color System
 
-문서 준비 중입니다.
+MDS는 제품의 시각적 일관성을 만들고, 정보의 우선순위와 상태를 전달하는 가장 중요한 요소 중 하나예요. MDS는 색상을 단순한 Color Value가 아닌 이름(Role)과 의미(Meaning) 중심으로 관리해요. 이를 위해 컬러를 다음 두 단계로 분리해 정의해요.
+
+## 1. Base token
+
+디자인 시스템의 기초가 되는 모든 색상 값을 체계적으로 분류하고 관리하기 위한 원자 값들의 명세예요. 색상의 이름엔 'palette' + 연속적인 레벨 'level' 을 표기해 시스템의 레시 값을 명확히 규정해요. 이후 시맨틱 토큰이 디자인의 의도에 따라 참조할 수 있는 color 라이브러리의 역할을 해요.
+
+
+![Base token 이름 규칙](/images/img_colorsystem_01.png)
+
+#### 예시
+
+![Base token 예시](/images/img_colorsystem_02.png)
+
+## 2. Semantic token
+
+실제 제품에 사용되는 의미 기반 색상이에요. 상황과 맥락에 따라 정의하며, 일관된 사용자 경험을 유지할 수 있도록 해요.
+
+
+![Semantic token 이름 규칙](/images/img_colorsystem_03.png)
+
+![Semantic token 예시](/images/img_colorsystem_04.png)
+
+
+#### 예시
+![Target 설명](/images/img_colorsystem_05.png)
+> State만 필요에 따라 선택적으로 사용할 수 있어요. 이 외 level은 모두 필수로 명시해야 해요.
+
+
+
+## 3. level 상세 설명
+
+### Target
+
+- **bg(background)**  컴포넌트나 페이지의 면을 채우는 배경색
+- **fg(foreground)**  배경 위에 올라가는 텍스트, 아이콘 색상
+- **stroke**  보더, 구분선 등 외곽선의 색상
+
+![Role 설명](/images/img_colorsystem_06.png)
+
+
+
+### Role
+
+- **Brand** &nbsp; 서비스의 아이덴티티를 나타내는 브랜드 색상
+- **Secondary** &nbsp; 브랜드 색상 다음 위계로 서비스의 아이덴티티를 나타내는 색상
+- **Neutral** &nbsp; 강조하지 않는 일반 정보나 UI의 전반적으로 사용되는 무채색
+- **Success** &nbsp; 완료, 긍정적인 결과나 상태를 나타내는 색상
+- **Attention** &nbsp; 주의, 경고 등 사용자의 주의를 환기할 필요가 있을 때 보조적 사용
+- **Danger** &nbsp; 경고, 삭제 등 위험도가 높은 상태에서 사용하는 색상
+- **Information** &nbsp; 안내, 팁 등 정보성 맥락에서 사용하는 색상
+- **Dim** Modal &nbsp; 위에 올라가는 오버레이에 사용하는 색상
+- **Layer-Default** &nbsp; UI 레딘 위에 올라오는 첫 번째 레이아웃, 카드 등의 배경색
+- **Layer-Basement** &nbsp; 페이지의 가장 바닥면, 진짜 배경색으로 사용하는 Viewport 색상
+
+![Emphasis 설명](/images/img_colorsystem_07.png)
+
+
+### Emphasis
+
+- **bold** &nbsp; 가장 높은 대비를 가져와, 시선을 강하게 끌어야 할 때 사용. default > subtle > ghost 순으로 대도 조절
+- **inverse** &nbsp; 배경색과 반전된 색상으로, 배경 위에서 가독성을 확보할 때 사용
+- **contrast** &nbsp; 유채색의 의도 대비를 극대화하는 데 사용되는 경우 사용
+
+![State 설명](/images/img_colorsystem_08.png)
+
+### State
+
+- **hover** &nbsp; 마우스 커서를 요소 위에 올렸을 때의 색상
+- **pressed** &nbsp; UI를 클릭하거나 탭했을 때 활성화 색상
+- **focused** &nbsp; UI가 선택되어 입력 준비, 입력 중인 상태의 색상
+- **disabled** &nbsp; 상호작용을 할 수 없는 비활성화 상태에서의 색상
+
+![State 설명](/images/img_colorsystem_09.png)

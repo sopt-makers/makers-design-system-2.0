@@ -18,7 +18,7 @@ export const h2 = style({
   ...typography.title2,
   margin: 0,
   marginTop: spacing.s48,
-  marginBottom: spacing.s12,
+  marginBottom: spacing.s16,
   scrollMarginTop: HEADING_SCROLL_MARGIN,
   color: colors.fg.neutral.bold,
 });
@@ -26,10 +26,19 @@ export const h2 = style({
 export const h3 = style({
   ...typography.title3,
   margin: 0,
-  marginTop: spacing.s32,
+  marginTop: spacing.s40,
   marginBottom: spacing.s12,
   scrollMarginTop: HEADING_SCROLL_MARGIN,
   color: colors.fg.neutral.bold,
+});
+
+export const h4 = style({
+  ...typography.body2,
+  margin: 0,
+  marginTop: spacing.s16,
+  marginBottom: spacing.s8,
+  scrollMarginTop: HEADING_SCROLL_MARGIN,
+  color: colors.fg.neutral.subtle,
 });
 
 export const paragraph = style({

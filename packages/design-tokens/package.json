@@ -1,6 +1,6 @@
 {
   "name": "@sopt-mds/design-tokens",
-  "version": "1.0.3",
+  "version": "1.0.7",
   "type": "module",
   "sideEffects": [
     "*.css"

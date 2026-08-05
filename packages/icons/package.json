@@ -1,6 +1,6 @@
 {
   "name": "@sopt-mds/icons",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "type": "module",
   "sideEffects": false,
   "exports": {
@@ -13,7 +13,7 @@
   "scripts": {
     "build": "vite build",
     "typecheck": "tsc --noEmit",
-    "sync": "tsx scripts/sync.ts && pnpm -w exec biome format --write packages/icons/src"
+    "sync": "tsx scripts/sync.ts && pnpm -w exec biome check --write packages/icons/src"
   },
   "devDependencies": {
     "@sopt-mds/tsconfig": "workspace:*",

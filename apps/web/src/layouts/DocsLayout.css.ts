@@ -6,8 +6,6 @@ import { MEDIA } from "../styles/breakpoints";
 const SIDEBAR_WIDTH = 230;
 /** TOC 폭 (Figma 188px). */
 const TOC_WIDTH = 188;
-/** 콘텐츠 최대 폭 (Figma default 1440px). */
-const CONTENT_MAX_WIDTH = 1440;
 /** 데스크탑 콘텐츠 좌우 여백 (Figma 24px). */
 const CONTENT_INLINE_PADDING = spacing.s24;
 /** 컬럼 사이 간격 (Figma 16px). */
@@ -29,8 +27,8 @@ export const body = style({
   columnGap: COLUMN_GAP,
   flex: 1,
   width: "100%",
-  maxWidth: CONTENT_MAX_WIDTH,
-  marginInline: "auto",
+  // 넓은 모니터에서도 좌측 사이드바가 화면 좌측과 24px를 유지하도록,
+  // 중앙정렬(max-width) 없이 전체 폭을 쓰고 좌우 24px 거터만 둔다.
   paddingInline: CONTENT_INLINE_PADDING,
   // ≤768: 사이드바·TOC를 숨기고 본문 단일 컬럼으로 전환 (좌우 여백은 본문이 직접 관리)
   "@media": {

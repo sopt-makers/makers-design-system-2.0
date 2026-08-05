@@ -9,6 +9,19 @@ body {
     "Segoe UI", sans-serif;
 }
 
+/**
+ * 그레이스케일 안티앨리어싱.
+ *
+ * macOS Chrome의 기본값(auto)은 서브픽셀 안티앨리어싱이라, 어두운 배경 위 밝은 글자의
+ * 획이 실제 font-weight보다 굵어 보인다. Figma는 그레이스케일로 렌더하므로 같은 토큰을
+ * 써도 스토리북 쪽만 두꺼워 보인다(2026-07-25 디자인 QA로 접수).
+ * apps/web(src/styles/global.css.ts)은 이미 같은 선언을 갖고 있어 여기만 빠져 있었다.
+ */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 /** 라이트 테마 토큰 — withThemeByClassName이 body에 theme-light 클래스를 붙임 */
 .theme-light {
   --color-background: #ffffff;

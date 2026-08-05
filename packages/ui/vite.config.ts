@@ -22,6 +22,7 @@ export default defineConfig({
         index: "src/index.ts",
         ...(await collectComponentEntries()),
       },
+      cssFileName: "index",
     },
     rolldownOptions: {
       external: [

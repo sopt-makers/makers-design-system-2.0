@@ -7,6 +7,7 @@ export const colorFg = {
     defaultDisabled: baseColor.gray500,
     subtle: baseColor.gray300,
     ghost: baseColor.gray500,
+    ghostDisabled: baseColor.gray700,
     inverse: baseColor.gray950,
   },
   brand: {
@@ -77,6 +78,12 @@ export const colorBg = {
     defaultHover: baseColor.red500,
     defaultPressed: baseColor.red600,
     ghost: baseColor.red950,
+  },
+  layer: {
+    basement: baseColor.gray950,
+    basementHover: baseColor.gray800,
+    default: baseColor.gray900,
+    defaultHover: baseColor.gray800,
   },
   dim: {
     default: "rgba(15, 16, 18, 0.8)",

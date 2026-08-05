@@ -1,24 +1,31 @@
 import { forwardRef } from "react";
-import type { SVGProps } from "react";
-const IconThumbsDownFilled = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>(
-  (props, ref) => (
-    <svg
-      width={24}
-      height={24}
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      ref={ref}
-      {...props}
-    >
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M10.0977 2.18352C10.35 1.61585 10.9129 1.25 11.5342 1.25C13.3102 1.25 14.75 2.68978 14.75 4.46584V8C14.75 8.13807 14.8619 8.25 15 8.25H18.5032C20.8015 8.25 22.559 10.2986 22.2096 12.5702L21.1326 19.5702C20.8512 21.3996 19.2771 22.75 17.4262 22.75H6.5929L6.5929 10.0693L10.0977 2.18352ZM5.0929 10.25H4C2.48122 10.25 1.25 11.4812 1.25 13V20C1.25 21.5188 2.48122 22.75 4 22.75H5.0929L5.0929 10.25Z"
-        fill="currentColor"
-      />
-    </svg>
-  ),
+import { type IconProps, resolveIconSize } from "./icon-size";
+
+const IconThumbsDownFilled = forwardRef<SVGSVGElement, IconProps>(
+  ({ size, ...rest }, ref) => {
+    const props = {
+      ...resolveIconSize(size),
+      ...rest,
+    };
+    return (
+      <svg
+        width={24}
+        height={24}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        ref={ref}
+        {...props}
+      >
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M13.9248 21.8165C13.6725 22.3842 13.1096 22.75 12.4884 22.75C10.7123 22.75 9.27253 21.3102 9.27253 19.5342V16C9.27253 15.8619 9.1606 15.75 9.02253 15.75H5.51936C3.22104 15.75 1.46349 13.7014 1.81297 11.4298L2.88989 4.42978C3.17133 2.60041 4.74539 1.25 6.59628 1.25H17.4296L17.4296 13.9307L13.9248 21.8165ZM18.9296 13.75H20.0225C21.5413 13.75 22.7725 12.5188 22.7725 11V4C22.7725 2.48122 21.5413 1.25 20.0225 1.25H18.9296V13.75Z"
+          fill="currentColor"
+        />
+      </svg>
+    );
+  },
 );
 IconThumbsDownFilled.displayName = "IconThumbsDownFilled";
 export default IconThumbsDownFilled;

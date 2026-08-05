@@ -1,5 +1,29 @@
 # @sopt-mds/design-tokens
 
+## 1.0.7
+
+### Patch Changes
+
+- 6c23137: add new title, body typo token
+
+## 1.0.6
+
+### Patch Changes
+
+- 6d78418: Add background layer color tokens.
+
+## 1.0.5
+
+### Patch Changes
+
+- 1a8f276: register radio component (Radio, RadioGroup) and add fg.neutral.ghostDisabled token
+
+## 1.0.4
+
+### Patch Changes
+
+- 3caf2a1: register checkbox component and add fg.neutral.ghostDisabled token
+
 ## 1.0.3
 
 ### Patch Changes

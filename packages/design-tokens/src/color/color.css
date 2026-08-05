@@ -82,6 +82,7 @@
   --color-fg-neutral-default-disabled: var(--color-base-gray500);
   --color-fg-neutral-subtle: var(--color-base-gray300);
   --color-fg-neutral-ghost: var(--color-base-gray500);
+  --color-fg-neutral-ghost-disabled: var(--color-base-gray700);
   --color-fg-neutral-inverse: var(--color-base-gray950);
 
   --color-fg-brand-default: var(--color-base-orange400);
@@ -138,6 +139,11 @@
   --color-bg-danger-default-hover: var(--color-base-red500);
   --color-bg-danger-default-pressed: var(--color-base-red600);
   --color-bg-danger-ghost: var(--color-base-red950);
+
+  --color-bg-layer-basement: var(--color-base-gray950);
+  --color-bg-layer-basement-hover: var(--color-base-gray800);
+  --color-bg-layer-default: var(--color-base-gray900);
+  --color-bg-layer-default-hover: var(--color-base-gray800);
 
   --color-bg-dim-default: rgba(15, 16, 18, 0.8);
 

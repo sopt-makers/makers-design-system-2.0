@@ -1,7 +1,7 @@
 import { colors, radius } from "@sopt-mds/design-tokens";
 import { createGlobalVar, style, styleVariants } from "@vanilla-extract/css";
-import { CHIP_SIZE_TOKENS, CHIP_STATE_TOKENS } from "./constant";
-import type { ChipSize, ChipState } from "./types";
+import { CHIP_SIZE_TOKENS, CHIP_TYPE_STATE_TOKENS } from "./constant";
+import type { ChipSize, ChipState, ChipType } from "./types";
 
 /*
  * Chip CSS variables
@@ -79,38 +79,37 @@ export const chipVars = {
   gap: createChipVar(CHIP_GAP_VARIABLE),
 } as const;
 
-const chipStateStyles: Record<ChipState, ChipStateStyle> = {
-  default: {
+function createChipStateStyle(
+  type: ChipType,
+  state: ChipState,
+): ChipStateStyle {
+  const token = CHIP_TYPE_STATE_TOKENS[type][state];
+
+  return {
     vars: {
-      [chipVars.backgroundColor]: CHIP_STATE_TOKENS.default.backgroundColor,
-      [chipVars.color]: CHIP_STATE_TOKENS.default.color,
-      [chipVars.borderWidth]: CHIP_STATE_TOKENS.default.borderWidth,
-      [chipVars.borderColor]: CHIP_STATE_TOKENS.default.borderColor,
+      [chipVars.backgroundColor]: token.backgroundColor,
+      [chipVars.color]: token.color,
+      [chipVars.borderWidth]: token.borderWidth,
+      [chipVars.borderColor]: token.borderColor,
     },
+  };
+}
+
+const chipTypeStateStyles: Record<
+  ChipType,
+  Record<ChipState, ChipStateStyle>
+> = {
+  outlined: {
+    default: createChipStateStyle("outlined", "default"),
+    hover: createChipStateStyle("outlined", "hover"),
+    selected: createChipStateStyle("outlined", "selected"),
+    disabled: createChipStateStyle("outlined", "disabled"),
   },
-  hover: {
-    vars: {
-      [chipVars.backgroundColor]: CHIP_STATE_TOKENS.hover.backgroundColor,
-      [chipVars.color]: CHIP_STATE_TOKENS.hover.color,
-      [chipVars.borderWidth]: CHIP_STATE_TOKENS.hover.borderWidth,
-      [chipVars.borderColor]: CHIP_STATE_TOKENS.hover.borderColor,
-    },
-  },
-  selected: {
-    vars: {
-      [chipVars.backgroundColor]: CHIP_STATE_TOKENS.selected.backgroundColor,
-      [chipVars.color]: CHIP_STATE_TOKENS.selected.color,
-      [chipVars.borderWidth]: CHIP_STATE_TOKENS.selected.borderWidth,
-      [chipVars.borderColor]: CHIP_STATE_TOKENS.selected.borderColor,
-    },
-  },
-  disabled: {
-    vars: {
-      [chipVars.backgroundColor]: CHIP_STATE_TOKENS.disabled.backgroundColor,
-      [chipVars.color]: CHIP_STATE_TOKENS.disabled.color,
-      [chipVars.borderWidth]: CHIP_STATE_TOKENS.disabled.borderWidth,
-      [chipVars.borderColor]: CHIP_STATE_TOKENS.disabled.borderColor,
-    },
+  solid: {
+    default: createChipStateStyle("solid", "default"),
+    hover: createChipStateStyle("solid", "hover"),
+    selected: createChipStateStyle("solid", "selected"),
+    disabled: createChipStateStyle("solid", "disabled"),
   },
 };
 
@@ -148,10 +147,13 @@ const focusVisibleStyle = {
 
 export const base = style({
   vars: {
-    [chipVars.backgroundColor]: CHIP_STATE_TOKENS.default.backgroundColor,
-    [chipVars.color]: CHIP_STATE_TOKENS.default.color,
-    [chipVars.borderWidth]: CHIP_STATE_TOKENS.default.borderWidth,
-    [chipVars.borderColor]: CHIP_STATE_TOKENS.default.borderColor,
+    [chipVars.backgroundColor]:
+      CHIP_TYPE_STATE_TOKENS.outlined.default.backgroundColor,
+    [chipVars.color]: CHIP_TYPE_STATE_TOKENS.outlined.default.color,
+    [chipVars.borderWidth]:
+      CHIP_TYPE_STATE_TOKENS.outlined.default.borderWidth,
+    [chipVars.borderColor]:
+      CHIP_TYPE_STATE_TOKENS.outlined.default.borderColor,
     [chipVars.fontWeight]: CHIP_SIZE_TOKENS.medium.fontWeight,
     [chipVars.fontSize]: CHIP_SIZE_TOKENS.medium.fontSize,
     [chipVars.lineHeight]: CHIP_SIZE_TOKENS.medium.lineHeight,
@@ -189,27 +191,46 @@ export const base = style({
   transition:
     "background-color 150ms ease, box-shadow 150ms ease, color 150ms ease",
   selectors: {
-    /**
-     * state priority
-     * - disabled > hover > selected > default
-     */
-    "&:not(:disabled):not([aria-disabled='true']):hover": chipStateStyles.hover,
-    "&:not(:disabled):not([aria-disabled='true'])[data-selected='true']:not(:hover)":
-      chipStateStyles.selected,
-    "&:not([aria-disabled='true']):has(input:checked:not(:disabled)):not(:hover)":
-      chipStateStyles.selected,
     "&:focus-visible": focusVisibleStyle,
     "&:has(input:focus-visible)": focusVisibleStyle,
-    "&:disabled, &[aria-disabled='true']": {
-      ...chipStateStyles.disabled,
-      cursor: "not-allowed",
-    },
   },
 });
 
 export const sizeVariants = styleVariants(chipSizeStyles);
 
-export const stateVariants = styleVariants(chipStateStyles);
+function createChipTypeVariant(type: ChipType) {
+  const states = chipTypeStateStyles[type];
+
+  return {
+    ...states.default,
+    selectors: {
+      /**
+       * state priority
+       * - disabled > hover > selected > default
+       */
+      "&:not(:disabled):not([aria-disabled='true'])[data-selected='true']":
+        states.selected,
+      "&:not([aria-disabled='true']):has(input:checked:not(:disabled))":
+        states.selected,
+      "&:disabled, &[aria-disabled='true']": {
+        ...states.disabled,
+        cursor: "not-allowed",
+      },
+    },
+    "@media": {
+      "(hover: hover) and (pointer: fine)": {
+        selectors: {
+          "&:not(:disabled):not([aria-disabled='true']):hover": states.hover,
+        },
+      },
+    },
+  };
+}
+
+export const typeVariants = styleVariants({
+  outlined: createChipTypeVariant("outlined"),
+  solid: createChipTypeVariant("solid"),
+});
 
 export const addon = style({
   zIndex: 1,

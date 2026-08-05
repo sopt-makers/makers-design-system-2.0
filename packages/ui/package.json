@@ -1,6 +1,6 @@
 {
   "name": "@sopt-mds/ui",
-  "version": "1.0.3",
+  "version": "1.9.0",
   "type": "module",
   "sideEffects": [
     "*.css"
@@ -17,6 +17,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.3.3",
     "@sopt-mds/design-tokens": "workspace:*",
     "@sopt-mds/icons": "workspace:*",
     "@vanilla-extract/css": "^1.15.5",
@@ -27,6 +28,7 @@
     "@sopt-mds/tsconfig": "workspace:*",
     "@sopt-mds/vite": "workspace:*",
     "@storybook/blocks": "^8.4.7",
+    "@storybook/preview-api": "^8.4.7",
     "@storybook/react": "^8.4.7",
     "@types/node": "^22.0.0",
     "@types/react": "^18.3.0",
@@ -49,6 +51,7 @@
         "types": "./dist/index.d.ts",
         "import": "./dist/index.js"
       },
+      "./index.css": "./dist/index.css",
       "./package.json": "./package.json"
     }
   }

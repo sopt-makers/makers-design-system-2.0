@@ -16,51 +16,45 @@ export type SidebarMenuItem = SidebarGroupItem | SidebarLinkItem;
 export const SIDEBAR_MENU: SidebarMenuItem[] = [
   {
     type: "group",
-    label: "Colors",
+    label: "Overview",
     items: [
-      {
-        type: "link",
-        label: "Color system",
-        path: "/foundations/color-system",
-      },
-      {
-        type: "link",
-        label: "Semantic color",
-        path: "/foundations/semantic-color",
-      },
-      {
-        type: "link",
-        label: "Migration Reference",
-        path: "/foundations/migration-reference",
-      },
-      ],
+      { type: "link", label: "MDS Overviews", path: "/overview/mds-overviews" },
+      { type: "link", label: "Progress Board", path: "/overview/progress-board" },
+    ],
   },
-  { type: "link", label: "Typography", path: "/foundations/typography" },
-  { type: "link", label: "Spacing", path: "/foundations/spacing" },
+  {
+    type: "group",
+    label: "Foundations",
+    items: [
+      { type: "link", label: "Design Tokens", path: "/foundations/design-tokens" },
+      { type: "link", label: "Color System", path: "/foundations/color-system" },
+      { type: "link", label: "Color Token Reference", path: "/foundations/color-token-reference" },
+      { type: "link", label: "Typography System", path: "/foundations/typography-system" },
+      { type: "link", label: "Typography Token Reference", path: "/foundations/typography-token-reference" },
+      { type: "link", label: "Spacing System", path: "/foundations/spacing-system" },
+      { type: "link", label: "Spacing Token Reference", path: "/foundations/spacing-token-reference" },
+      { type: "link", label: "Radius System", path: "/foundations/radius-system" },
+      { type: "link", label: "Radius Token Reference", path: "/foundations/radius-token-reference" },
+    ],
+  },
   {
     type: "group",
     label: "Writing",
     items: [
-      {
-        type: "link",
-        label: "Tone of Voice",
-        path: "/foundations/tone-of-voice",
-      },
-      {
-        type: "link",
-        label: "Writing Principles",
-        path: "/foundations/writing-principles",
-      },
-      {
-        type: "link",
-        label: "Language",
-        path: "/foundations/language",
-      },
-      {
-        type: "link",
-        label: "Grammar",
-        path: "/foundations/grammar",
-      },
-      ],
+      { type: "link", label: "Tone of Voice", path: "/foundations/tone-of-voice" },
+      { type: "link", label: "Writing Principles", path: "/foundations/writing-principles" },
+      { type: "link", label: "Language", path: "/foundations/language" },
+      { type: "link", label: "Grammar", path: "/foundations/grammar" },
+    ],
   },
-  ];
+  {
+    type: "group",
+    label: "Components",
+    items: [],
+  },
+  {
+    type: "group",
+    label: "Developments",
+    items: [],
+  },
+];

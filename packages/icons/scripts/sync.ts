@@ -78,19 +78,24 @@ const parseVariant = (variant: string): { type: string; style: string } => {
   return { type: props.type ?? "", style: props.style ?? "" };
 };
 
-const findIconSet = (document: FigmaNode): FigmaNode | undefined => {
+/** 카테고리별 icon_* 컴포넌트셋 전부 수집 (구버전의 단일 'icon' 셋도 지원). */
+const findIconSets = (document: FigmaNode): FigmaNode[] => {
+  const found: FigmaNode[] = [];
   const stack: FigmaNode[] = [document];
   while (stack.length > 0) {
     const node = stack.pop();
     if (!node) continue;
-    if (node.type === "COMPONENT_SET" && node.name === "icon") {
-      return node;
+    if (
+      node.type === "COMPONENT_SET" &&
+      (node.name === "icon" || node.name.startsWith("icon_"))
+    ) {
+      found.push(node);
     }
     if (node.children) {
       stack.push(...node.children);
     }
   }
-  return undefined;
+  return found;
 };
 
 const collectVariants = (iconSet: FigmaNode): IconVariant[] => {
@@ -156,10 +161,14 @@ const applyCurrentColor = (svg: string): string =>
 /**
  * Monochrome SVG는 currentColor로 치환해 테마/color prop을 따르게 하고,
  * 다색 SVG(예: googleColor, github의 음각 디테일)는 원본 색상을 보존한다.
+ * defs/clipPath 내부 fill은 렌더링되지 않으므로 색 판정에서 제외한다.
  */
 const isMonochromeSvg = (svg: string): boolean => {
+  const visible = svg
+    .replace(/<defs[\s\S]*?<\/defs>/g, "")
+    .replace(/<clipPath[\s\S]*?<\/clipPath>/g, "");
   const colors = new Set<string>();
-  for (const match of svg.matchAll(/(?:fill|stroke)="([^"]+)"/g)) {
+  for (const match of visible.matchAll(/(?:fill|stroke)="([^"]+)"/g)) {
     const value = match[1];
     if (value && value !== "none" && value !== "currentColor") {
       colors.add(value.toLowerCase());
@@ -182,11 +191,20 @@ const buildComponentSource = async (
       expandProps: "end",
       jsxRuntime: "automatic",
       plugins: ["@svgr/plugin-jsx"],
+      /*
+       * `size`는 svg 안에서 풀지 않고 props를 합성해 넘긴다. svgr이 뱉는 jsx는
+       * `width={24} ... {...props}` 순서라, 합성한 객체에 width/height가 들어 있으면
+       * 원본 24를 덮고 없으면 그대로 남는다. `...rest`를 뒤에 두어 소비자가
+       * width/height를 직접 넘긴 경우가 size보다 우선하게 한다.
+       */
       template: ({ jsx, componentName: name }, { tpl }) => tpl`
 import { forwardRef } from "react";
-import type { SVGProps } from "react";
+import { type IconProps, resolveIconSize } from "./icon-size";
 
-const ${name} = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>((props, ref) => ${jsx});
+const ${name} = forwardRef<SVGSVGElement, IconProps>(({ size, ...rest }, ref) => {
+  const props = { ...resolveIconSize(size), ...rest };
+  return ${jsx};
+});
 
 ${name}.displayName = "${name}";
 
@@ -204,7 +222,9 @@ const writeRootIndex = async (
   const lines = sorted.map(
     (e) => `export { default as ${e.componentName} } from "./${e.fileName}";`,
   );
-  await writeFile(join(srcRoot, "index.ts"), `${lines.join("\n")}\n`);
+  // 손으로 쓰는 모듈이라 생성 대상이 아니지만, 배럴은 매번 새로 쓰므로 여기서 같이 내보낸다.
+  const shared = `export { ICON_SIZES, type IconProps, type IconSize } from "./icon-size";`;
+  await writeFile(join(srcRoot, "index.ts"), `${shared}\n${lines.join("\n")}\n`);
 };
 
 const cleanPreviousOutput = async (): Promise<void> => {
@@ -217,14 +237,26 @@ const cleanPreviousOutput = async (): Promise<void> => {
 
 const main = async (): Promise<void> => {
   console.log("→ Fetching Figma file structure...");
-  const file = await callFigma<FigmaFileResponse>(`/v1/files/${FIGMA_FILE_ID}?depth=4`);
+  // 섹션 안에 셋이 중첩될 수 있어 depth 제한 없이 전체 트리를 받는다.
+  const file = await callFigma<FigmaFileResponse>(`/v1/files/${FIGMA_FILE_ID}`);
 
-  const iconSet = findIconSet(file.document);
-  if (!iconSet) {
-    throw new Error("Could not find ComponentSet named 'icon' in the Figma file.");
+  const iconSets = findIconSets(file.document);
+  if (iconSets.length === 0) {
+    throw new Error("Could not find any 'icon'/'icon_*' ComponentSet in the Figma file.");
   }
+  console.log(`→ Found ${iconSets.length} icon sets: ${iconSets.map((s) => s.name).join(", ")}`);
 
-  const variants = collectVariants(iconSet);
+  // 여러 셋을 병합하므로 동일 type+style 중복은 먼저 나온 것을 유지한다.
+  const seen = new Set<string>();
+  const variants = iconSets.flatMap(collectVariants).filter((v) => {
+    const key = `${v.name}/${v.style}`;
+    if (seen.has(key)) {
+      console.warn(`  ⚠ Duplicate variant across sets, skipping: ${key}`);
+      return false;
+    }
+    seen.add(key);
+    return true;
+  });
   console.log(`→ Found ${variants.length} icon variants`);
 
   const styleCount = new Map<string, Set<string>>();
