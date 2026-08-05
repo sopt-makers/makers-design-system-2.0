@@ -26,7 +26,7 @@ export interface NavTab {
   label: string;
   /** 탭이 소유하는 경로 접두사. 이 아래 경로에서는 이 탭의 사이드바가 뜬다. */
   path: string;
-  /** 탭을 눌렀을 때 열리는 문서. 문서가 있는 첫 항목을 가리킨다. */
+  /** 탭을 눌렀을 때 열리는 문서. 사이드바 첫 항목을 가리킨다. */
   indexPath: string;
   sidebar: SidebarMenuItem[];
 }
@@ -43,7 +43,8 @@ export const NAV_TABS: [NavTab, ...NavTab[]] = [
   {
     label: "Overview",
     path: "/overview",
-    indexPath: "/overview/design-token",
+    // 문서가 아직 없어 준비 중 화면으로 가지만, 첫 메뉴가 진입점이라는 규칙을 지킨다.
+    indexPath: "/overview/mds",
     sidebar: [
       { type: "link", label: "MDS", path: "/overview/mds" },
       { type: "link", label: "Design Token", path: "/overview/design-token" },
