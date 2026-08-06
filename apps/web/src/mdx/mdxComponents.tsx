@@ -1,12 +1,18 @@
 import type { MDXComponents } from "mdx/types";
+import { Tab, Tabs } from "../components/Tabs";
 import * as styles from "./mdx.css";
 
 /**
  * MDX 본문 요소 → 디자인 타이포그래피 매핑.
  * MDXProvider에 한 번 등록하면 모든 .mdx 문서가 이 스타일로 렌더된다.
  * (렌더마다 재생성되지 않도록 모듈 레벨 상수로 둔다.)
+ *
+ * HTML 요소 매핑 외에 문서에서 바로 쓰는 컴포넌트(Tabs/Tab)도 함께 싣는다 —
+ * 문서마다 import를 적지 않아도 되도록.
  */
 export const mdxComponents: MDXComponents = {
+  Tabs,
+  Tab,
   h1: (props) => <h1 className={styles.h1} {...props} />,
   h2: (props) => <h2 className={styles.h2} {...props} />,
   h3: (props) => <h3 className={styles.h3} {...props} />,

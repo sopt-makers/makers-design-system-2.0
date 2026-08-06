@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import type { SidebarLinkItem } from "./constant";
+import type { SidebarLinkItem } from "../navigation";
 import * as styles from "./Sidebar.css";
 
 interface SidebarChildLinkProps {

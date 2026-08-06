@@ -1,25 +1,49 @@
 import { colors, spacing, typography } from "@sopt-mds/design-tokens";
 import { style } from "@vanilla-extract/css";
 import { MEDIA } from "../../styles/breakpoints";
+import {
+  SHELL_INLINE_PADDING,
+  SHELL_MAX_WIDTH,
+  TOP_NAVIGATION_HEIGHT,
+  Z_INDEX,
+} from "../../styles/layout";
 
-/** 상단바 높이 (Figma 64px). */
-const BAR_HEIGHT = 64;
 /** 로고와 내비게이션 사이 간격 (Figma gap 67px). */
 const LOGO_NAV_GAP = 67;
 /** 활성 탭 하단 인디케이터 두께 (Figma border-b-2). */
 const ACTIVE_INDICATOR_WIDTH = 2;
 
+/**
+ * 바깥 껍데기 — 배경과 하단 보더만 화면 폭 전체로 늘린다.
+ * 넓은 모니터에서 바가 본문 폭에서 잘려 보이지 않게 하기 위함이다.
+ *
+ * 스크롤과 무관하게 상단에 남는다(디자인 QA). 배경이 불투명해야 본문이 비치지 않는다.
+ */
 export const bar = style({
+  position: "sticky",
+  top: 0,
+  zIndex: Z_INDEX.topNavigation,
+  boxSizing: "border-box",
+  height: TOP_NAVIGATION_HEIGHT,
+  width: "100%",
+  backgroundColor: colors.base.gray950, // #0F1012 (Figma bg/layer/layer-basement)
+  borderBottom: `1px solid ${colors.stroke.neutral.ghost}`, // #202025
+});
+
+/**
+ * 실제 콘텐츠 줄 — 본문 그리드와 같은 최대 폭·거터를 써서 로고 좌측이 사이드바 좌측과 맞는다.
+ * (배경은 bar가 전체 폭으로 깔고, 정렬만 여기서 한다.)
+ */
+export const inner = style({
   boxSizing: "border-box",
   display: "flex",
   // Figma: 콘텐츠를 바닥에 정렬(items-end) → 활성 탭 밑줄이 헤더 하단에 붙는다.
   alignItems: "flex-end",
-  height: BAR_HEIGHT,
-  width: "100%",
-  paddingInline: spacing.s24,
+  height: "100%",
+  maxWidth: SHELL_MAX_WIDTH,
+  marginInline: "auto",
+  paddingInline: SHELL_INLINE_PADDING,
   paddingBottom: "1px", // Figma: pb-px
-  backgroundColor: colors.base.gray950, // #0F1012 (Figma bg/layer/layer-basement)
-  borderBottom: `1px solid ${colors.stroke.neutral.ghost}`, // #202025
 });
 
 export const logoLink = style({

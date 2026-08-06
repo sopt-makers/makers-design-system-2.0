@@ -1,7 +1,7 @@
 import { IconChevronDown, IconChevronRight } from "@sopt-mds/icons";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import type { SidebarGroupItem } from "./constant";
+import type { SidebarGroupItem } from "../navigation";
 import * as styles from "./Sidebar.css";
 import { SidebarChildLink } from "./SidebarChildLink";
 
