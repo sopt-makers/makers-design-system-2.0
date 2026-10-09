@@ -29,3 +29,4 @@ storybook-static/
 
 # omc
 .omc/
+.gstack/
