@@ -6,7 +6,7 @@ import type { TabsSize, TabsVariant } from "./types";
 
 const COMPONENT_DESCRIPTION = `
   \`Tabs\`는 관련된 콘텐츠를 분류하고 그중 하나를 고르는 컴포넌트입니다. **단일 선택**만 가능합니다.\n
-  \`Tabs\`(선택 상태) > \`Tabs.List\`(탭 묶음) > \`Tabs.Trigger\`(탭)로 조합합니다. 탭 패널은 제공하지 않으므로 선택된 \`value\`에 따라 본문을 직접 렌더합니다.\n
+  \`Tabs\`(선택 상태) > \`Tabs.List\`(탭 묶음) > \`Tabs.Trigger\`(탭)로 조합합니다. 본문은 \`Tabs.Content\`로 보여줍니다. 링크 탭처럼 본문을 직접 그리는 경우에는 쓰지 않아도 됩니다.\n
   - **variant**: 화면에 탭이 모두 노출되면 \`fill\`, 탭이 많아 넘치면 \`hug\`를 사용합니다.\n
   - **children**(\`Tabs.Trigger\`): 탭 라벨. 문장이 아닌 단어로만 씁니다.\n
   - **tag**(\`Tabs.Trigger\`): 텍스트만 넘기며, Tag 모양은 고정이라 바꿀 수 없습니다.\n
@@ -22,8 +22,10 @@ const [tab, setTab] = useState("home");
     <Tabs.Trigger value="all">전체 모임</Tabs.Trigger>
     <Tabs.Trigger value="mine">내 모임</Tabs.Trigger>
   </Tabs.List>
+  <Tabs.Content value="home"><Home /></Tabs.Content>
+  <Tabs.Content value="all"><All /></Tabs.Content>
+  <Tabs.Content value="mine"><Mine /></Tabs.Content>
 </Tabs>
-{tab === "home" && <Home />}
 
 // 선택 상태를 직접 관리하지 않으면 defaultValue만 넘깁니다.
 <Tabs defaultValue="home">...</Tabs>
@@ -234,5 +236,31 @@ export const TabStates: Story = {
         },
       ]}
     />
+  ),
+};
+
+/** 선택된 탭의 본문을 `Tabs.Content`로 보여줍니다. 링크 탭처럼 본문을 직접 그리는 경우에는 쓰지 않아도 됩니다. */
+export const TabsWithContent: Story = {
+  name: "Tabs.Content",
+  parameters: { controls: { disable: true }, layout: "padded" },
+  render: () => (
+    <div style={{ width: STORY_WIDTH, color: colors.fg.neutral.bold }}>
+      <Tabs defaultValue="home">
+        <Tabs.List aria-label="모임">
+          <Tabs.Trigger value="home">홈</Tabs.Trigger>
+          <Tabs.Trigger value="all">전체 모임</Tabs.Trigger>
+          <Tabs.Trigger value="mine">내 모임</Tabs.Trigger>
+        </Tabs.List>
+        <Tabs.Content value="home" style={{ padding: spacing.s16 }}>
+          홈 본문
+        </Tabs.Content>
+        <Tabs.Content value="all" style={{ padding: spacing.s16 }}>
+          전체 모임 본문
+        </Tabs.Content>
+        <Tabs.Content value="mine" style={{ padding: spacing.s16 }}>
+          내 모임 본문
+        </Tabs.Content>
+      </Tabs>
+    </div>
   ),
 };

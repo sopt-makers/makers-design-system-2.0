@@ -3,7 +3,12 @@ import clsx from "clsx";
 import * as React from "react";
 import { mergeRefs } from "../../utils/mergeRefs";
 import { Tag } from "../Tag";
-import { TabsContext, useTabsContext } from "./context";
+import {
+  getContentId,
+  getTriggerId,
+  TabsContext,
+  useTabsContext,
+} from "./context";
 import {
   divider as dividerStyle,
   list,
@@ -45,7 +50,7 @@ export interface TabsRootProps<T extends string = string>
  *
  * - 화면에 탭이 모두 노출되면 `variant="fill"`(Fixed), 탭이 많아지면 `variant="hug"`(Scrollable)를 씁니다.
  * - 탭은 2개 이상, 최대 5개를 권장합니다.
- * - 탭 패널(Content)은 제공하지 않습니다. 선택 value에 따라 본문을 직접 렌더하세요.
+ * - 선택된 탭의 본문은 `Tabs.Content`로 보여줍니다. 링크 탭처럼 본문을 직접 그리는 경우에는 쓰지 않아도 됩니다.
  */
 const TabsRoot = React.forwardRef<HTMLDivElement, TabsRootProps>(
   (
@@ -60,6 +65,7 @@ const TabsRoot = React.forwardRef<HTMLDivElement, TabsRootProps>(
     },
     ref,
   ) => {
+    const baseId = React.useId();
     const [uncontrolledValue, setUncontrolledValue] =
       React.useState(defaultValue);
     const isControlled = valueProp !== undefined;
@@ -75,8 +81,8 @@ const TabsRoot = React.forwardRef<HTMLDivElement, TabsRootProps>(
     );
 
     const contextValue = React.useMemo(
-      () => ({ value, select, size, variant }),
-      [value, select, size, variant],
+      () => ({ baseId, value, select, size, variant }),
+      [baseId, value, select, size, variant],
     );
 
     return (
@@ -306,6 +312,8 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
 
     return (
       <Comp
+        id={getTriggerId(context.baseId, value)}
+        aria-controls={getContentId(context.baseId, value)}
         {...rest}
         {...(asChild
           ? { "aria-disabled": disabled || undefined }
@@ -343,7 +351,36 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
 
 TabsRoot.displayName = "Tabs";
 TabsList.displayName = "Tabs.List";
+export interface TabsContentProps
+  extends React.ComponentPropsWithoutRef<"div"> {
+  /** 이 본문이 속한 탭의 value입니다. 선택된 탭의 본문만 렌더됩니다. */
+  value: string;
+}
+
+/** 선택된 탭의 본문입니다. 선택되지 않은 탭의 본문은 렌더하지 않습니다. */
+const TabsContent = React.forwardRef<HTMLDivElement, TabsContentProps>(
+  ({ value, ...rest }, ref) => {
+    const context = useTabsContext("Tabs.Content");
+    if (context.value !== value) return null;
+
+    // WAI-ARIA Tabs 패턴: 패널 안에 포커스할 요소가 없어도 키보드로 본문에 닿게 한다.
+    // 포커스 가능한 요소가 있는 본문은 `tabIndex={-1}`로 덮어쓸 수 있다.
+    return (
+      <div
+        // biome-ignore lint/a11y/noNoninteractiveTabindex: 위 주석 참고. tabpanel은 이 패턴에서 포커스 대상이다.
+        tabIndex={0}
+        {...rest}
+        ref={ref}
+        role="tabpanel"
+        id={getContentId(context.baseId, value)}
+        aria-labelledby={getTriggerId(context.baseId, value)}
+      />
+    );
+  },
+);
+
 TabsTrigger.displayName = "Tabs.Trigger";
+TabsContent.displayName = "Tabs.Content";
 
 type TabsComponent = (<T extends string = string>(
   props: TabsRootProps<T> & React.RefAttributes<HTMLDivElement>,
@@ -351,11 +388,13 @@ type TabsComponent = (<T extends string = string>(
   displayName?: string;
   List: typeof TabsList;
   Trigger: typeof TabsTrigger;
+  Content: typeof TabsContent;
 };
 
 export const Tabs = Object.assign(TabsRoot, {
   List: TabsList,
   Trigger: TabsTrigger,
+  Content: TabsContent,
 }) as unknown as TabsComponent;
 
 Tabs.displayName = "Tabs";
