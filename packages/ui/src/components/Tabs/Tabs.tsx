@@ -103,6 +103,26 @@ function isEnabledTab(tab: HTMLElement) {
   );
 }
 
+/**
+ * 잘린 탭이 보이도록 목록의 scrollLeft만 조정한다. 이미 보이면 움직이지 않는다.
+ * scrollIntoView는 페이지까지 세로로 스크롤하므로 쓰지 않는다.
+ */
+function scrollTabIntoView(
+  listNode: HTMLElement,
+  tab: HTMLElement,
+  behavior: ScrollBehavior,
+) {
+  const listRect = listNode.getBoundingClientRect();
+  const tabRect = tab.getBoundingClientRect();
+  const delta =
+    tabRect.left < listRect.left
+      ? tabRect.left - listRect.left
+      : Math.max(tabRect.right - listRect.right, 0);
+  if (delta !== 0) {
+    listNode.scrollTo({ left: listNode.scrollLeft + delta, behavior });
+  }
+}
+
 export interface TabsListProps extends React.ComponentPropsWithoutRef<"div"> {
   /**
    * 목록 하단 전체 폭에 divider를 그립니다. 선택 인디케이터가 그 위에 겹칩니다.
@@ -117,9 +137,29 @@ export interface TabsListProps extends React.ComponentPropsWithoutRef<"div"> {
  */
 const TabsList = React.forwardRef<HTMLDivElement, TabsListProps>(
   ({ divider = true, className, onKeyDown, ...rest }, ref) => {
-    const { variant } = useTabsContext("Tabs.List");
+    const { value, variant } = useTabsContext("Tabs.List");
     const listRef = React.useRef<HTMLDivElement>(null);
     const mergedRef = React.useMemo(() => mergeRefs(ref, listRef), [ref]);
+    const mountedRef = React.useRef(false);
+
+    // hug는 가로 스크롤되므로 선택 탭을 보이게 한다. 마운트 시에는 애니메이션 없이 즉시 이동한다.
+    // biome-ignore lint/correctness/useExhaustiveDependencies: value는 선택이 바뀔 때 다시 실행하기 위한 트리거다.
+    React.useEffect(() => {
+      const listNode = listRef.current;
+      const selectedTab =
+        listNode &&
+        getTabs(listNode).find(
+          (tab) => tab.getAttribute("aria-selected") === "true",
+        );
+      if (variant === "hug" && listNode && selectedTab) {
+        scrollTabIntoView(
+          listNode,
+          selectedTab,
+          mountedRef.current ? "auto" : "instant",
+        );
+      }
+      mountedRef.current = true;
+    }, [value, variant]);
 
     // roving tabindex: Tab 키로 들어오면 선택된 탭(없거나 disabled면 첫 활성 탭)에 포커스된다.
     // Trigger는 자기 선택 여부만 알아서, "선택된 탭이 없다"는 판단은 목록에서 한다.
@@ -229,33 +269,6 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
   ) => {
     const context = useTabsContext("Tabs.Trigger");
     const selected = context.value === value;
-    const triggerRef = React.useRef<HTMLButtonElement>(null);
-    const mergedRef = React.useMemo(() => mergeRefs(ref, triggerRef), [ref]);
-    const mountedRef = React.useRef(false);
-
-    // hug는 가로 스크롤되므로 선택 탭을 보이게 한다. 마운트 시에는 애니메이션 없이 즉시 이동한다.
-    // scrollIntoView는 페이지까지 세로로 스크롤하므로 목록의 scrollLeft만 직접 계산한다.
-    React.useEffect(() => {
-      const node = triggerRef.current;
-      const listNode = node?.closest<HTMLElement>('[role="tablist"]');
-      if (context.variant === "hug" && selected && node && listNode) {
-        const listRect = listNode.getBoundingClientRect();
-        const tabRect = node.getBoundingClientRect();
-        // 왼쪽으로 잘렸으면 왼쪽 끝을, 오른쪽으로 잘렸으면 오른쪽 끝을 맞춘다(inline: nearest).
-        const delta =
-          tabRect.left < listRect.left
-            ? tabRect.left - listRect.left
-            : Math.max(tabRect.right - listRect.right, 0);
-        if (delta !== 0) {
-          listNode.scrollTo({
-            left: listNode.scrollLeft + delta,
-            ...(mountedRef.current ? null : { behavior: "instant" as const }),
-          });
-        }
-      }
-      mountedRef.current = true;
-    }, [selected, context.variant]);
-
     React.useEffect(() => {
       if (isDev && !asChild && typeof children !== "string") {
         console.warn(
@@ -287,7 +300,7 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
         {...(asChild
           ? { "aria-disabled": disabled || undefined }
           : { type: "button" as const, disabled })}
-        ref={mergedRef}
+        ref={ref}
         role="tab"
         aria-selected={selected}
         tabIndex={selected && !disabled ? 0 : -1}
