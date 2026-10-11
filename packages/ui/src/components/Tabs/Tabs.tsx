@@ -182,6 +182,10 @@ const TabsList = React.forwardRef<HTMLDivElement, TabsListProps>(
       onKeyDown?.(event);
       const listNode = listRef.current;
       if (event.defaultPrevented || listNode == null) return;
+      // Alt+←(뒤로 가기) 같은 브라우저/OS 단축키는 가로채지 않는다.
+      if (event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) {
+        return;
+      }
 
       const current = (event.target as HTMLElement).closest<HTMLElement>(
         '[role="tab"]',
