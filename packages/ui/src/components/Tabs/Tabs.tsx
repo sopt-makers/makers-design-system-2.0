@@ -262,6 +262,7 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
       asChild = false,
       className,
       onClick,
+      onClickCapture,
       onFocus,
       ...rest
     },
@@ -277,12 +278,18 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
       }
     }, [asChild, children]);
 
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-      // asChild(링크 등)는 네이티브 disabled가 없어 클릭을 직접 막는다.
+    // asChild(링크 등)는 네이티브 disabled가 없다. Slot은 자식의 onClick을 먼저 실행하므로
+    // 라우터 Link가 이동하기 전에 capture 단계에서 막는다.
+    const handleClickCapture = (event: React.MouseEvent<HTMLButtonElement>) => {
       if (disabled) {
         event.preventDefault();
+        event.stopPropagation();
         return;
       }
+      onClickCapture?.(event);
+    };
+
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
       onClick?.(event);
       context.select(value);
     };
@@ -311,6 +318,7 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
           triggerVariants[context.variant],
           className,
         )}
+        onClickCapture={handleClickCapture}
         onClick={handleClick}
         onFocus={handleFocus}
       >
