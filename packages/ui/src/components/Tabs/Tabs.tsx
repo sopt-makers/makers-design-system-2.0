@@ -162,7 +162,7 @@ const TabsList = React.forwardRef<HTMLDivElement, TabsListProps>(
     }, [value, variant]);
 
     // roving tabindex: Tab 키로 들어오면 선택된 탭(없거나 disabled면 첫 활성 탭)에 포커스된다.
-    // Trigger는 자기 선택 여부만 알아서, "선택된 탭이 없다"는 판단은 목록에서 한다.
+    // 선택된 탭이 없는 경우까지 목록 단위로 판단해야 해서, tabIndex는 Trigger가 아닌 여기서만 정한다.
     React.useLayoutEffect(() => {
       const listNode = listRef.current;
       if (listNode == null) return;
@@ -314,7 +314,6 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
         ref={ref}
         role="tab"
         aria-selected={selected}
-        tabIndex={selected && !disabled ? 0 : -1}
         data-state={selected ? "active" : "inactive"}
         className={clsx(
           trigger,
