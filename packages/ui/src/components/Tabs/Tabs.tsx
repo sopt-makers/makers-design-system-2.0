@@ -290,7 +290,11 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
     };
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+      // 라우터 Link 같은 자식이 이미 preventDefault한 클릭은 선택으로 인정한다.
+      // 이 onClick이 새로 preventDefault했다면 선택을 취소한 것이다.
+      const wasPrevented = event.defaultPrevented;
       onClick?.(event);
+      if (!wasPrevented && event.defaultPrevented) return;
       context.select(value);
     };
 
