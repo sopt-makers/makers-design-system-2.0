@@ -16,8 +16,6 @@ import {
 } from "./Tabs.css";
 import type { TabsSize, TabsVariant } from "./types";
 
-const isDev = process.env.NODE_ENV !== "production";
-
 export interface TabsRootProps<T extends string = string>
   extends Omit<
     React.ComponentPropsWithoutRef<"div">,
@@ -236,25 +234,30 @@ const TabsList = React.forwardRef<HTMLDivElement, TabsListProps>(
   },
 );
 
-export interface TabsTriggerProps
+interface TabsTriggerBaseProps
   extends Omit<React.ComponentPropsWithoutRef<"button">, "value" | "children"> {
   /** 이 탭을 식별하는 값입니다. Tabs의 `value`와 비교해 선택 여부를 정합니다. */
   value: string;
-  /**
-   * 탭 라벨입니다. 문장이 아닌 단어로만 씁니다.
-   * `asChild`면 라벨을 담은 요소(예: Link)를 넘깁니다.
-   */
-  children: string | React.ReactElement;
   /** 라벨 뒤에 붙는 Tag 텍스트입니다. Tag는 pill / primary / small / subtle로 고정됩니다. */
   tag?: string;
   /** 탭을 비활성화합니다. 키보드 이동에서 건너뜁니다. */
   disabled?: boolean;
-  /**
-   * true면 Trigger를 자식 요소로 렌더링합니다. 예: `<Tabs.Trigger asChild><a href="...">홈</a></Tabs.Trigger>`
-   * @default false
-   */
-  asChild?: boolean;
 }
+
+export type TabsTriggerProps = TabsTriggerBaseProps &
+  (
+    | {
+        /** 탭 라벨입니다. 문장이 아닌 단어로만 씁니다. */
+        children: string;
+        asChild?: false;
+      }
+    | {
+        /** 라벨을 담은 요소입니다. 라우터 Link처럼 탭을 링크로 쓸 때 `asChild`와 함께 넘깁니다. */
+        children: React.ReactElement;
+        /** true면 Trigger 대신 `children` 요소가 탭이 됩니다. */
+        asChild: true;
+      }
+  );
 
 const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
   (
@@ -274,14 +277,6 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
   ) => {
     const context = useTabsContext("Tabs.Trigger");
     const selected = context.value === value;
-    React.useEffect(() => {
-      if (isDev && !asChild && typeof children !== "string") {
-        console.warn(
-          "[mds] Tabs.Trigger의 children은 문자열 라벨이어야 합니다. 요소를 넘기려면 asChild를 쓰세요.",
-        );
-      }
-    }, [asChild, children]);
-
     // asChild(링크 등)는 네이티브 disabled가 없다. Slot은 자식의 onClick을 먼저 실행하므로
     // 라우터 Link가 이동하기 전에 capture 단계에서 막는다.
     const handleClickCapture = (event: React.MouseEvent<HTMLButtonElement>) => {
