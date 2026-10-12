@@ -31,6 +31,7 @@ export function SnackBarProvider({ children }: { children: React.ReactNode }) {
     (SnackBarOptions & { id: number })[]
   >([]);
   const [phase, setPhase] = React.useState<Phase>("enter");
+  const [paused, setPaused] = React.useState(false);
   const nextId = React.useRef(0);
   const current = queue[0];
 
@@ -39,13 +40,13 @@ export function SnackBarProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   React.useEffect(() => {
-    if (current == null || phase !== "display") return;
+    if (current == null || phase !== "display" || paused) return;
     const timer = setTimeout(
       () => setPhase("exit"),
       current.duration ?? DEFAULT_DURATION,
     );
     return () => clearTimeout(timer);
-  }, [current, phase]);
+  }, [current, phase, paused]);
 
   const handleAnimationEnd = (event: React.AnimationEvent<HTMLDivElement>) => {
     if (event.target !== event.currentTarget) return;
@@ -53,7 +54,15 @@ export function SnackBarProvider({ children }: { children: React.ReactNode }) {
     if (phase === "exit") {
       setQueue((q) => q.slice(1));
       setPhase("enter");
+      setPaused(false);
     }
+  };
+
+  const pauseHandlers = {
+    onMouseEnter: () => setPaused(true),
+    onMouseLeave: () => setPaused(false),
+    onFocus: () => setPaused(true),
+    onBlur: () => setPaused(false),
   };
 
   const value = React.useMemo(() => ({ show }), [show]);
@@ -77,6 +86,7 @@ export function SnackBarProvider({ children }: { children: React.ReactNode }) {
             }
             className={styles.motion[phase]}
             onAnimationEnd={handleAnimationEnd}
+            {...(current.action != null && pauseHandlers)}
           >
             {current.message}
           </SnackBar>
