@@ -33,6 +33,7 @@ const SnackBar = React.forwardRef<HTMLDivElement, SnackBarProps>(
       if (label != null && label.scrollHeight > label.clientHeight) {
         console.warn(
           "[mds] SnackBar 메시지가 두 줄을 넘어 말줄임 처리되었습니다. 두 줄을 넘는 메시지는 Dialog나 BottomSheet를 사용하세요.",
+          label.textContent,
         );
       }
     }, [children]);
