@@ -58,13 +58,13 @@ export const action = style({
 
 export const viewport = style({
   position: "fixed",
-  top: "calc(env(safe-area-inset-top, 0px) + 16px)",
-  left: 20,
-  right: 20,
+  top: `calc(env(safe-area-inset-top, 0px) + ${spacing.s16})`,
+  left: spacing.s20,
+  right: spacing.s20,
   zIndex: 1000,
   "@media": {
     "(min-width: 768px)": {
-      top: "calc(env(safe-area-inset-top, 0px) + 36px)",
+      top: `calc(env(safe-area-inset-top, 0px) + ${spacing.s36})`,
       left: 0,
       right: 0,
       width: 380,
