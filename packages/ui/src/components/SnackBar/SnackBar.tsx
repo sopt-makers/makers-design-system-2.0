@@ -5,8 +5,7 @@ import { TextButton } from "../TextButton";
 import * as styles from "./SnackBar.css";
 import type { SnackBarAction, SnackBarVariant } from "./types";
 
-export interface SnackBarProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
+export interface SnackBarProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: SnackBarVariant;
   action?: SnackBarAction;
   children: React.ReactNode;
