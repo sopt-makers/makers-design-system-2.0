@@ -30,6 +30,7 @@ export default defineConfig({
         "react-dom",
         "react/jsx-runtime",
         "@sopt-mds/design-tokens",
+        "@floating-ui/react-dom",
       ],
       output: [
         {

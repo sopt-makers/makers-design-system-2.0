@@ -8,6 +8,7 @@ export * from "./FloatingButton";
 export * from "./Radio";
 export * from "./ReactionButton";
 export * from "./SearchField";
+export * from "./Select";
 export * from "./SnackBar";
 export * from "./Tag";
 export * from "./TextArea";
