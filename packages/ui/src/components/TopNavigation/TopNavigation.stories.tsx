@@ -1,4 +1,3 @@
-import { colors, spacing, typography } from "@sopt-mds/design-tokens";
 import type { Meta, StoryObj } from "@storybook/react";
 import { TopNavigation } from "./TopNavigation";
 
@@ -18,7 +17,7 @@ const COMPONENT_DESCRIPTION = `
       profileSrc={user?.imageUrl}
   />
   \`\`\`
-  **2. 로고 옆에 넣을 요소는 \`children\`으로 넘겨요. 메뉴 탭이든 다른 UI든 상관없고, 모양과 내부 간격은 사용처에서 정해요. 여러 요소를 넣을 때는 하나로 묶어서 넘겨요.**\n
+  **2. md Left에서는 \`TopNavigation.Menu\`로 로고 옆에 메뉴 탭을 넣어요. 현재 페이지 메뉴에는 \`active\`를 주고, Next.js \`Link\`는 \`asChild\`로 감싸요.**\n
   \`\`\`tsx
   <TopNavigation
       variant="left"
@@ -28,23 +27,44 @@ const COMPONENT_DESCRIPTION = `
       profileName={user?.name}
       onProfileClick={openMyPage}
   >
-      <nav className={menuTabs}>
-          <a href="/members">멤버</a>
-          <a href="/community">커뮤니티</a>
-      </nav>
+      <TopNavigation.Menu>
+          <TopNavigation.MenuItem asChild active>
+              <Link href="/members">멤버</Link>
+          </TopNavigation.MenuItem>
+          <TopNavigation.MenuItem asChild>
+              <Link href="/community">커뮤니티</Link>
+          </TopNavigation.MenuItem>
+          <TopNavigation.MenuDivider />
+          <TopNavigation.MenuItem asChild>
+              <Link href="/review">활동후기 업로드</Link>
+          </TopNavigation.MenuItem>
+      </TopNavigation.Menu>
   </TopNavigation>
   \`\`\`
-  **3. 메뉴나 프로필 버튼으로 내비게이션·드롭다운을 연다면 열림 상태를 함께 넘겨요. 스크린 리더가 열림과 닫힘을 읽어줘요.**\n
+  메뉴 탭이 아닌 다른 UI가 필요한 지면이라면 \`children\`에 직접 넣어요. 이때 모양과 내부 간격은 사용처에서 정해요. 로고 옆 요소는 md Left에서만 보여요.\n
+  **3. 메뉴 버튼으로 내비게이션을 연다면 열림 상태를 함께 넘겨요. 스크린 리더가 열림과 닫힘을 읽어줘요.**\n
   \`\`\`tsx
   <TopNavigation
       size="sm"
       onMenuClick={toggleDrawer}
       menuExpanded={isDrawerOpen}
-      onProfileClick={toggleProfileMenu}
-      profileExpanded={isProfileMenuOpen}
   />
   \`\`\`
 `;
+
+const menuTab = (
+  <TopNavigation.Menu>
+    <TopNavigation.MenuItem href="#" active>
+      멤버
+    </TopNavigation.MenuItem>
+    <TopNavigation.MenuItem href="#">커뮤니티</TopNavigation.MenuItem>
+    <TopNavigation.MenuItem href="#">모임</TopNavigation.MenuItem>
+    <TopNavigation.MenuItem href="#">프로젝트</TopNavigation.MenuItem>
+    <TopNavigation.MenuItem href="#">커피솝</TopNavigation.MenuItem>
+    <TopNavigation.MenuDivider />
+    <TopNavigation.MenuItem href="#">활동후기 업로드</TopNavigation.MenuItem>
+  </TopNavigation.Menu>
+);
 
 const meta: Meta<typeof TopNavigation> = {
   title: "TopNavigation",
@@ -59,9 +79,13 @@ const meta: Meta<typeof TopNavigation> = {
   argTypes: {
     variant: { control: "radio", options: ["center", "left"] },
     size: { control: "radio", options: ["sm", "md"] },
-    // ReactNode·함수 prop은 컨트롤로 편집할 수 없어 설명만 표에 남긴다.
-    logo: { control: false },
-    children: { control: false },
+    children: {
+      control: { type: "radio", labels: { none: "없음", menuTab: "메뉴 탭" } },
+      options: ["none", "menuTab"],
+      mapping: { none: undefined, menuTab: menuTab },
+      if: { arg: "variant", eq: "left" },
+    },
+    // 함수 prop은 컨트롤로 편집할 수 없어 설명만 표에 남긴다.
     onProfileClick: { control: false },
     onMenuClick: { control: false },
   },
@@ -81,37 +105,4 @@ type Story = StoryObj<typeof TopNavigation>;
 
 export const TopNavigationDefault: Story = {
   name: "TopNavigation",
-};
-
-export const MdLeft: Story = {
-  args: {
-    variant: "left",
-    size: "md",
-    // Figma의 메뉴 탭 예시. children의 스타일은 전부 소비처가 지정한다.
-    children: (
-      <nav
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: spacing.s16,
-          whiteSpace: "nowrap",
-          color: colors.fg.neutral.subtle,
-          ...typography.title5,
-        }}
-      >
-        <span style={{ color: colors.fg.neutral.bold }}>멤버</span>
-        <span>커뮤니티</span>
-        <span>모임</span>
-        <span>프로젝트</span>
-        <span>커피솝</span>
-        <span>활동후기 업로드</span>
-      </nav>
-    ),
-  },
-};
-
-export const WithoutProfile: Story = {
-  args: {
-    profile: false,
-  },
 };
