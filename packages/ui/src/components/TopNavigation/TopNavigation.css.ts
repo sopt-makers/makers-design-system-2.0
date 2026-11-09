@@ -67,6 +67,33 @@ export const logo = style({
   flexShrink: 0,
 });
 
+export const menu = style({
+  display: "flex",
+  flexShrink: 0,
+  alignItems: "center",
+  gap: spacing.s16,
+});
+
+export const menuItem = style({
+  ...typography.title5,
+  color: colors.fg.neutral.subtle,
+  textDecoration: "none",
+  whiteSpace: "nowrap",
+  selectors: {
+    '&[aria-current="page"]': { color: colors.fg.neutral.bold },
+    "&:focus-visible": focusVisibleStyle,
+  },
+});
+
+export const menuDivider = style({
+  flexShrink: 0,
+  width: "1px",
+  height: "17px",
+  marginInline: "-0.5px",
+  borderRadius: radius.full,
+  backgroundColor: colors.stroke.neutral.default,
+});
+
 const rightSlotBase = style({
   display: "flex",
   flexShrink: 0,

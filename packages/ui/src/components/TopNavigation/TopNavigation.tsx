@@ -1,3 +1,4 @@
+import { Slot } from "@radix-ui/react-slot";
 import { IconMenu } from "@sopt-mds/icons";
 import clsx from "clsx";
 import * as React from "react";
@@ -7,8 +8,11 @@ import {
   avatarButton,
   base,
   leftLayout,
-  logo as logoClass,
+  logo,
+  menu,
   menuButton,
+  menuDivider,
+  menuItem,
   profileButton,
   profileName,
   rightSlotVariants,
@@ -29,12 +33,7 @@ export interface TopNavigationProps
    * @default "sm"
    */
   size?: TopNavigationSize;
-  /**
-   * TitleSlot에 표시할 로고입니다.
-   * @default SOPT playground 로고
-   */
-  logo?: React.ReactNode;
-  /** TitleSlot에서 로고 오른쪽에 표시할 요소입니다. 스타일을 입히지 않으니 모양과 내부 간격은 사용처에서 정합니다. */
+  /** TitleSlot에서 로고 오른쪽에 표시할 요소입니다. md left에서만 렌더링됩니다. 메뉴 탭은 `TopNavigation.Menu`로 만들고, 다른 UI를 넣으면 모양과 내부 간격은 사용처에서 정합니다. */
   children?: React.ReactNode;
   /**
    * 프로필 노출 여부입니다. 비로그인 상태에서만 `false`를 넘깁니다.
@@ -48,8 +47,6 @@ export interface TopNavigationProps
   profileName?: string;
   /** 프로필 클릭 핸들러입니다. */
   onProfileClick?: React.MouseEventHandler<HTMLButtonElement>;
-  /** 프로필 버튼이 드롭다운 등을 열 때 열림 상태를 넘깁니다. `aria-expanded`로 전달되고, 생략하면 속성을 붙이지 않습니다. */
-  profileExpanded?: boolean;
   /** 좌측 메뉴 아이콘 클릭 핸들러입니다. sm 전체와 md center에서 렌더링되고, md left에는 없습니다. */
   onMenuClick?: React.MouseEventHandler<HTMLButtonElement>;
   /** 메뉴 버튼이 내비게이션을 열 때 열림 상태를 넘깁니다. `aria-expanded`로 전달되고, 생략하면 속성을 붙이지 않습니다. */
@@ -58,18 +55,16 @@ export interface TopNavigationProps
 
 const PROFILE_FALLBACK_LABEL = "프로필";
 
-const TopNavigation = React.forwardRef<HTMLElement, TopNavigationProps>(
+const TopNavigationRoot = React.forwardRef<HTMLElement, TopNavigationProps>(
   (
     {
       variant = "center",
       size = "sm",
-      logo,
       children,
       profile = true,
       profileSrc,
       profileName: name,
       onProfileClick,
-      profileExpanded,
       onMenuClick,
       menuExpanded,
       className,
@@ -112,8 +107,10 @@ const TopNavigation = React.forwardRef<HTMLElement, TopNavigationProps>(
           </button>
         )}
         <div className={titleSlotVariants[layout]}>
-          <span className={logoClass}>{logo ?? <LogoPlayground />}</span>
-          {children}
+          <span className={logo}>
+            <LogoPlayground />
+          </span>
+          {isLeft && children}
         </div>
         <div className={rightSlotVariants[layout]}>
           {profile &&
@@ -121,7 +118,6 @@ const TopNavigation = React.forwardRef<HTMLElement, TopNavigationProps>(
               <button
                 type="button"
                 aria-label={name ? undefined : PROFILE_FALLBACK_LABEL}
-                aria-expanded={profileExpanded}
                 className={profileButton}
                 onClick={onProfileClick}
               >
@@ -132,7 +128,6 @@ const TopNavigation = React.forwardRef<HTMLElement, TopNavigationProps>(
               <button
                 type="button"
                 aria-label={name || PROFILE_FALLBACK_LABEL}
-                aria-expanded={profileExpanded}
                 className={avatarButton}
                 onClick={onProfileClick}
               >
@@ -145,6 +140,58 @@ const TopNavigation = React.forwardRef<HTMLElement, TopNavigationProps>(
   },
 );
 
-TopNavigation.displayName = "TopNavigation";
+const TopNavigationMenu = React.forwardRef<
+  HTMLElement,
+  React.HTMLAttributes<HTMLElement>
+>(({ className, ...rest }, ref) => (
+  <nav {...rest} ref={ref} className={clsx(menu, className)} />
+));
 
-export { TopNavigation };
+export interface TopNavigationMenuItemProps
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  /** true면 자식 요소(Next.js `Link` 등)에 스타일과 속성을 입혀 렌더링합니다. */
+  asChild?: boolean;
+  /** 현재 페이지의 메뉴입니다. 강조 색과 `aria-current="page"`가 붙습니다. */
+  active?: boolean;
+}
+
+const TopNavigationMenuItem = React.forwardRef<
+  HTMLAnchorElement,
+  TopNavigationMenuItemProps
+>(({ asChild = false, active = false, className, ...rest }, ref) => {
+  const Comp = asChild ? Slot : "a";
+
+  return (
+    <Comp
+      {...rest}
+      ref={ref}
+      aria-current={active ? "page" : undefined}
+      className={clsx(menuItem, className)}
+    />
+  );
+});
+
+const TopNavigationMenuDivider = React.forwardRef<
+  HTMLSpanElement,
+  React.HTMLAttributes<HTMLSpanElement>
+>(({ className, ...rest }, ref) => (
+  <span
+    aria-hidden="true"
+    {...rest}
+    ref={ref}
+    className={clsx(menuDivider, className)}
+  />
+));
+
+TopNavigationRoot.displayName = "TopNavigation";
+TopNavigationMenu.displayName = "TopNavigation.Menu";
+TopNavigationMenuItem.displayName = "TopNavigation.MenuItem";
+TopNavigationMenuDivider.displayName = "TopNavigation.MenuDivider";
+
+export const TopNavigation = Object.assign(TopNavigationRoot, {
+  Menu: TopNavigationMenu,
+  MenuItem: TopNavigationMenuItem,
+  MenuDivider: TopNavigationMenuDivider,
+});
+
+TopNavigation.displayName = "TopNavigation";
