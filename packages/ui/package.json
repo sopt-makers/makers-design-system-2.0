@@ -17,6 +17,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@floating-ui/react-dom": "^2.1.9",
     "@radix-ui/react-slot": "^1.3.3",
     "@sopt-mds/design-tokens": "workspace:*",
     "@sopt-mds/icons": "workspace:*",
