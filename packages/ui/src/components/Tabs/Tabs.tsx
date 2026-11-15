@@ -260,7 +260,10 @@ export type TabsTriggerProps = TabsTriggerBaseProps &
     | {
         /** 라벨을 담은 요소입니다. 라우터 Link처럼 탭을 링크로 쓸 때 `asChild`와 함께 넘깁니다. */
         children: React.ReactElement;
-        /** true면 Trigger 대신 `children` 요소가 탭이 됩니다. */
+        /**
+         * true면 Trigger 대신 `children` 요소가 탭이 됩니다.
+         * Content를 쓰지 않는 링크 탭은 aria-controls={undefined}를 넘기세요.
+         */
         asChild: true;
       }
   );
@@ -340,7 +343,9 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
     return (
       <Comp
         id={getTriggerId(context.baseId, value)}
-        aria-controls={getContentId(context.baseId, value)}
+        aria-controls={
+          selected ? getContentId(context.baseId, value) : undefined
+        }
         {...rest}
         {...(asChild
           ? { "aria-disabled": disabled || undefined }

@@ -264,3 +264,26 @@ export const TabsWithContent: Story = {
     </div>
   ),
 };
+
+/** `asChild`로 링크를 탭으로 씁니다. `Tabs.Content`를 쓰지 않으므로 `aria-controls={undefined}`를 넘겨요. */
+export const TabsAsLink: Story = {
+  name: "링크 탭 (asChild)",
+  parameters: { controls: { disable: true }, layout: "padded" },
+  render: () => (
+    <div style={{ width: STORY_WIDTH }}>
+      <Tabs defaultValue="home">
+        <Tabs.List aria-label="모임">
+          <Tabs.Trigger value="home" asChild aria-controls={undefined}>
+            <a href="#home">홈</a>
+          </Tabs.Trigger>
+          <Tabs.Trigger value="all" asChild aria-controls={undefined}>
+            <a href="#all">전체 모임</a>
+          </Tabs.Trigger>
+          <Tabs.Trigger value="mine" asChild aria-controls={undefined}>
+            <a href="#mine">내 모임</a>
+          </Tabs.Trigger>
+        </Tabs.List>
+      </Tabs>
+    </div>
+  ),
+};
