@@ -282,6 +282,7 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
       onFocus,
       onBlur,
       onPointerDown,
+      onPointerCancel,
       ...rest
     },
     ref,
@@ -308,8 +309,12 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
       pointerFocusRef.current = false;
       onClick?.(event);
       if (!wasPrevented && event.defaultPrevented) return;
-      // cmd/ctrl/shift/alt+클릭은 새 탭·창 열기 등 브라우저 동작이므로 현재 화면은 선택하지 않는다.
-      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+      // 링크 탭(asChild)에서 cmd/ctrl/shift/alt+클릭은 새 탭·창 열기 등 브라우저 동작이므로 현재 화면은 선택하지 않는다.
+      // 일반 버튼 탭은 수정키와 무관하게 선택한다.
+      if (
+        asChild &&
+        (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
+      ) {
         return;
       }
       context.select(value);
@@ -332,7 +337,15 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
       if (!disabled) context.select(value);
     };
 
+    const handlePointerCancel = (
+      event: React.PointerEvent<HTMLButtonElement>,
+    ) => {
+      onPointerCancel?.(event);
+      pointerFocusRef.current = false;
+    };
+
     // Safari 버튼 클릭이나 드래그 후 이탈처럼 포커스/클릭이 오지 않아 ref가 남는 경우를 정리한다.
+    // 터치 스와이프로 pointercancel만 오는 경우는 handlePointerCancel이 정리한다.
     const handleBlur = (event: React.FocusEvent<HTMLButtonElement>) => {
       onBlur?.(event);
       pointerFocusRef.current = false;
@@ -363,6 +376,7 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
         onClickCapture={handleClickCapture}
         onClick={handleClick}
         onPointerDown={handlePointerDown}
+        onPointerCancel={handlePointerCancel}
         onFocus={handleFocus}
         onBlur={handleBlur}
       >
