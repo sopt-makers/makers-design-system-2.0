@@ -277,12 +277,16 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
       onClick,
       onClickCapture,
       onFocus,
+      onBlur,
+      onPointerDown,
       ...rest
     },
     ref,
   ) => {
     const context = useTabsContext("Tabs.Trigger");
     const selected = context.value === value;
+    // 마우스 포커스는 선택하지 않고 click에서 판단한다. cmd+클릭으로 새 탭을 열 때 기존 화면 선택을 막기 위함.
+    const pointerFocusRef = React.useRef(false);
     // asChild(링크 등)는 네이티브 disabled가 없다. Slot은 자식의 onClick을 먼저 실행하므로
     // 라우터 Link가 이동하기 전에 capture 단계에서 막는다.
     const handleClickCapture = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -298,14 +302,37 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
       // 라우터 Link 같은 자식이 이미 preventDefault한 클릭은 선택으로 인정한다.
       // 이 onClick이 새로 preventDefault했다면 선택을 취소한 것이다.
       const wasPrevented = event.defaultPrevented;
+      pointerFocusRef.current = false;
       onClick?.(event);
       if (!wasPrevented && event.defaultPrevented) return;
+      // cmd/ctrl/shift/alt+클릭은 새 탭·창 열기 등 브라우저 동작이므로 현재 화면은 선택하지 않는다.
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+        return;
+      }
       context.select(value);
     };
 
+    const handlePointerDown = (
+      event: React.PointerEvent<HTMLButtonElement>,
+    ) => {
+      onPointerDown?.(event);
+      pointerFocusRef.current = true;
+    };
+
+    // 키보드(화살표 이동, Tab 진입)로 받은 포커스만 선택한다(automatic activation).
     const handleFocus = (event: React.FocusEvent<HTMLButtonElement>) => {
       onFocus?.(event);
+      if (pointerFocusRef.current) {
+        pointerFocusRef.current = false;
+        return;
+      }
       if (!disabled) context.select(value);
+    };
+
+    // Safari 버튼 클릭이나 드래그 후 이탈처럼 포커스/클릭이 오지 않아 ref가 남는 경우를 정리한다.
+    const handleBlur = (event: React.FocusEvent<HTMLButtonElement>) => {
+      onBlur?.(event);
+      pointerFocusRef.current = false;
     };
 
     const Comp = asChild ? Slot : "button";
@@ -330,7 +357,9 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
         )}
         onClickCapture={handleClickCapture}
         onClick={handleClick}
+        onPointerDown={handlePointerDown}
         onFocus={handleFocus}
+        onBlur={handleBlur}
       >
         {asChild ? <Slottable>{children}</Slottable> : children}
         {tag != null ? (
