@@ -1,5 +1,12 @@
 # @sopt-mds/ui
 
+## 1.11.0
+
+### Minor Changes
+
+- 0ae3387: add tabs component
+- b2b483d: add the `SnackBar` component. wrap the app root in `SnackBarProvider` once and call `useSnackBar().show({ message, variant, action, duration })` to display one. snack bars show one at a time and queue in order, each appearing right after the previous one finishes exiting. messages clamp to two lines, with a dev-only console warning when they overflow.
+
 ## 1.10.0
 
 ### Minor Changes
