@@ -3,7 +3,7 @@ import { TopNavigation } from "./TopNavigation";
 
 const COMPONENT_DESCRIPTION = `
   \`TopNavigation\`은 화면 최상단에서 현재 위치를 알려주고, 주요 액션을 제공해요.\n
-  - **size**: 화면 폭에 맞춰 \`sm\` 또는 \`md\`를 선택해요. (sm: 320–767 / md: 768~) \`sm\`에서는 좌측 메뉴 아이콘으로 내비게이션을 열어요. \`sm\`은 **Left여도 타이틀이 중앙 정렬**돼요.\n
+  - **size**: 화면 폭에 맞춰 \`sm\` 또는 \`md\`를 선택해요. (sm: 320–767 / md: 768~) \`sm\`에서는 좌측 메뉴 아이콘으로 내비게이션을 열어요.\n
   - **Title Slot**: 로고 단독 또는 (로고 + 메뉴) 탭을 넣어요. 지면에 따라 Slot 내부에 탭과 같은 다른 UI 요소를 넣는 것도 가능해요.\n
   - **Profile**: 로그인 상태에서는 \`Profile=true\`로 아바타를 보여줘요. \`md\` Left는 아바타와 이름을 함께 보여줘요. 비로그인 상태에서는 \`Profile=false\`를 사용해요.\n
   <br/>
