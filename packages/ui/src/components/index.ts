@@ -15,3 +15,4 @@ export * from "./TextArea";
 export * from "./TextButton";
 export * from "./TextField";
 export * from "./Toggle";
+export * from "./TopNavigation";
