@@ -161,17 +161,9 @@ const TopNavigationMenuItem = React.forwardRef<
   );
 });
 
-const TopNavigationMenuDivider = React.forwardRef<
-  HTMLSpanElement,
-  React.HTMLAttributes<HTMLSpanElement>
->(({ className, ...rest }, ref) => (
-  <span
-    aria-hidden="true"
-    {...rest}
-    ref={ref}
-    className={clsx(menuDivider, className)}
-  />
-));
+const TopNavigationMenuDivider = () => (
+  <span aria-hidden="true" className={menuDivider} />
+);
 
 TopNavigationRoot.displayName = "TopNavigation";
 TopNavigationMenu.displayName = "TopNavigation.Menu";
