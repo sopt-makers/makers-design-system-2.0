@@ -5,7 +5,7 @@ const COMPONENT_DESCRIPTION = `
   \`TopNavigation\`은 화면 최상단에서 현재 위치를 알려주고, 주요 액션을 제공해요.\n
   - **size**: 화면 폭에 맞춰 \`sm\` 또는 \`md\`를 선택해요. (sm: 320–767 / md: 768~) \`sm\`에서는 좌측 메뉴 아이콘으로 내비게이션을 열어요.\n
   - **Title Slot**: 로고 단독 또는 (로고 + 메뉴) 탭을 넣어요. 지면에 따라 Slot 내부에 탭과 같은 다른 UI 요소를 넣는 것도 가능해요.\n
-  - **Profile**: 로그인 상태에서는 \`Profile=true\`로 아바타를 보여줘요. \`md\` Left는 아바타와 이름을 함께 보여줘요. 비로그인 상태에서는 \`Profile=false\`를 사용해요.\n
+  - **Profile**: 로그인 상태에서는 \`profile\`에 프로필 정보(\`src\`, \`name\`, \`onClick\`)를 넘겨 아바타를 보여줘요. \`md\` Left는 아바타와 이름을 함께 보여줘요. 프로필 이미지가 없으면 \`src\`를 빼고 넘겨요. 기본 아바타가 보여요. 비로그인 상태에서는 \`profile\`을 넘기지 않아요.\n
   <br/>
   ### 사용법\n
   **1. 화면 폭에 맞는 \`size\`를 넘겨요. 좌측 메뉴 아이콘이 있는 레이아웃(sm 전체, md Center)에서는 클릭을 \`onMenuClick\`으로 받아요.**\n
@@ -13,8 +13,9 @@ const COMPONENT_DESCRIPTION = `
   <TopNavigation
       size="sm"
       onMenuClick={openDrawer}
-      profile={isLoggedIn}
-      profileSrc={user?.imageUrl}
+      profile={
+          user && { src: user.imageUrl, name: user.name, onClick: openMyPage }
+      }
   />
   \`\`\`
   **2. md Left에서는 \`TopNavigation.Menu\`로 로고 옆에 메뉴 탭을 넣어요. 현재 페이지 메뉴에는 \`active\`를 주고, Next.js \`Link\`는 \`asChild\`로 감싸요.**\n
@@ -22,10 +23,9 @@ const COMPONENT_DESCRIPTION = `
   <TopNavigation
       variant="left"
       size="md"
-      profile={isLoggedIn}
-      profileSrc={user?.imageUrl}
-      profileName={user?.name}
-      onProfileClick={openMyPage}
+      profile={
+          user && { src: user.imageUrl, name: user.name, onClick: openMyPage }
+      }
   >
       <TopNavigation.Menu>
           <TopNavigation.MenuItem asChild active>
@@ -73,8 +73,7 @@ const meta: Meta<typeof TopNavigation> = {
   args: {
     variant: "center",
     size: "sm",
-    profile: true,
-    profileName: "세글자",
+    profile: { name: "세글자", onClick: () => {} },
   },
   argTypes: {
     variant: { control: "radio", options: ["center", "left"] },
@@ -86,7 +85,6 @@ const meta: Meta<typeof TopNavigation> = {
       if: { arg: "variant", eq: "left" },
     },
     // 함수 prop은 컨트롤로 편집할 수 없어 설명만 표에 남긴다.
-    onProfileClick: { control: false },
     onMenuClick: { control: false },
   },
   parameters: {

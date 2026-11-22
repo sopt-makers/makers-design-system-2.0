@@ -19,7 +19,11 @@ import {
   sizeVariants,
   titleSlotVariants,
 } from "./TopNavigation.css";
-import type { TopNavigationSize, TopNavigationVariant } from "./types";
+import type {
+  TopNavigationProfile,
+  TopNavigationSize,
+  TopNavigationVariant,
+} from "./types";
 
 export interface TopNavigationProps extends React.HTMLAttributes<HTMLElement> {
   /**
@@ -35,24 +39,15 @@ export interface TopNavigationProps extends React.HTMLAttributes<HTMLElement> {
   /** TitleSlot에서 로고 오른쪽에 표시할 요소입니다. md left에서만 렌더링됩니다. 메뉴 탭은 `TopNavigation.Menu`로 만들고, 다른 UI를 넣으면 모양과 내부 간격은 사용처에서 정합니다. */
   children?: React.ReactNode;
   /**
-   * 프로필 노출 여부입니다. 비로그인 상태에서만 `false`를 넘깁니다.
-   * `false`여도 같은 너비의 빈 영역이 남아 로고 정렬을 유지합니다.
-   * @default true
+   * 로그인 사용자의 프로필(`src`, `name`, `onClick`)입니다. 넘기면 프로필을 보여주고, 비로그인 상태에서는 넘기지 않습니다.
+   * 넘기지 않아도 같은 너비의 빈 영역이 남아 로고 정렬을 유지합니다.
    */
-  profile?: boolean;
-  /** 프로필 이미지 URL입니다. 없으면 기본 아바타(fallback 아이콘)를 보여줍니다. */
-  profileSrc?: string;
-  /** 프로필 이름입니다. md left에서는 아바타 옆에 표시되고, 그 외에는 접근 가능한 이름으로 쓰입니다. */
-  profileName?: string;
-  /** 프로필 클릭 핸들러입니다. */
-  onProfileClick?: React.MouseEventHandler<HTMLButtonElement>;
+  profile?: TopNavigationProfile;
   /** 좌측 메뉴 아이콘 클릭 핸들러입니다. sm 전체와 md center에서 렌더링되고, md left에는 없습니다. */
   onMenuClick?: React.MouseEventHandler<HTMLButtonElement>;
   /** 메뉴 버튼이 내비게이션을 열 때 열림 상태를 넘깁니다. `aria-expanded`로 전달되고, 생략하면 속성을 붙이지 않습니다. */
   menuExpanded?: boolean;
 }
-
-const PROFILE_FALLBACK_LABEL = "프로필";
 
 const TopNavigationRoot = React.forwardRef<HTMLElement, TopNavigationProps>(
   (
@@ -60,10 +55,7 @@ const TopNavigationRoot = React.forwardRef<HTMLElement, TopNavigationProps>(
       variant = "center",
       size = "sm",
       children,
-      profile = true,
-      profileSrc,
-      profileName: name,
-      onProfileClick,
+      profile,
       onMenuClick,
       menuExpanded,
       className,
@@ -76,7 +68,7 @@ const TopNavigationRoot = React.forwardRef<HTMLElement, TopNavigationProps>(
     const isLeft = layout === "left";
     const avatar = (
       <Avatar
-        src={profileSrc}
+        src={profile?.src}
         size={32}
         type="ghost"
         strokeColor="neutralGhost"
@@ -116,19 +108,18 @@ const TopNavigationRoot = React.forwardRef<HTMLElement, TopNavigationProps>(
             (isLeft ? (
               <button
                 type="button"
-                aria-label={name ? undefined : PROFILE_FALLBACK_LABEL}
                 className={profileButton}
-                onClick={onProfileClick}
+                onClick={profile.onClick}
               >
                 {avatar}
-                <span className={profileName}>{name}</span>
+                <span className={profileName}>{profile.name}</span>
               </button>
             ) : (
               <button
                 type="button"
-                aria-label={name || PROFILE_FALLBACK_LABEL}
+                aria-label={profile.name}
                 className={avatarButton}
-                onClick={onProfileClick}
+                onClick={profile.onClick}
               >
                 {avatar}
               </button>
