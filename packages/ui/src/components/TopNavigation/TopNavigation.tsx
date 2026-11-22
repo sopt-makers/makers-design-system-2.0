@@ -183,5 +183,3 @@ export const TopNavigation = Object.assign(TopNavigationRoot, {
   MenuItem: TopNavigationMenuItem,
   MenuDivider: TopNavigationMenuDivider,
 });
-
-TopNavigation.displayName = "TopNavigation";
