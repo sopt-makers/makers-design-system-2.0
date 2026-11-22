@@ -19,7 +19,6 @@ const buttonReset = {
 export const base = style({
   display: "flex",
   alignItems: "center",
-  gap: spacing.s20,
   boxSizing: "border-box",
   width: "100%",
   paddingBlock: spacing.s4,
@@ -59,7 +58,7 @@ const titleSlotBase = style({
 
 export const titleSlotVariants = styleVariants({
   center: [titleSlotBase, { justifyContent: "center", overflow: "hidden" }],
-  left: [titleSlotBase, { gap: spacing.s40 }],
+  left: [titleSlotBase, { gap: spacing.s40, overflow: "hidden" }],
 });
 
 export const logo = style({
@@ -67,29 +66,36 @@ export const logo = style({
   flexShrink: 0,
 });
 
+// 넘치는 지점의 메뉴에 말줄임이 붙도록 한 줄 인라인 흐름으로 배치
 export const menu = style({
-  display: "flex",
-  flexShrink: 0,
-  alignItems: "center",
-  gap: spacing.s16,
+  ...typography.title5,
+  minWidth: 0,
+  padding: spacing.s4,
+  margin: `calc(-1 * ${spacing.s4})`,
+  overflow: "hidden",
+  whiteSpace: "nowrap",
+  textOverflow: ["ellipsis", '"..."'],
+  color: colors.fg.neutral.subtle,
 });
 
 export const menuItem = style({
-  ...typography.title5,
-  color: colors.fg.neutral.subtle,
+  color: "inherit",
   textDecoration: "none",
-  whiteSpace: "nowrap",
   selectors: {
+    "&:not(:first-child)": { marginInlineStart: spacing.s16 },
     '&[aria-current="page"]': { color: colors.fg.neutral.bold },
     "&:focus-visible": focusVisibleStyle,
   },
 });
 
 export const menuDivider = style({
-  flexShrink: 0,
+  display: "inline-block",
+  verticalAlign: "top",
   width: "1px",
   height: "17px",
-  marginInline: "-0.5px",
+  marginTop: "3.5px",
+  marginInlineStart: `calc(${spacing.s16} - 0.5px)`,
+  marginInlineEnd: "-0.5px",
   borderRadius: radius.full,
   backgroundColor: colors.stroke.neutral.default,
 });
