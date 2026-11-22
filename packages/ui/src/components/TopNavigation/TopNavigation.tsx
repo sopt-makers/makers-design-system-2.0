@@ -21,8 +21,7 @@ import {
 } from "./TopNavigation.css";
 import type { TopNavigationSize, TopNavigationVariant } from "./types";
 
-export interface TopNavigationProps
-  extends Omit<React.HTMLAttributes<HTMLElement>, "children"> {
+export interface TopNavigationProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * 타이틀 정렬입니다. sm 사이즈에서는 left여도 center로 렌더링됩니다.
    * @default "center"
