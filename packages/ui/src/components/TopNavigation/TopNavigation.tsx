@@ -104,26 +104,17 @@ const TopNavigationRoot = React.forwardRef<HTMLElement, TopNavigationProps>(
           {isLeft && children}
         </div>
         <div className={rightSlotVariants[layout]}>
-          {profile &&
-            (isLeft ? (
-              <button
-                type="button"
-                className={profileButton}
-                onClick={profile.onClick}
-              >
-                {avatar}
-                <span className={profileName}>{profile.name}</span>
-              </button>
-            ) : (
-              <button
-                type="button"
-                aria-label={profile.name}
-                className={avatarButton}
-                onClick={profile.onClick}
-              >
-                {avatar}
-              </button>
-            ))}
+          {profile && (
+            <button
+              type="button"
+              aria-label={profile.name}
+              className={isLeft ? profileButton : avatarButton}
+              onClick={profile.onClick}
+            >
+              {avatar}
+              {isLeft && <span className={profileName}>{profile.name}</span>}
+            </button>
+          )}
         </div>
       </header>
     );
