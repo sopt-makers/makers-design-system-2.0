@@ -11,7 +11,8 @@
   ],
   "scripts": {
     "build": "vite build",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
   },
   "dependencies": {
     "jscodeshift": "^17.4.0"
@@ -21,6 +22,7 @@
     "@types/jscodeshift": "^17.3.0",
     "@types/node": "^22.0.0",
     "typescript": "^5.6.0",
-    "vite": "npm:rolldown-vite@latest"
+    "vite": "npm:rolldown-vite@latest",
+    "vitest": "^5.1.1"
   }
 }

@@ -1,7 +1,11 @@
 import { resolve } from "node:path";
-import { defineConfig } from "vite";
+import { defineConfig } from "vitest/config";
 
 export default defineConfig({
+  test: {
+    // jscodeshift testUtils가 전역 describe/it/expect를 쓴다
+    globals: true,
+  },
   build: {
     target: "node22",
     minify: false,
