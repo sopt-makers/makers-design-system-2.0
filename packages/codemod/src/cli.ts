@@ -3,8 +3,8 @@ import { parseArgs } from "node:util";
 import { rules } from "./transforms/index.ts";
 
 const COMMANDS: Record<string, string> = {
-  scan: "v1 토큰 사용처를 판정해 리포트를 만든다 (미구현)",
-  token: "v1 색/글자 토큰을 v2로 바꾼다 (미구현)",
+  scan: "v1 토큰 사용처를 판정해 리포트를 만들어요 (미구현)",
+  token: "v1 색/글자 토큰을 v2로 바꿔요 (미구현)",
 };
 
 const HELP = `사용법: mds-migrate <${Object.keys(COMMANDS).join("|")}> <경로> [옵션]
@@ -15,12 +15,12 @@ ${Object.entries(COMMANDS)
   .join("\n")}
 
 옵션
-  --dry            소스 파일을 쓰지 않고 요약만 출력 (미구현)
-  --print          변환 결과를 출력 (미구현)
-  --report <파일>  리포트 JSON 저장 (미구현)
-  --only <규칙>    지정한 규칙만 실행 (미구현)
-  --list           규칙 목록 출력
-  -h, --help       도움말 출력`;
+  --dry            소스 파일을 쓰지 않고 요약만 출력해요 (미구현)
+  --print          변환 결과를 출력해요 (미구현)
+  --report <파일>  리포트 JSON을 저장해요 (미구현)
+  --only <규칙>    지정한 규칙만 실행해요 (미구현)
+  --list           규칙 목록을 출력해요
+  -h, --help       도움말을 출력해요`;
 
 const main = (args: string[]): number => {
   const { values, positionals } = parseArgs({
