@@ -1,0 +1,11 @@
+{
+  "extends": "@sopt-mds/tsconfig/base.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "erasableSyntaxOnly": true
+  },
+  "include": ["src", "test", "vite.config.ts"],
+  "exclude": ["**/__testfixtures__"]
+}

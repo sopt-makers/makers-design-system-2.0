@@ -1,0 +1,28 @@
+{
+  "name": "@sopt-mds/codemod",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "mds-migrate": "./dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "jscodeshift": "^17.4.0"
+  },
+  "devDependencies": {
+    "@sopt-mds/tsconfig": "workspace:*",
+    "@types/jscodeshift": "^17.3.0",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0",
+    "vite": "npm:rolldown-vite@latest",
+    "vitest": "^5.1.1"
+  }
+}
